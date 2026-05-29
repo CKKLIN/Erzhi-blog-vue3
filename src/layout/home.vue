@@ -28,12 +28,14 @@ const handlePath = (path) => {
   width: 100%;
   height: 100vh;
 }
+
 .home-top {
   width: 100%;
   height: fit-content;
   position: absolute;
   z-index: 999;
 }
+
 .home-body {
   position: fixed;
   overflow: hidden;

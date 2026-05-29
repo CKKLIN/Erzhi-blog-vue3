@@ -15,18 +15,26 @@
       <div class="body">
         <div class="body-left">
           <div class="body-left-one">
-            <div class="info-avatar">
-              <img style="width: 100%; height: 100%" :src="user.avatarUrl" />
-            </div>
-            <div class="infoBox">
-              <div class="info-name">{{ user.userName }}</div>
-              <div class="info-say">{{ user.signature }}</div>
-            </div>
+            <infoCard :userInfo="user" />
           </div>
-          <div class="body-left-two"></div>
+
+          <div class="body-left-two">
+            <TWSidebar></TWSidebar>
+          </div>
         </div>
         <div class="body-right">
-          <ContentList />
+          <div class="body-right-one">
+            <createTime />
+          </div>
+          <div class="body-right-two">
+
+            <img class="hornIcon" :src=hornIcon />
+            <div class="hornMsg">公告！！！！！！</div>
+          </div>
+          <div class="body-right-three">
+
+            <loading />
+          </div>
         </div>
       </div>
     </div>
@@ -36,11 +44,15 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import wave from '@/components/wave.vue'
-import ContentList from '@/views/home/content/content.vue'
 import player from '@/assets/icon/player.png'
 import pause from '@/assets/icon/pause.png'
 import dijia from '@/assets/picture/dijia.jpg'
 import useCounter from '@/stores/pinia'
+import hornIcon from '@/assets/icon/horn.svg'
+import infoCard from '@/views/home/components/infoCard/index.vue'
+import createTime from '@/views/home/components/createTime/index.vue'
+import loading from '@/views/home/components/loading/index.vue'
+import TWSidebar from '@/components/TWSidebar/index.vue'
 
 const counterStore = useCounter()
 const isPlay = ref(true)
@@ -51,10 +63,17 @@ let typeIndex = 0
 
 const user = ref({
   id: null,
-  userName: '',
+  userName: '木二支',
   avatarUrl: dijia,
-  signature: '',
+  title: 1223,
+  look: 45654
 })
+
+const postList = ref(Array.from({ length: 5 }, () => ({
+  title: '文章标题',
+  summary: '这是一段文章摘要内容...',
+  date: '2026-05-28',
+})))
 
 // TODO: 替换为实际音乐文件
 const musicSrc = ''
@@ -91,19 +110,22 @@ onMounted(() => {
   background-size: cover;
   animation: slideDown 1.5s ease-in-out forwards;
 }
+
 @keyframes slideDown {
   from {
     background-position: center -60px;
   }
+
   to {
     background-position: center 0px;
   }
 }
+
 .welcome {
   max-width: 300px;
   height: fit-content;
   background-color: rgba(255, 255, 255, 0.336);
-  position: absolute;
+  position: fixed;
   margin-left: calc(50% - 150px);
   margin-top: -8%;
   border-radius: 10px;
@@ -114,6 +136,7 @@ onMounted(() => {
   font-size: larger;
   padding-right: 35px;
 }
+
 .music {
   width: 50px;
   height: 50px;
@@ -127,19 +150,23 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
 }
+
 .music-spin {
   width: 100%;
   height: 100%;
   animation: music 2s linear infinite;
 }
+
 @keyframes music {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 .bigBox {
   width: 100%;
   height: fit-content;
@@ -148,87 +175,100 @@ onMounted(() => {
   flex-direction: column;
   padding-top: 20%;
 }
+
 .top {
   width: 100%;
   height: 150px;
 }
+
 .body {
   width: 100%;
   height: fit-content;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-white);
+  /* background-color:red; */
   position: relative;
   display: flex;
   flex-direction: row;
+  gap: var(--gap);
+  /* align-items:center; */
+  justify-content: center;
 }
+
 .body-left {
-  width: 24%;
+  width: 18%;
   height: fit-content;
-  background-color: rgba(209, 209, 209, 0.233);
-  margin: 0 0 10px 30px;
-  border-radius: 8px;
-  top: -20px;
-  padding: 15px;
+  /* margin: 0 0 10px 30px; */
+  /* top: -20px; */
+  /* padding: 15px; */
 }
+
 .body-left-one {
   width: 100%;
-  height: 85px;
-}
-.info-avatar {
-  width: 150px;
-  aspect-ratio: 1 / 1; /* 强制高度与宽度相等 */
-  border-radius: 50%;
-  background-color: antiquewhite;
-  position: absolute;
-  overflow: hidden;
-  left: 35px;
-  top: -50px;
-  box-shadow: -5px 5px 12px rgba(0, 0, 0, 0.555);
-}
-.infoBox {
-  width: calc(63% - 16px);
-  background-color: rgb(78, 133, 133);
-  padding: 8px;
-  float: right;
-  border-radius: 8px;
+  /* height: 85px; */
+  padding: var(--padding-card);
+  background-color: var(--color-card-bg);
+  border-radius: var(--border-radius-card);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  /* background: url(@/assets/bj/bj7.jpg) no-repeat center center / cover;
+  background: linear-gradient(to top, red, rgba(255, 255, 0, 0)); */
+  background: linear-gradient(rgba(14, 62, 134, 0), rgba(57, 158, 241, 0.692), rgb(57, 159, 241)), url('@/assets/bj/bj4.jpeg');
+  background-size: cover;
+  background-position: center;
 }
-.info-name {
-  width: 100%;
-  height: 24px;
-  max-height: 24px;
-  white-space: nowrap;
-  overflow: hidden;
-  font-weight: bold;
-  text-overflow: ellipsis;
-  font-size: 14px;
-  line-height: 24px;
-}
-.info-say {
-  width: 100%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 13px;
-  line-height: 20px;
-}
+
 .body-left-two {
   width: 100%;
-  height: 600px;
-  background-color: aqua;
+  /* height: 600px; */
+  background-color: rgba(255, 255, 255, 0.774);
+  /* padding: var(--padding-ssm); */
   margin-top: 15px;
-  border-radius: 8px;
+  box-shadow: var(--color-card-shadow);
+  border-radius: var(--border-radius-card);
+  border: var(--color-card-border);
 }
+
 .body-right {
-  width: calc(76% - 120px);
+  width: 72%;
   height: fit-content;
-  background-color: rgba(209, 209, 209, 0.233);
+  /* margin-left: 15px; */
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+
+.body-right-one {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 8px;
-  margin-left: 15px;
-  padding: 15px 15px 0 15px;
+  /* background-color: var(--color-card-bg); */
+  font-family: "YuWoErYanNiZuiKeAi-2";
+  font-size: 18px;
+
+  margin-bottom: 15px;
+}
+
+.hornIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.body-right-two {
+  display: flex;
+  flex-direction: row;
+  /* justify-content:center; */
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  /* padding: var(--padding-card); */
+  border-radius: 8px;
+  background-color: var(--color-card-bg);
+  border: 1px dashed #ce6d13;
+  /* gap: var(--gap); */
+  padding: 0px 10px 0 10px;
+  line-height: 1;
 }
 </style>

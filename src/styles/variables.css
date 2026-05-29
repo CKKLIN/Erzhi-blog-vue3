@@ -1,0 +1,12 @@
+:root {
+  --color-card-bg: rgba(209, 209, 209, 0.233);
+  --color-card-border:1px solid rgba(223, 222, 222, 0.233);
+  --color-card-shadow: 2px 2px 5px rgba(138, 138, 138, 0.233);
+  --color-white: rgb(255, 255, 255);
+  --color-shadow: rgba(0, 0, 0, 0.356);
+  --color-line: 0.8px solid  rgba(0, 0, 0, 0.123);
+  --padding-card:15px;
+  --gap: 15px;
+  --border-radius-card: 8px;
+  --padding-ssm: 10px;
+}

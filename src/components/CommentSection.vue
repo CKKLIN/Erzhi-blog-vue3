@@ -2,8 +2,9 @@
   <div class="comment-view">
     <div class="comments-section">
       <div class="top">
-        <el-button class="top-button" @click="$emit('getComment', 'll', null)">最新</el-button>
-        <el-button class="top-button" @click="$emit('getComment', null, 1)">最火</el-button>
+        |&ensp;{{ comments.length }}条留言
+        <!-- <el-button class="top-button" @click="$emit('getComment', 'll', null)">最新</el-button>
+        <el-button class="top-button" @click="$emit('getComment', null, 1)">最火</el-button> -->
       </div>
       <div class="comment" v-for="item in comments" :key="item.id">
         <div class="comment-header">
@@ -15,7 +16,7 @@
           </div>
         </div>
         <div class="comment-body">{{ item.comment }}</div>
-        <div class="comment-actions">
+        <!-- <div class="comment-actions">
           <span class="like-count">{{ item.good }}</span>
           <div class="goodBox">
             <img v-if="item.isgood == false" style="width: 20px;height: 20px;" @click="$emit('isGood', item.id)"
@@ -23,7 +24,7 @@
             <img v-else style="width: 20px;height: 20px;" @click="$emit('noGood', item.id)"
               :src="goodedIcon">
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -52,18 +53,19 @@ const setDefaultImage = (event) => {
   width: 100%;
   height: auto;
   padding-bottom: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-white);
 }
 
 .top {
   width: 50%;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+  color: rgb(87, 87, 87);
 }
 
 .comments-section {
   margin: 0 auto 30px auto;
-  width: 50%;
-  background-color: rgb(255, 255, 255);
+  max-width: 800px;
+  background-color: var(--color-white);
   padding: 10px 10px 0 10px;
   border-radius: 15px;
 }
