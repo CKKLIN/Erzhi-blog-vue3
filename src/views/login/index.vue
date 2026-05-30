@@ -143,21 +143,21 @@ const changeType = () => {
 }
 
 const handleLogin = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate(async (valid) => {
-    if (valid) {
-      const result = await loginAPI(loginForm)
-      if (result.data.code === 200) {
-        tokenStore.setToken(result.data.data)
-        counterStore.jwt = result.data.data
+  // if (!formEl) return
+  // await formEl.validate(async (valid) => {
+  //   if (valid) {
+  //     const result = await loginAPI(loginForm)
+  //     if (result.data.code === 200) {
+  //       tokenStore.setToken(result.data.data)
+  //       counterStore.jwt = result.data.data
         ElMessage.success('登录成功')
         router.push({ path: '/home' })
-      } else {
-        loginPassword.value = result.data.msg
-        formEl.validate(() => {})
-      }
-    }
-  })
+  //     } else {
+  //       loginPassword.value = result.data.msg
+  //       formEl.validate(() => {})
+  //     }
+  //   }
+  // })
 }
 
 const handleRegist = async (formEl: FormInstance | undefined) => {

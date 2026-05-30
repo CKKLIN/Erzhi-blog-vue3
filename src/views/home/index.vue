@@ -19,7 +19,7 @@
           </div>
 
           <div class="body-left-two">
-            <TWSidebar></TWSidebar>
+            <TWSidebar :article="article" title="推荐标题"></TWSidebar>
           </div>
         </div>
         <div class="body-right">
@@ -77,6 +77,57 @@ const postList = ref(Array.from({ length: 5 }, () => ({
 
 // TODO: 替换为实际音乐文件
 const musicSrc = ''
+
+const article = ref([
+   {
+    id: 1,
+    title: '2026年全球科技峰会在沪开幕，AI与量子计算成焦点议题',
+    time: '2026-05-28',
+    img: 'https://picsum.photos/800/600?random=1'
+  },
+  {
+    id: 2,
+    title: '新能源汽车市场竞争白热化：特斯拉降价引发连锁反应',
+    time: '2026-05-25',
+    img: 'https://picsum.photos/800/600?random=2'
+  },
+  {
+    id: 3,
+    title: '广州迎来强降雨季，市民出行需注意防范内涝与交通安全',
+    time: '2026-05-20',
+    img: 'https://picsum.photos/800/600?random=3'
+  },
+  {
+    id: 4,
+    title: '揭秘“过于先进不便展示”的反导画面背后的国防科技力量',
+    time: '2026-05-18',
+    img: 'https://picsum.photos/800/600?random=4'
+  },
+//   {
+//     id: 5,
+//     title: '92号汽油价格调整：有望重返“7元时代”缓解车主压力',
+//     time: '2026-05-15',
+//     img: 'https://picsum.photos/800/600?random=5'
+//   },
+//   {
+//     id: 6,
+//     title: '智利复活节岛遭遇山火，珍贵石像群受损引发全球关注',
+//     time: '2026-05-10',
+//     img: 'https://picsum.photos/800/600?random=6'
+//   },
+//   {
+//     id: 7,
+//     title: '美国芯片巨头一夜暴跌近14%，全球半导体市场震荡',
+//     time: '2026-05-05',
+//     img: 'https://picsum.photos/800/600?random=7'
+//   },
+//   {
+//     id: 8,
+//     title: '央行公开市场净回笼5940亿元，货币政策走向引热议',
+//     time: '2026-05-01',
+//     img: 'https://picsum.photos/800/600?random=8'
+//   },
+]);
 
 const typeWriter = () => {
   if (typeIndex < fullText.length) {

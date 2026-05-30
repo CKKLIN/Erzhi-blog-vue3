@@ -1,0 +1,286 @@
+<template>
+  <div ref="containerRef" class="book-container"></div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+import * as THREE from 'three'
+
+const containerRef = ref<HTMLDivElement>()
+
+let scene: THREE.Scene
+let camera: THREE.PerspectiveCamera
+let renderer: THREE.WebGLRenderer
+let spiralGroup: THREE.Group
+let animationId: number
+let hoveredMesh: THREE.Mesh | null = null
+const raycaster = new THREE.Raycaster()
+const mouse = new THREE.Vector2(-999, -999)
+let scrollY = 0
+let targetScrollY = 0
+let autoRotation = 0
+
+// ==================== 螺旋控制参数 ====================
+const IMAGE_COUNT = 120     // 图片总数
+const R_MAX = 5.5           // 螺旋顶部半径（最外圈）
+const R_MIN = 3.5           // 螺旋底部半径（最内圈）
+const TURN_SPACING = 2.7    // 每圈螺旋的垂直间距
+const RIBBON_WIDTH = 1.5    // 每张图片在弧线上占据的宽度
+const RIBBON_HEIGHT = 2.2   // 每张图片的高度
+const IMAGE_GAP = 0.02      // 相邻图片之间的弧长间隔
+const INITIAL_Y = -3        // 螺旋初始垂直位置（正值上移，负值下移）
+const SUBDIVISIONS = 20     // 每张图片的曲线细分段数，越大越平滑
+const HOVER_OFFSET = 0.15    // 鼠标悬停时图片向外弹出的距离
+const WOBBLE_STRENGTH = 0.08 // 鼠标悬停时螺旋晃动幅度
+const TILT_ANGLE = 0        // 螺旋整体往后倾斜的角度（弧度）
+
+const IMAGE_LIST = Array.from(
+  { length: IMAGE_COUNT },
+  (_, i) => `https://picsum.photos/400/560?random=${i + 10}`
+)
+
+function initScene() {
+  const container = containerRef.value!
+  const width = container.clientWidth
+  const height = container.clientHeight
+
+  scene = new THREE.Scene()
+  scene.background = null
+  scene.fog = new THREE.FogExp2(0x1a1a1a, 0.02)
+
+  camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100)
+  camera.position.set(0, 0, 14)
+  camera.lookAt(0, -4, 0)
+
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+  renderer.setSize(width, height)
+  renderer.setPixelRatio(window.devicePixelRatio)
+  container.appendChild(renderer.domElement)
+}
+
+function createSpiral() {
+  spiralGroup = new THREE.Group()
+  const loader = new THREE.TextureLoader()
+
+  // 灰色占位纹理
+  const placeholderCanvas = document.createElement('canvas')
+  placeholderCanvas.width = 1
+  placeholderCanvas.height = 1
+  const placeholderCtx = placeholderCanvas.getContext('2d')!
+  placeholderCtx.fillStyle = '#3a3a3a'
+  placeholderCtx.fillRect(0, 0, 1, 1)
+  const placeholderTexture = new THREE.CanvasTexture(placeholderCanvas)
+
+  let angle = 0
+  let accumulatedY = 0
+
+  for (let img = 0; img < IMAGE_COUNT; img++) {
+    const positions: number[] = []
+    const normals: number[] = []
+    const uvs: number[] = []
+    const indices: number[] = []
+
+    // 根据当前半径算出该图片的垂直步进，保证每圈上升高度一致
+    const imgT = img / IMAGE_COUNT
+    const imgRadius = R_MAX - (R_MAX - R_MIN) * imgT
+    const verticalStep = TURN_SPACING * RIBBON_WIDTH / (2 * Math.PI * imgRadius)
+
+    for (let s = 0; s <= SUBDIVISIONS; s++) {
+      const localT = s / SUBDIVISIONS
+      const globalT = (img + localT) / IMAGE_COUNT
+      const radius = R_MAX - (R_MAX - R_MIN) * globalT
+
+      if (s > 0) {
+        angle += RIBBON_WIDTH / SUBDIVISIONS / radius
+      }
+
+      const cx = radius * Math.cos(angle)
+      const cz = radius * Math.sin(angle)
+      const cy = INITIAL_Y - (accumulatedY + localT * verticalStep)
+
+      const nx = Math.cos(angle)
+      const nz = Math.sin(angle)
+
+      positions.push(cx, cy + RIBBON_HEIGHT / 2, cz)
+      normals.push(nx, 0, nz)
+      uvs.push(localT, 1)
+
+      positions.push(cx, cy - RIBBON_HEIGHT / 2, cz)
+      normals.push(nx, 0, nz)
+      uvs.push(localT, 0)
+
+      if (s < SUBDIVISIONS) {
+        const a = s * 2
+        const b = s * 2 + 1
+        const c = (s + 1) * 2
+        const d = (s + 1) * 2 + 1
+        indices.push(a, c, b)
+        indices.push(b, c, d)
+      }
+    }
+
+    accumulatedY += verticalStep
+
+    // 图片间隔
+    if (IMAGE_GAP > 0 && img < IMAGE_COUNT - 1) {
+      const gapT = (img + 1) / IMAGE_COUNT
+      const gapRadius = R_MAX - (R_MAX - R_MIN) * gapT
+      angle += IMAGE_GAP / gapRadius
+    }
+
+    const geometry = new THREE.BufferGeometry()
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+    geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3))
+    geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2))
+    geometry.setIndex(indices)
+
+    const material = new THREE.MeshStandardMaterial({
+      map: placeholderTexture,
+      side: THREE.DoubleSide,
+      roughness: 0.4,
+      metalness: 0.1,
+    })
+
+    const texture = loader.load(IMAGE_LIST[img], () => {
+      material.map = texture
+      material.needsUpdate = true
+    })
+    texture.colorSpace = THREE.SRGBColorSpace
+
+    const mesh = new THREE.Mesh(geometry, material)
+    // 记录径向朝外方向，用于 hover 时偏移
+    mesh.userData.outX = Math.cos(angle)
+    mesh.userData.outZ = Math.sin(angle)
+    mesh.userData.curOut = 0
+    spiralGroup.add(mesh)
+  }
+
+  scene.add(spiralGroup)
+}
+
+let wobbleX = 0
+let wobbleZ = 0
+let curWobbleX = 0
+let curWobbleZ = 0
+
+function handleMouseMove(e: MouseEvent) {
+  const container = containerRef.value
+  if (!container) return
+  const rect = container.getBoundingClientRect()
+  mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+}
+
+function handleWheel(e: WheelEvent) {
+  e.preventDefault()
+  targetScrollY += e.deltaY * 0.008
+}
+
+function updateHover() {
+  raycaster.setFromCamera(mouse, camera)
+  const meshes = spiralGroup.children as THREE.Mesh[]
+  const intersects = raycaster.intersectObjects(meshes)
+
+  const newHovered = (intersects.length > 0 ? intersects[0].object : null) as THREE.Mesh | null
+
+  if (newHovered !== hoveredMesh) {
+    hoveredMesh = newHovered
+  }
+}
+
+function updateMeshAnimations() {
+  const meshes = spiralGroup.children as THREE.Mesh[]
+  for (const mesh of meshes) {
+    const isHovered = mesh === hoveredMesh
+    const target = isHovered ? HOVER_OFFSET : 0
+    mesh.userData.curOut += (target - mesh.userData.curOut) * 0.1
+    mesh.position.x = mesh.userData.curOut * mesh.userData.outX
+    mesh.position.z = mesh.userData.curOut * mesh.userData.outZ
+  }
+}
+
+function addLights() {
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6)
+  scene.add(ambient)
+
+  const pointLight = new THREE.PointLight(0xffffff, 80, 30)
+  pointLight.position.set(0, 10, 0)
+  scene.add(pointLight)
+
+  const pointLight2 = new THREE.PointLight(0x4488ff, 40, 25)
+  pointLight2.position.set(-5, -3, 5)
+  scene.add(pointLight2)
+}
+
+function animate() {
+  animationId = requestAnimationFrame(animate)
+  // 滚动平滑插值
+  scrollY += (targetScrollY - scrollY) * 0.08
+  // 滚动驱动旋转 + 同步上移
+  autoRotation += 0.0003
+  spiralGroup.position.y = scrollY * 0.5
+  spiralGroup.rotation.y = autoRotation + scrollY * 0.5
+  // 鼠标悬停在螺旋图片上时才晃动
+  const wobbleTargetX = hoveredMesh ? -mouse.y * WOBBLE_STRENGTH : 0
+  const wobbleTargetZ = hoveredMesh ? -mouse.x * WOBBLE_STRENGTH : 0
+  curWobbleX += (wobbleTargetX - curWobbleX) * 0.08
+  curWobbleZ += (wobbleTargetZ - curWobbleZ) * 0.08
+  spiralGroup.rotation.x = curWobbleX + TILT_ANGLE
+  spiralGroup.rotation.z = curWobbleZ
+  updateHover()
+  updateMeshAnimations()
+  renderer.render(scene, camera)
+}
+
+function handleResize() {
+  if (!containerRef.value) return
+  const width = containerRef.value.clientWidth
+  const height = containerRef.value.clientHeight
+  camera.aspect = width / height
+  camera.updateProjectionMatrix()
+  renderer.setSize(width, height)
+}
+
+function cleanup() {
+  cancelAnimationFrame(animationId)
+  window.removeEventListener('resize', handleResize)
+
+  spiralGroup.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+      child.geometry.dispose()
+      const mats = Array.isArray(child.material) ? child.material : [child.material]
+      mats.forEach((mat) => {
+        const m = mat as THREE.MeshStandardMaterial
+        m.map?.dispose()
+        m.dispose()
+      })
+    }
+  })
+  renderer.dispose()
+  containerRef.value?.removeChild(renderer.domElement)
+}
+
+onMounted(() => {
+  initScene()
+  addLights()
+  createSpiral()
+  animate()
+  window.addEventListener('resize', handleResize)
+  containerRef.value?.addEventListener('mousemove', handleMouseMove)
+  containerRef.value?.addEventListener('wheel', handleWheel, { passive: false })
+})
+
+onUnmounted(() => {
+  cleanup()
+  containerRef.value?.removeEventListener('mousemove', handleMouseMove)
+  containerRef.value?.removeEventListener('wheel', handleWheel)
+})
+</script>
+
+<style scoped>
+.book-container {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0);
+}
+</style>

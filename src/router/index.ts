@@ -97,6 +97,24 @@ const router = createRouter({
         },
       ]
     },
+    
+    //书单
+    {
+      path: '/book',
+      meta: {
+        title: '书单',
+        keepAlive: true
+      },
+      component: () => import('@/layout/home.vue'),
+      // meta:{show:true},
+      redirect: '/',
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/book/index.vue')
+        },
+      ]
+    },
   ],
 })
 

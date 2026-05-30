@@ -47,6 +47,7 @@ import chatIcon from '@/assets/icon/chat.svg'
 import noteIcon from '@/assets/icon/note.svg'
 import sheyingIcon from '@/assets/icon/sheying.svg' 
 import ziyuanIcon from '@/assets/icon/ziyuan.svg'
+import bookIcon from '@/assets/icon/book.svg'
 
 const counterStore = useCounter()
 const tokenStore = useTokenStore()
@@ -63,6 +64,7 @@ const user = ref({
 const menuList = ref([
   { path: '/home', name: 'home', title: '首页', icon: homeIcon },
   { path: '/resources', name: 'resources', title: '资源', icon: ziyuanIcon },
+  { path: '/book', name: 'book', title: '书单', icon: bookIcon },
   { path: '/chat', name: 'chat', title: '论坛', icon: chatIcon },
   { path: '/picture', name: 'picture', title: '摄影', icon: sheyingIcon },
   { path: '/note', name: 'note', title: '留言', icon: noteIcon },
