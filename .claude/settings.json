@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(xargs grep -l \"three\\\\|THREE\")",
+      "Bash(mkdir -p d:/money/erzhi-blog-vue3/src/components/WaterMistGlass/shaders)",
+      "Bash(npx vite *)",
+      "Bash(npm run *)"
+    ],
+    "additionalDirectories": [
+      "d:\\money\\erzhi-blog-vue3\\src\\components\\WaterMistGlass"
     ]
   }
 }
