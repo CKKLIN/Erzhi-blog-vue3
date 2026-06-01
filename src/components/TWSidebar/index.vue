@@ -99,8 +99,8 @@ defineProps({
 }
 .ar-img{
     width: 45%;
-    height: 80%;
-    min-height: 50px;
+    max-height: 90px;
+    min-height: 40px;
     /* background-color: #f50505; */
     border-radius: 4px;
     display: block;

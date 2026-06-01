@@ -11,9 +11,9 @@
     <div class="header-right">
       <div class="menuList">
         <div v-for="item in menuList" :key="item.name">
-          <div class="menu">
+          <div class="menu" @click="handlePath(item.path, item.name)">
             <img class="menuIcon" :src="item.icon" />
-            <div @click="handlePath(item.path, item.name)" :class="{ active: index === item.name }">{{ item.title }}
+            <div  :class="{ active: index === item.name }">{{ item.title }}
             </div>
 
           </div>
@@ -82,9 +82,9 @@ const backLogin = () => {
 const handlePath = async (path, pageName) => {
   counterStore.index = pageName
   router.push(path)
-  if (route.path !== path) {
-    await pageCountAPI({ userId: user.value.id, pageName })
-  }
+  // if (route.path !== path) {
+  //   await pageCountAPI({ userId: user.value.id, pageName })
+  // }
 }
 
 onMounted(() => {
@@ -109,7 +109,7 @@ onMounted(() => {
 }
 
 .header:hover {
-  background-color: rgba(93, 94, 95, 0.13);
+  background-color: rgba(93, 94, 95, 0.616);
 }
 
 .header-left {
