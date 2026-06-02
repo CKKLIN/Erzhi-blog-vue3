@@ -46,13 +46,13 @@ import { ref, onMounted } from 'vue'
 import wave from '@/components/wave.vue'
 import player from '@/assets/icon/player.png'
 import pause from '@/assets/icon/pause.png'
-import dijia from '@/assets/picture/dijia.jpg'
+import ikun from '@/assets/picture/ikun.jpg'
 import useCounter from '@/stores/pinia'
 import hornIcon from '@/assets/icon/horn.svg'
-import infoCard from '@/views/home/components/infoCard/index.vue'
+import infoCard from '@/components/info/infoCard/index.vue'
 import createTime from '@/views/home/components/createTime/index.vue'
 import loading from '@/views/home/components/loading/index.vue'
-import TWSidebar from '@/components/TWSidebar/index.vue'
+import TWSidebar from '@/components/sidebar/TWSidebar/index.vue'
 
 const counterStore = useCounter()
 const isPlay = ref(true)
@@ -64,9 +64,10 @@ let typeIndex = 0
 const user = ref({
   id: null,
   userName: '木二支',
-  avatarUrl: dijia,
+  avatarUrl: ikun,
   title: 1223,
-  look: 45654
+  look: 45654,
+  resources:234,
 })
 
 const postList = ref(Array.from({ length: 5 }, () => ({
@@ -256,7 +257,6 @@ onMounted(() => {
 .body-left-one {
   width: 100%;
   /* height: 85px; */
-  padding: var(--padding-card);
   background-color: var(--color-card-bg);
   border-radius: var(--border-radius-card);
   display: flex;

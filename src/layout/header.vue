@@ -41,13 +41,14 @@ import { useRouter, useRoute } from 'vue-router'
 import { useTokenStore } from '@/stores/token'
 import useCounter from '@/stores/pinia'
 import { pageCountAPI } from '@/api/page'
-import dijia from '@/assets/picture/dijia.jpg'
+import ikun from '@/assets/picture/ikun.jpg'
 import homeIcon from '@/assets/icon/home.svg'
 import chatIcon from '@/assets/icon/chat.svg'
 import noteIcon from '@/assets/icon/note.svg'
 import sheyingIcon from '@/assets/icon/sheying.svg' 
 import ziyuanIcon from '@/assets/icon/ziyuan.svg'
 import bookIcon from '@/assets/icon/book.svg'
+import superManIcon from '@/assets/icon/superMan.svg'
 
 const counterStore = useCounter()
 const tokenStore = useTokenStore()
@@ -58,7 +59,7 @@ const index = ref()
 const user = ref({
   id: null,
   userName: '',
-  avatarUrl: dijia,
+  avatarUrl: ikun,
 })
 
 const menuList = ref([
@@ -68,6 +69,7 @@ const menuList = ref([
   { path: '/chat', name: 'chat', title: '论坛', icon: chatIcon },
   { path: '/picture', name: 'picture', title: '摄影', icon: sheyingIcon },
   { path: '/note', name: 'note', title: '留言', icon: noteIcon },
+  { path: '/my', name: 'my', title: '主页', icon: superManIcon },
 ])
 
 counterStore.userId = user.value.id
@@ -100,6 +102,7 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   /* background-color: goldenrod; */
+  background-color: rgba(93, 94, 95, 0.616);
 }
 
 .header,
@@ -144,8 +147,8 @@ onMounted(() => {
 }
 
 .menu {
-  /* width: fit-content;
-height: fit-content; */
+  width: fit-content;
+height: 100%;
   display: flex;
   flex-direction: row;
   /* box-shadow: -2px 3px 10px rgba(0, 0, 0, 0.356); */
@@ -159,6 +162,12 @@ height: fit-content; */
 .menu.active {
   /* box-shadow: 2px -3px 10px rgba(0, 0, 0, 0.356); */
   /* background-color: rgba(217, 219, 221, 0.735); */
+}
+
+.menu:hover {
+  /* box-shadow: 2px -3px 10px rgba(0, 0, 0, 0.356); */
+  /* background-color: rgba(217, 219, 221, 0.735); */
+  /* color: red; */
 }
 
 .header-right {

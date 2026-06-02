@@ -115,6 +115,23 @@ const router = createRouter({
         },
       ]
     },
+        //主页
+    {
+      path: '/my',
+      meta: {
+        title: '主页',
+        keepAlive: true
+      },
+      component: () => import('@/layout/home.vue'),
+      // meta:{show:true},
+      redirect: '/',
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/my/index.vue')
+        },
+      ]
+    },
   ],
 })
 
