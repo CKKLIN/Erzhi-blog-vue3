@@ -7,6 +7,9 @@
       <Transition name="slide" mode="out-in">
         <router-view />
       </Transition>
+      <div class="home-footer">
+        uihuihui
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +30,8 @@ const handlePath = (path) => {
   position: relative;
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .home-top {
@@ -37,10 +42,17 @@ const handlePath = (path) => {
 }
 
 .home-body {
-  position: fixed;
   overflow: hidden;
   width: 100%;
   height: 100%;
   z-index: 1;
+  background-color: goldenrod;
+}
+
+.home-footer {
+  width: 100%;
+  height: 100px;
+  justify-content: flex-end;
+  background-color: red;
 }
 </style>

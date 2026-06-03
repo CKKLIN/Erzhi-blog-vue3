@@ -1,11 +1,51 @@
 <template>
-    <div class="container"> fdvfdvfd
+    <div class="container" ref="containerRef">
+        <cardAnimation :items="animationItems" :scroller="containerRef">
+            <template #front="{ item }">
+                <div class="card-cover">
+                    <img :src="item.cover" :alt="item.title" class="card-cover-img" />
+                </div>
+                <div class="card-info">
+                    <h3 class="card-title">{{ item.title }}</h3>
+                    <p class="card-author">{{ item.author }}</p>
+                </div>
+            </template>
+            <template #back="{ item }">
+                <h3 class="card-title">{{ item.title }}</h3>
+                <p class="card-author">{{ item.author }}</p>
+                <p class="card-desc">{{ item.desc }}</p>
+            </template>
+        </cardAnimation>
     </div>
 </template>
+<script setup>
+import { ref } from 'vue'
+import cardAnimation from '@/components/cardAnimation/index.vue'
+import { bookList3 } from '@/assets/linshi/data/data'
+
+const containerRef = ref()
+
+const animationItems = bookList3.map(b => ({
+    title: b.name,
+    cover: b.cover,
+    author: b.author,
+    desc: b.introduction,
+}))
+</script>
 <style scoped>
+.card-cover {
+    width: 100%;
+    height: 300px;
+    /* object-fit: cover; */
+}
+.card-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .container {
     width: 100%;
     height: 100%;
-    /* background-color: #000; */
+    overflow: auto;
 }
 </style>

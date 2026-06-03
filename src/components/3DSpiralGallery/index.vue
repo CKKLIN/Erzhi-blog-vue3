@@ -5,6 +5,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
+import { gsap } from 'gsap'
 
 const containerRef = ref<HTMLDivElement>()
 
@@ -12,13 +13,26 @@ let scene: THREE.Scene
 let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 let spiralGroup: THREE.Group
-let animationId: number
 let hoveredMesh: THREE.Mesh | null = null
 const raycaster = new THREE.Raycaster()
 const mouse = new THREE.Vector2(-999, -999)
-let scrollY = 0
-let targetScrollY = 0
 let autoRotation = 0
+
+// GSAP 动画代理
+const scrollProxy = { y: 0 }
+const parentScrollProxy = { y: 0 }
+const rotationScrollProxy = { y: 0 }
+let targetScrollY = 0
+let extraRotation = 0
+const wobbleProxy = { x: 0, z: 0 }
+let scrollYQuickTo: ReturnType<typeof gsap.quickTo>
+let parentScrollQuickTo: ReturnType<typeof gsap.quickTo>
+let rotationScrollQuickTo: ReturnType<typeof gsap.quickTo>
+let wobbleXTo: ReturnType<typeof gsap.quickTo>
+let wobbleZTo: ReturnType<typeof gsap.quickTo>
+let ctx: gsap.Context | null = null
+let hoverTweenIn: gsap.core.Tween | null = null
+let hoverTweenOut: gsap.core.Tween | null = null
 
 // ==================== 螺旋控制参数 ====================
 const IMAGE_COUNT = 120     // 图片总数
@@ -32,6 +46,12 @@ const INITIAL_Y = -3        // 螺旋初始垂直位置（正值上移，负值�
 const SUBDIVISIONS = 20     // 每张图片的曲线细分段数，越大越平滑
 const HOVER_OFFSET = 0.15    // 鼠标悬停时图片向外弹出的距离
 const WOBBLE_STRENGTH = 0.08 // 鼠标悬停时螺旋晃动幅度
+const ROTATION_SPEED = 0.0009 // 自动旋转速度（弧度/秒，0.018 ≈ 每分钟约10°）
+const PREVENT_SCROLL = false // 是否阻止滚轮事件冒泡（false 时父组件也会滚动）
+const SCROLL_SPEED = 0.9    // 滚轮驱动螺旋上移的倍率（值越大上移越快）
+const PARENT_SCROLL_SPEED = 0.005 // 父组件滚动驱动螺旋的倍率
+const SCROLL_LIMIT = -5    // 螺旋向下移动的最低位置（负值，值越小允许下移越低）
+const SCROLL_CEILING = 17   // 螺旋向上移动的最高位置（正值，0 为初始位置）
 const TILT_ANGLE = 0        // 螺旋整体往后倾斜的角度（弧度）
 const PLACEHOLDER_COLOR = '#7e7e7e32' // 图片加载前的占位颜色
 
@@ -160,10 +180,36 @@ function createSpiral() {
   scene.add(spiralGroup)
 }
 
-let wobbleX = 0
-let wobbleZ = 0
-let curWobbleX = 0
-let curWobbleZ = 0
+function onHoverChanged(newHovered: THREE.Mesh | null, oldHovered: THREE.Mesh | null) {
+  if (oldHovered) {
+    hoverTweenOut?.kill()
+    hoverTweenOut = gsap.to(oldHovered.userData, {
+      curOut: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+      onUpdate() {
+        oldHovered.position.x = oldHovered.userData.curOut * oldHovered.userData.outX
+        oldHovered.position.z = oldHovered.userData.curOut * oldHovered.userData.outZ
+      },
+    })
+  }
+  if (newHovered) {
+    hoverTweenIn?.kill()
+    hoverTweenIn = gsap.to(newHovered.userData, {
+      curOut: HOVER_OFFSET,
+      duration: 0.4,
+      ease: 'power2.out',
+      onUpdate() {
+        newHovered.position.x = newHovered.userData.curOut * newHovered.userData.outX
+        newHovered.position.z = newHovered.userData.curOut * newHovered.userData.outZ
+      },
+    })
+  }
+}
+
+function onParentScroll(scrollTop: number) {
+  parentScrollQuickTo(scrollTop * PARENT_SCROLL_SPEED)
+}
 
 function handleMouseMove(e: MouseEvent) {
   const container = containerRef.value
@@ -174,8 +220,22 @@ function handleMouseMove(e: MouseEvent) {
 }
 
 function handleWheel(e: WheelEvent) {
-  e.preventDefault()
-  targetScrollY += e.deltaY * 0.008
+  if (PREVENT_SCROLL) e.preventDefault()
+  const delta = e.deltaY * 0.008
+  const nextY = targetScrollY + delta
+
+  if (nextY < SCROLL_LIMIT) {
+    extraRotation += (nextY - SCROLL_LIMIT) * SCROLL_SPEED
+    targetScrollY = SCROLL_LIMIT
+  } else if (nextY > SCROLL_CEILING) {
+    extraRotation += (nextY - SCROLL_CEILING) * SCROLL_SPEED
+    targetScrollY = SCROLL_CEILING
+  } else {
+    targetScrollY = nextY
+  }
+
+  scrollYQuickTo(targetScrollY)
+  rotationScrollQuickTo(targetScrollY + extraRotation)
 }
 
 function updateHover() {
@@ -186,18 +246,9 @@ function updateHover() {
   const newHovered = (intersects.length > 0 ? intersects[0].object : null) as THREE.Mesh | null
 
   if (newHovered !== hoveredMesh) {
+    const old = hoveredMesh
     hoveredMesh = newHovered
-  }
-}
-
-function updateMeshAnimations() {
-  const meshes = spiralGroup.children as THREE.Mesh[]
-  for (const mesh of meshes) {
-    const isHovered = mesh === hoveredMesh
-    const target = isHovered ? HOVER_OFFSET : 0
-    mesh.userData.curOut += (target - mesh.userData.curOut) * 0.1
-    mesh.position.x = mesh.userData.curOut * mesh.userData.outX
-    mesh.position.z = mesh.userData.curOut * mesh.userData.outZ
+    onHoverChanged(newHovered, old)
   }
 }
 
@@ -214,23 +265,22 @@ function addLights() {
   scene.add(pointLight2)
 }
 
-function animate() {
-  animationId = requestAnimationFrame(animate)
-  // 滚动平滑插值
-  scrollY += (targetScrollY - scrollY) * 0.08
-  // 滚动驱动旋转 + 同步上移
-  autoRotation += 0.0003
-  spiralGroup.position.y = scrollY * 0.5
-  spiralGroup.rotation.y = autoRotation + scrollY * 0.5
-  // 鼠标悬停在螺旋图片上时才晃动
-  const wobbleTargetX = hoveredMesh ? -mouse.y * WOBBLE_STRENGTH : 0
-  const wobbleTargetZ = hoveredMesh ? -mouse.x * WOBBLE_STRENGTH : 0
-  curWobbleX += (wobbleTargetX - curWobbleX) * 0.08
-  curWobbleZ += (wobbleTargetZ - curWobbleZ) * 0.08
-  spiralGroup.rotation.x = curWobbleX + TILT_ANGLE
-  spiralGroup.rotation.z = curWobbleZ
+function onTick() {
+  autoRotation += ROTATION_SPEED * gsap.ticker.deltaRatio()
+
+  const totalScroll = scrollProxy.y + parentScrollProxy.y
+  const totalRotation = rotationScrollProxy.y + parentScrollProxy.y
+  spiralGroup.position.y = totalScroll * SCROLL_SPEED
+  spiralGroup.rotation.y = autoRotation + totalRotation * SCROLL_SPEED
+
+  const targetX = hoveredMesh ? -mouse.y * WOBBLE_STRENGTH : 0
+  const targetZ = hoveredMesh ? -mouse.x * WOBBLE_STRENGTH : 0
+  wobbleXTo(targetX)
+  wobbleZTo(targetZ)
+  spiralGroup.rotation.x = wobbleProxy.x + TILT_ANGLE
+  spiralGroup.rotation.z = wobbleProxy.z
+
   updateHover()
-  updateMeshAnimations()
   renderer.render(scene, camera)
 }
 
@@ -244,7 +294,6 @@ function handleResize() {
 }
 
 function cleanup() {
-  cancelAnimationFrame(animationId)
   window.removeEventListener('resize', handleResize)
 
   spiralGroup.traverse((child) => {
@@ -266,13 +315,27 @@ onMounted(() => {
   initScene()
   addLights()
   createSpiral()
-  animate()
+
+  ctx = gsap.context(() => {
+    scrollYQuickTo = gsap.quickTo(scrollProxy, 'y', { duration: 0.8, ease: 'power3' })
+    parentScrollQuickTo = gsap.quickTo(parentScrollProxy, 'y', { duration: 0.8, ease: 'power3' })
+    rotationScrollQuickTo = gsap.quickTo(rotationScrollProxy, 'y', { duration: 0.8, ease: 'power3' })
+    wobbleXTo = gsap.quickTo(wobbleProxy, 'x', { duration: 0.8, ease: 'power2.out' })
+    wobbleZTo = gsap.quickTo(wobbleProxy, 'z', { duration: 0.8, ease: 'power2.out' })
+    gsap.ticker.add(onTick)
+  })
+
   window.addEventListener('resize', handleResize)
   containerRef.value?.addEventListener('mousemove', handleMouseMove)
-  containerRef.value?.addEventListener('wheel', handleWheel, { passive: false })
+  containerRef.value?.addEventListener('wheel', handleWheel, { passive: !PREVENT_SCROLL })
 })
 
+defineExpose({ onParentScroll })
+
 onUnmounted(() => {
+  hoverTweenIn?.kill()
+  hoverTweenOut?.kill()
+  ctx?.revert()
   cleanup()
   containerRef.value?.removeEventListener('mousemove', handleMouseMove)
   containerRef.value?.removeEventListener('wheel', handleWheel)

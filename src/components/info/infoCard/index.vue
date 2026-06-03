@@ -193,9 +193,10 @@ const currentLevelName = computed(() => {
     /* border-radius: 8px; */
     display: flex;
     flex-direction: column;
+    position: relative;
     align-items: center;
     /* gap: 4px; */
-
+overflow: hidden;
     padding: var(--padding-card);
 }
 

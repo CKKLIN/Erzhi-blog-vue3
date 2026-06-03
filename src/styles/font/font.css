@@ -15,3 +15,7 @@
   font-family: "ZiHun144Hao-LangYuanTi-2";
   src: url("@/styles/font/ZiHun144Hao-LangYuanTi-2.ttf");
 }
+@font-face {
+  font-family: "RuiZiJiJiaHongHuangChaoJiLiang";
+  src: url("@/styles/font/RuiZiJiJiaHongHuangChaoJiLiang.ttf");
+}
