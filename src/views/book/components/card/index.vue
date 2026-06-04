@@ -87,6 +87,7 @@ function getCover(cover: string): string {
 
 .card-info {
     padding: 4px;
+  background-color: rgb(160, 160, 160);
     /* background: #097f94; */
 }
 
@@ -94,7 +95,7 @@ function getCover(cover: string): string {
     margin: 0 0 6px;
     font-size: 16px;
     font-weight: 600;
-    color: #1a1a1a;
+  color: #fff;
     line-height: 1;
     white-space: nowrap;
     overflow: hidden;
@@ -109,7 +110,7 @@ function getCover(cover: string): string {
 .card-author {
     /* margin: 0 0 8px; */
     font-size: 13px;
-    color: #707070;
+    color: #000000;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     line-clamp: 1;

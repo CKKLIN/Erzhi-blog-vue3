@@ -11,7 +11,7 @@
       </div>
       <div class="body-two">
         <titleCard class="body-two-title"></titleCard>
-        <titleCard class="body-two-title two-title"></titleCard>
+        <titleCard class="two-title"></titleCard>
         <cardAnimation :items="animationItems" :scroller="containerRef" trigger-start="top top" style="width: 100%;"
           trigger-end="bottom bottom" scroll-height="300vh" :converge-speed="0.15" sticky-top="0"
           container-height="100vh">
@@ -25,7 +25,7 @@
             </div>
           </template>
           <template #back="{ item }">
-            <div class="card-back">
+            <div class="card-back" :style="{ background: item.backColor || '#ffffff' }">
               <h3 class="card-title">{{ item.title }}</h3>
               <p class="card-author">{{ item.author }}</p>
               <p class="card-desc">{{ item.desc }}</p>
@@ -35,7 +35,7 @@
           <template #cover="{ item }">
             <div class="cover">
 
-              <titleCard class="body-two-title"></titleCard>
+              <!-- <titleCard class="body-two-title"></titleCard> -->
             </div>
           </template>
         </cardAnimation>
@@ -56,6 +56,7 @@ const animationItems = bookList3.map(b => ({
   cover: b.cover,
   author: b.author,
   desc: b.introduction,
+  backColor: b.backColor,
 }))
 
 const spiralRef = ref()
@@ -69,13 +70,22 @@ function onScroll(e: Event) {
 .card-back {
   width: 100%;
   height: 450px;
-  background-color: #99cd325e;
+  font-family: "ZiHun144Hao-LangYuanTi-2";
 }
 
 .cover {
   width: 100%;
   height: 450px;
   background-color: #000000;
+    background: url('@/assets/bj/bj14.jpg');
+  box-shadow:var(--color-card-shadow-top) ;
+  /* box-shadow-top: 0; */
+  /* background-size: cover;
+    background-position: center;   */
+  /* background-size: cover; */
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .body {
@@ -175,6 +185,8 @@ function onScroll(e: Event) {
   display: flex;
   justify-content: center;
   z-index: 0;
+      background: linear-gradient(rgba(14, 62, 134, 0), rgba(54, 125, 184, 0.281), rgba(76, 153, 216, 0.507)), url('@/assets/bj/bj4.jpeg');
+
 }
 
 .title {
@@ -190,8 +202,8 @@ function onScroll(e: Event) {
   position: absolute;
   /* background-color: rgb(0, 255, 76); */
   /* margin-top: 100px; */
-  font-size: 30px;
-
+  /* font-size: 30px; */
+margin-top: 100px;
   font-size: 90px;
   /* font-weight: 100; */
   text-align: center;
@@ -201,7 +213,20 @@ function onScroll(e: Event) {
 }
 
 .two-title {
-  margin-top: 700px;
+  margin-top: 750px;  
+  width: 13%;
+  height: fit-content;
+  position: absolute;
+  /* background-color: rgb(0, 255, 76); */
+  /* margin-top: 100px; */
+  font-size: 25px;
+left: 7%;
+  /* font-size: 90px; */
+  /* font-weight: 100; */
+  /* text-align: start; */
+  color: #4c5ec5;
+
+  font-family: "RuiZiJiJiaHongHuangChaoJiLiang";
 }
 
 .Spiraly {

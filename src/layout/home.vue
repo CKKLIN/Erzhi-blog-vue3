@@ -7,9 +7,9 @@
       <Transition name="slide" mode="out-in">
         <router-view />
       </Transition>
-      <div class="home-footer">
+      <!-- <div class="home-footer">
         uihuihui
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@ const handlePath = (path) => {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: goldenrod;
+  background-color: rgb(179, 179, 179);
 }
 
 .home-footer {

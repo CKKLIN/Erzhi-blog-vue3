@@ -1,17 +1,9 @@
 <template>
   <div class="book-page" ref="pageRef">
-    <div class="fixed-center">
+    <div class="fixed-center" ref="fixedCenterRef">
       <div class="cards-container" ref="containerRef">
-        <div
-          class="book-card"
-          v-for="(item, index) in items"
-          :key="index"
-          :ref="(el) => setCardRef(el, index)"
-        >
-          <div
-            class="card-inner"
-            :ref="(el) => setInnerRef(el, index)"
-          >
+        <div class="book-card" v-for="(item, index) in items" :key="index" :ref="(el) => setCardRef(el, index)">
+          <div class="card-inner" :ref="(el) => setInnerRef(el, index)">
             <div class="card-front">
               <slot name="front" :item="item" :index="index">
                 <div class="card-cover">
@@ -23,7 +15,7 @@
                 </div>
               </slot>
             </div>
-            <div class="card-back">
+            <div class="card-back" :style="{ background: item.backColor || '#ffffff' }">
               <slot name="back" :item="item" :index="index">
                 <h3 class="card-title">{{ item.title }}</h3>
                 <p class="card-author">{{ item.author }}</p>
@@ -34,7 +26,9 @@
         </div>
       </div>
     </div>
-    <div class="cover-box" ref="coverRef"></div>
+    <div class="cover-box" ref="coverRef">
+      <slot name="cover"></slot>
+    </div>
     <div class="scroll-spacer" ref="scrollSpacerRef"></div>
   </div>
 </template>
@@ -51,30 +45,53 @@ interface CardItem {
   cover?: string
   author?: string
   desc?: string
+  backColor?: string
   [key: string]: any
 }
 
 const props = withDefaults(defineProps<{
   items: CardItem[]
-  cardWidth?: number
-  cardGap?: number
-  scrollHeight?: string
-  coverHeight?: number
-  coverColor?: string
+  scroller?: HTMLElement | null
+  // ==================== 动画控制参数 ====================
+  triggerStart?: string     // ScrollTrigger 触发起始位置，如 'top center' 'top 80%'
+  triggerEnd?: string       // ScrollTrigger 触发结束位置，如 'bottom bottom'
+  scrollHeight?: string     // 滚动占位高度，决定动画总滚动距离，如 '500vh'
+  convergeSpeed?: number    // 收拢速度（0~1），值越大收拢越快，默认 0.35
+  stickyTop?: string        // 卡片容器 sticky 定位的 top 值，如 '0' '30%'
+  containerHeight?: string  // 卡片容器高度，如 '100vh' '500px' 'auto'
+  verticalAlign?: string    // 卡片容器垂直对齐方式，如 'center' 'flex-start'
+  paddingTop?: string       // 卡片容器顶部内边距
+  cardWidth?: number        // 单张卡片宽度（px）
+  cardGap?: number          // 卡片间距（px）
+  cardScaleW?: number       // 翻转后卡片宽度倍数，如 1.5
+  cardScaleH?: number       // 翻转后卡片高度倍数，如 1.5
+  coverHeight?: number      // 遮挡层高度（px）
+  coverColor?: string       // 遮挡层背景色
 }>(), {
-  cardWidth: 200,
-  cardGap: 40,
-  scrollHeight: '500vh',
-  coverHeight: 550,
-  coverColor: '#615b48',
+  triggerStart: 'top top',          // ScrollTrigger 触发起始位置，如 'top top' 'top center'
+  triggerEnd: 'bottom bottom',  // ScrollTrigger 触发结束位置，如 'bottom bottom'
+  scrollHeight: '1000vh',        // 滚动占位高度，决定动画总滚动距离，如 '500vh'
+  convergeSpeed: 0.15,            // 收拢速度（0~1），值越大收拢越快
+  stickyTop: '0',               // 卡片容器 sticky 定位的 top 值，如 '0' '30%'
+  containerHeight: '100vh',     // 卡片容器高度
+  verticalAlign: 'center',      // 卡片容器垂直对齐方式，如 'center' 'flex-start'
+  paddingTop: '0',              // 卡片容器顶部内边距距
+  cardWidth: 240,               // 单张卡片宽度（px）
+  cardGap: 40,                  // 卡片间距（px）
+  cardScaleW: 1.3,              // 翻转后卡片宽度倍数
+  cardScaleH: 1.3,              // 翻转后卡片高度倍数
+  coverHeight: 300,             // 遮挡层高度（px）
+  coverColor: '#99cd325e',        // 遮挡层背景色
 })
 
-const pageRef = ref<HTMLElement | null>(null)
-const coverRef = ref<HTMLElement | null>(null)
-const containerRef = ref<HTMLElement | null>(null)
-const scrollSpacerRef = ref<HTMLElement | null>(null)
-const cardRefs = ref<(HTMLElement | null)[]>([])
-const innerRefs = ref<(HTMLElement | null)[]>([])
+
+const pageRef = ref<HTMLElement | null>(null)       // 组件根元素
+const fixedCenterRef = ref<HTMLElement | null>(null) // 卡片可视区域（sticky）
+const coverRef = ref<HTMLElement | null>(null)      // 遮挡层
+const containerRef = ref<HTMLElement | null>(null)   // 卡片容器
+const scrollSpacerRef = ref<HTMLElement | null>(null) // 滚动占位元素
+const cardRefs = ref<(HTMLElement | null)[]>([])     // 卡片元素列表
+const innerRefs = ref<(HTMLElement | null)[]>([])    // 卡片翻转层列表
 
 const setCardRef = (el: unknown, index: number) => {
   cardRefs.value[index] = el as HTMLElement | null
@@ -84,14 +101,15 @@ const setInnerRef = (el: unknown, index: number) => {
   innerRefs.value[index] = el as HTMLElement | null
 }
 
-// 动态生成等间距偏移，支持任意数量卡片
+// 每张卡片相对于中心的水平偏移索引
 const offsets = computed(() => {
   const n = props.items.length
   return Array.from({ length: n }, (_, i) => i - (n - 1) / 2)
 })
 
-const cardStep = 200
+const cardStep = 200  // 卡片堆叠时的水平间距（px）
 
+// 堆叠状态下每张卡片的位置和旋转
 const stackState = computed(() =>
   offsets.value.map((offset, i) => ({
     x: -offset * cardStep + (i - (props.items.length - 1) / 2) * 50,
@@ -100,23 +118,20 @@ const stackState = computed(() =>
   }))
 )
 
-// 动画阶段阈值
-const P1 = 0.35
-const P2 = 0.55
-const HIDE_AT = 0.38
+// ==================== 动画阶段阈值（0~1 的进度比例）====================
+// P1 由 convergeSpeed 控制，后续阶段按比例自动调整
+const P1 = props.convergeSpeed   // 阶段1结束：卡片收拢到位（由 prop 控制）
+const HIDE_AT = P1 * 1.09        // 阶段2结束：卡片完全隐藏（保持比例 0.38/0.35）
 
-let P3 = 0.72
-let P3A = 0.75
-let P4 = 0.93
+let P3 = 0.72         // 阶段3开始：卡片重新出现
+let P3A = 0.75        // 阶段4开始：卡片下落弹跳
+let P4 = 0.93         // 阶段5开始：卡片翻转并排
 
-const smoothstep = (t: number) => t * t * (3 - 2 * t)
-const convergeEndDropY = smoothstep(P1 / P2) * 400
-const hideEndDropY = smoothstep(HIDE_AT / P2) * 400
-const D = 10
+const D = 10  // GSAP timeline 总时长系数
 
-let ctx: gsap.Context | null = null
+let ctx: gsap.Context | null = null  // GSAP 上下文，用于清理
 
-// 跳动动画管理
+// 空闲状态下卡片微弹动画
 function createBounceTweens(cards: HTMLElement[]): gsap.core.Tween[] {
   return cards.map((card, i) =>
     gsap.to(card, {
@@ -140,16 +155,20 @@ const initAnimations = () => {
   const trigger = scrollSpacerRef.value
   const cover = coverRef.value
   const container = containerRef.value
-  if (!page || !trigger || !container) return
+  const fixedCenter = fixedCenterRef.value
+  if (!page || !trigger || !container || !fixedCenter) return
 
   const cards = cardRefs.value.filter(Boolean) as HTMLElement[]
   const inners = innerRefs.value.filter(Boolean) as HTMLElement[]
   if (cards.length === 0) return
 
+  // 确定滚动容器和可视区域高度
+  const scrollerEl = props.scroller || window
+  const compH = scrollerEl instanceof Window ? window.innerHeight : scrollerEl.clientHeight
+
   const stacks = stackState.value
 
-  // 动态计算出现时机
-  const compH = page.clientHeight
+  // 根据遮挡层位置动态调整阶段3~5的触发时机
   const targetCoverTop = compH * 2 / 3 - props.coverHeight
   const phase2StartTop = compH * 0.5
   const phase2EndTop = -compH * 1.1
@@ -161,9 +180,8 @@ const initAnimations = () => {
   P3A = P3 + 0.03 * scale
   P4 = P3 + (0.93 - 0.72) * scale
 
-  const coverMidY = compH * 2 / 3 - props.coverHeight / 2 - compH / 2
-
   ctx = gsap.context(() => {
+    // 设置卡片层级（最前面的卡片最后渲染）
     cards.forEach((card, i) => {
       gsap.set(card, { zIndex: cards.length - i })
     })
@@ -172,10 +190,11 @@ const initAnimations = () => {
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger,
-        scroller: page,
-        start: 'top top',
-        end: 'bottom bottom',
+        trigger: fixedCenter,
+        endTrigger: page,
+        scroller: scrollerEl,
+        start: props.triggerStart,
+        end: props.triggerEnd,
         scrub: true,
         onUpdate: (self) => {
           const p = self.progress
@@ -190,11 +209,25 @@ const initAnimations = () => {
             killBounceTweens(bounceTweens, cards)
           }
 
-          if (p < P3) {
+          if (p >= HIDE_AT && p < P3) {
+            // 卡片完全隐藏阶段，保持透明
+            cards.forEach(c => { c.style.opacity = '0' })
+          } else if (p < HIDE_AT) {
+            // 遮罩覆盖渐变消失
             const coverTop = cover.getBoundingClientRect().top
-            const rightmostTop = cards[cards.length - 1].getBoundingClientRect().top
-            const hidden = coverTop <= rightmostTop
-            cards.forEach(c => { c.style.opacity = hidden ? '0' : '1' })
+            const coverBottom = coverTop + props.coverHeight
+            cards.forEach(c => {
+              const cardTop = c.getBoundingClientRect().top
+              const cardBottom = c.getBoundingClientRect().bottom
+              const cardH = cardBottom - cardTop
+              const overlap = Math.max(0, Math.min(coverBottom, cardBottom) - Math.max(coverTop, cardTop))
+              const ratio = overlap / cardH
+              if (ratio <= 0.5) {
+                c.style.opacity = '1'
+              } else {
+                c.style.opacity = String(Math.max(0, 1 - (ratio - 0.5) * 2))
+              }
+            })
           } else if (p < P3A) {
             const t = (p - P3) / (P3A - P3)
             cards.forEach(c => { c.style.opacity = String(Math.min(t * 4, 1)) })
@@ -205,59 +238,43 @@ const initAnimations = () => {
       },
     })
 
-    // 阶段 1：收拢 + 下移（0 → P1）
+    // 阶段 1：收拢（进度 0 → P1），卡片只水平移动和旋转，不下移
     cards.forEach((card, i) => {
       tl.to(card, {
         x: stacks[i].x,
-        y: stacks[i].y + convergeEndDropY,
+        y: stacks[i].y,
         rotation: stacks[i].rotate,
         duration: P1 * D,
         ease: 'power2.inOut',
       }, 0)
     })
 
-    if (cover) {
-      tl.to(cover, {
-        top: '50vh',
-        duration: P1 * D,
-        ease: 'power2.inOut',
-      }, 0)
-    }
-
-    // 阶段 2：继续下移（P1 → HIDE_AT）
+    // 阶段 2：卡片保持不动（P1 → HIDE_AT）
     cards.forEach((card, i) => {
       tl.to(card, {
-        y: stacks[i].y + hideEndDropY,
+        y: stacks[i].y,
         duration: (HIDE_AT - P1) * D,
         ease: 'power2.inOut',
       }, P1 * D)
     })
 
-    if (cover) {
-      tl.to(cover, {
-        top: '-110vh',
-        duration: (1 - P1) * D,
-        ease: 'none',
-      }, P1 * D)
-    }
-
-    // 阶段 3：出现（P3 → P3A）
+    // 阶段 3：卡片缩小重新出现在视口顶部（P3 → P3A）
     tl.set(container, { scale: 0.3, immediateRender: false }, P3 * D)
-
     cards.forEach((card, i) => {
       tl.set(card, {
         x: stacks[i].x,
-        y: coverMidY + stacks[i].y,
+        y: -compH * 0.4 + stacks[i].y,
         rotateX: 40,
         immediateRender: false,
       }, P3 * D)
     })
 
-    // 阶段 4：下落 → 弹跳（P3A → P4）
+    // 阶段 4：卡片落到视口底部再弹回居中（P3A → P4）
     const bounceDur = (P4 - P3A) * D
-    const dropDur = bounceDur * 0.3
-    const bounceUpDur = bounceDur * 0.7
+    const dropDur = bounceDur * 0.4     // 下落到底部
+    const bounceUpDur = bounceDur * 0.6  // 弹回居中
     const bounceStart = P3A * D
+    const bottomY = compH * 0.35  // 视口底部位置（相对于居中偏移）
 
     tl.to(container, {
       scale: 1,
@@ -266,17 +283,16 @@ const initAnimations = () => {
     }, bounceStart)
 
     cards.forEach((card, i) => {
-      const startY = coverMidY + stacks[i].y
-      const bottomY = startY + 300
-
+      // 从顶部下落到视口底部
       tl.to(card, {
         x: stacks[i].x,
-        y: bottomY,
+        y: bottomY + stacks[i].y,
         rotateX: 0,
         duration: dropDur,
-        ease: 'power1.in',
+        ease: 'power2.in',
       }, bounceStart)
 
+      // 从底部弹回到居中
       tl.to(card, {
         x: 0,
         y: 0,
@@ -286,7 +302,7 @@ const initAnimations = () => {
       }, bounceStart + dropDur)
     })
 
-    // 阶段 5：翻转 + 并排（P4 → 1.0）
+    // 阶段 5：卡片翻转背面 + 水平展开排列（P4 → 1.0）
     const off = offsets.value
     cards.forEach((card, i) => {
       tl.set(card, { boxShadow: 'none', border: 'none' }, P4 * D)
@@ -294,7 +310,8 @@ const initAnimations = () => {
         x: off[i] * 100,
         y: 0,
         rotation: 0,
-        scale: 1.5,
+        width: props.cardWidth * props.cardScaleW,
+        height: cards[0].offsetHeight * props.cardScaleH,
         duration: (1 - P4) * D,
         ease: 'power2.inOut',
       }, P4 * D)
@@ -311,33 +328,31 @@ const initAnimations = () => {
 }
 
 onMounted(() => {
-  requestAnimationFrame(initAnimations)
+  requestAnimationFrame(initAnimations) // 延迟一帧确保 DOM 和父组件 ref 就绪
 })
 
 onUnmounted(() => {
-  ctx?.revert()
+  ctx?.revert() // 清理所有 GSAP 动画和 ScrollTrigger
 })
 </script>
 
 <style scoped>
 .book-page {
-  height: 100vh;
-  overflow-y: auto;
   position: relative;
-  isolation: isolate;
 }
 
 .fixed-center {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: sticky;
+  top: v-bind(stickyTop);
   width: 100%;
-  height: 100vh;
+  height: v-bind(containerHeight);
   display: flex;
-  align-items: center;
+  align-items: v-bind(verticalAlign);
   justify-content: center;
+  padding-top: v-bind(paddingTop);
   pointer-events: none;
   z-index: 1;
+  overflow: hidden;
 }
 
 .cards-container {
@@ -420,10 +435,10 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #1a1a2e;
+  background: #ffffff;
   border-radius: var(--border-radius-card);
   backface-visibility: hidden;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   padding: var(--padding-card);
   box-sizing: border-box;
   display: flex;
@@ -450,15 +465,12 @@ onUnmounted(() => {
 }
 
 .cover-box {
-  position: fixed;
-  top: 300vh;
-  left: 0;
-  width: calc(100% - 6px);
-  height: v-bind(coverHeight + 'px');
+  position: relative;
+  width: 100%;
+  min-height: v-bind(coverHeight + 'px');
   background: v-bind(coverColor);
-  z-index: 10;
-  pointer-events: none;
-  will-change: top;
+  z-index: 2;
+  pointer-events: auto;
 }
 
 .scroll-spacer {
