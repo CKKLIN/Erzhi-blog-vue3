@@ -77,8 +77,8 @@ function onScroll(e: Event) {
   width: 100%;
   height: 450px;
   background-color: #000000;
-    background: url('@/assets/bj/bj14.jpg');
-  box-shadow:var(--color-card-shadow-top) ;
+  background: url('@/assets/bj/bj14.jpg');
+  box-shadow: var(--color-card-shadow-top);
   /* box-shadow-top: 0; */
   /* background-size: cover;
     background-position: center;   */
@@ -99,7 +99,7 @@ function onScroll(e: Event) {
   /* justify-content: center; */
   align-items: center;
   background: url('@/assets/bj/bj13.jpg');
-  box-shadow:var(--color-card-shadow-top) ;
+  box-shadow: var(--color-card-shadow-top);
   /* box-shadow-top: 0; */
   /* background-size: cover;
     background-position: center;   */
@@ -185,7 +185,7 @@ function onScroll(e: Event) {
   display: flex;
   justify-content: center;
   z-index: 0;
-      background: linear-gradient(rgba(14, 62, 134, 0), rgba(54, 125, 184, 0.281), rgba(76, 153, 216, 0.507)), url('@/assets/bj/bj4.jpeg');
+  background: linear-gradient(rgba(14, 62, 134, 0), rgba(54, 125, 184, 0.281), rgba(76, 153, 216, 0.507)), url('@/assets/bj/bj4.jpeg');
 
 }
 
@@ -203,7 +203,7 @@ function onScroll(e: Event) {
   /* background-color: rgb(0, 255, 76); */
   /* margin-top: 100px; */
   /* font-size: 30px; */
-margin-top: 100px;
+  margin-top: 50px;
   font-size: 90px;
   /* font-weight: 100; */
   text-align: center;
@@ -213,14 +213,14 @@ margin-top: 100px;
 }
 
 .two-title {
-  margin-top: 750px;  
+  margin-top: 750px;
   width: 13%;
   height: fit-content;
   position: absolute;
   /* background-color: rgb(0, 255, 76); */
   /* margin-top: 100px; */
   font-size: 25px;
-left: 7%;
+  left: 7%;
   /* font-size: 90px; */
   /* font-weight: 100; */
   /* text-align: start; */

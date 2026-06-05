@@ -18,9 +18,14 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 
 const props = withDefaults(defineProps<{
   modelUrl: string
+  autoRotate?: boolean
+  autoRotateSpeed?: number
 }>(), {
   modelUrl: '',
+  autoRotate: true,
+  autoRotateSpeed: 2,
 })
+
 
 const containerRef = ref<HTMLDivElement>()
 const loading = ref(true)
@@ -173,7 +178,8 @@ onMounted(() => {
   controls = new OrbitControls(camera, renderer.domElement)
   controls.enableDamping = true
   controls.dampingFactor = 0.05
-  controls.autoRotate = false
+  controls.autoRotate = props.autoRotate
+  controls.autoRotateSpeed = props.autoRotateSpeed
   controls.enablePan = false
   controls.enableZoom = false
   controls.minPolarAngle = Math.PI / 2

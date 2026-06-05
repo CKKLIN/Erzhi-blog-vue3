@@ -2,8 +2,8 @@
   <div class="login-register">
     <div class="contain" :class="{ register: !isLogin }">
       <div class="big-box" :class="{ active: isLogin }">
-        <div class="big-contain" key="bigContainLogin" v-if="isLogin"
-          :style="{ backgroundImage: `url(${bj5})`, backgroundSize: '100% 100%', backgroundPosition: 'center' }">
+        <div class="big-contain" key="bigContainLogin" v-if="isLogin"  style="background-position: 80vw 80vh;"
+          :style="{ backgroundImage: `url(${bj5})`, backgroundSize: '100vw 100vh'}">
           <el-form :model="loginForm" label-width="auto" class="login" ref="loginFormRef" :rules="loginRules">
             <div class="btitle">用户登录</div>
             <el-form-item style="width: 40%;" prop="account" label-width="0">
@@ -28,8 +28,8 @@
           </el-form>
         </div>
 
-        <div class="big-contain" key="bigContainRegister" v-else
-          :style="{ backgroundImage: `url(${bj4})`, backgroundSize: '100% 100%', backgroundPosition: 'center' }">
+        <div class="big-contain" key="bigContainRegister" v-else  style="background-position: 53vw 80vh;"
+          :style="{ backgroundImage: `url(${bj4})`, backgroundSize: '100vw 100vh' }">
           <el-form :model="registForm" label-width="auto" class="regist" ref="registFormRef" :rules="registRules">
             <div class="retitle">注册</div>
             <el-form-item style="width: 40%;" prop="account">
@@ -59,17 +59,17 @@
       </div>
 
       <div class="small-box" :class="{ active: isLogin }">
-        <div class="small-contain" key="smallContainRegister" v-if="isLogin"
-          :style="{ backgroundImage: `url(${bj1})`, backgroundSize: '100% 100%', backgroundPosition: 'center' }">
+        <div class="small-contain" key="smallContainRegister" v-if="isLogin"  style="background-position: 50vw 80vh;"
+          :style="{ backgroundImage: `url(${bj1})`, backgroundSize: '100vw 100vh' }">
           <div class="stitle">欢迎回来!</div>
           <p class="scontent">请登录你的账户</p>
           <button class="sbutton" @click="changeType">注册</button>
         </div>
-        <div class="small-contain" key="smallContainLogin" v-else
-          :style="{ backgroundImage: `url(${bj4})`, backgroundSize: '100% 100%', backgroundPosition: 'center' }">
+        <div class="small-contain" key="smallContainLogin" v-else  style="background-position: 80vw 80vh;"
+          :style="{ backgroundImage: `url(${bj4})`, backgroundSize: '100vw 100vh' }">
           <div class="stitle">
             <span>欢迎使用</span>
-            <span>erzhi-blog</span>
+            <!-- <span>erzhi-blog</span> -->
           </div>
           <p class="scontent">开始注册</p>
           <button class="sbutton" @click="changeType">登录</button>
