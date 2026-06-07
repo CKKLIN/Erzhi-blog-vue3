@@ -1,4 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import h5 from './h5'
+
+const isMobileDevice = () => {
+  return /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -132,7 +137,20 @@ const router = createRouter({
         },
       ]
     },
+    ...h5
   ],
+})
+
+// h5 页面路径列表
+const h5Paths = h5.map(route => route.path)
+
+// 移动端自动跳转到面经页面
+router.beforeEach((to, from, next) => {
+  if (isMobileDevice() && !h5Paths.includes(to.path)) {
+    next('/mianJingh5')
+  } else {
+    next()
+  }
 })
 
 export default router
