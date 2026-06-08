@@ -14,4 +14,6 @@
   --padding-ssm: 5px;
   --padding-sm: 10px;
   --transform-sm:perspective(600px) rotateX(30deg);
+  --color-h5Top:rgba(186, 236, 84, 0.705);
+  --border-radius-sm:16px
 }

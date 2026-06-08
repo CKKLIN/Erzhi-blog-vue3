@@ -1,122 +1,260 @@
-export const vueList=[
-  {
-    "id": 1,
-    "title": "Vue 的双向数据绑定原理",
-    "content": "<p>Vue 2 使用 <strong>Object.defineProperty()</strong> 劫持对象属性的 getter 和 setter。Vue 3 升级为使用 ES6 的 <strong>Proxy</strong>，能够监听整个对象的变化，解决了数组下标和对象新增属性无法监听的缺陷。</p>",
-    "createTime": 1717808880000
-  },
-  {
-    "id": 2,
-    "title": "v-if 和 v-show 的区别",
-    "content": "<ul><li><code>v-if</code> 是真正的条件渲染，条件为假时元素不会渲染到 DOM，切换时会触发组件的销毁与重建。</li><li><code>v-show</code> 只是切换元素的 CSS <code>display</code> 属性，DOM 始终存在。</li></ul><p><em>建议：频繁切换状态用 v-show，条件极少改变用 v-if。</em></p>",
-    "createTime": 1717812480000
-  },
-  {
-    "id": 3,
-    "title": "Vue 3 组合式 API 的优势",
-    "content": "<p>组合式 API (Composition API) 解决了 Vue 2 Options API 在大型组件中逻辑分散的问题。它允许我们将相关的逻辑（如状态、方法、生命周期）组织在一起，并且极大地提高了代码的复用性（通过 Composables）。</p>",
-    "createTime": 1717816080000
-  },
-  {
-    "id": 4,
-    "title": "computed 和 watch 的区别",
-    "content": "<p><code>computed</code> 具有缓存机制，只有依赖的响应式数据发生变化时才会重新计算，适合用于数据转换。</p><p><code>watch</code> 没有缓存，主要用于在数据变化时执行异步操作或复杂的业务逻辑（如防抖请求）。</p>",
-    "createTime": 1717819680000
-  },
-  {
-    "id": 5,
-    "title": "Vue 组件的通信方式有哪些？",
-    "content": "<ol><li>父子组件：<code>props</code> / <code>$emit</code></li><li>跨层级通信：<code>provide</code> / <code>inject</code></li><li>全局状态管理：<code>Pinia</code> 或 <code>Vuex</code></li><li>事件总线：<code>EventBus</code> (Vue3 中推荐用 mitt 替代)</li></ol>",
-    "createTime": 1717823280000
-  },
-  {
-    "id": 6,
-    "title": "什么是虚拟 DOM (Virtual DOM)？",
-    "content": "<p>虚拟 DOM 是用 JavaScript 对象（VNode）来描述真实 DOM 结构。当数据变化时，Vue 会在内存中生成新的虚拟 DOM，并通过 <strong>Diff 算法</strong>与旧虚拟 DOM 进行对比，找出最小差异后一次性更新到真实 DOM 上，从而减少浏览器的重排和重绘，提升性能。</p>",
-    "createTime": 1717826880000
-  },
-  {
-    "id": 7,
-    "title": "nextTick 的原理和使用场景",
-    "content": "<p>Vue 的 DOM 更新是异步的。<code>nextTick</code> 会在下次 DOM 更新循环结束之后执行延迟回调。</p><p><strong>使用场景</strong>：当你修改了响应式数据后，需要立即获取更新后的 DOM 状态（如获取元素高度、让输入框自动聚焦）时，必须在 <code>nextTick</code> 中执行。</p>",
-    "createTime": 1717830480000
-  },
-  {
-    "id": 8,
-    "title": "v-for 为什么必须绑定 key？",
-    "content": "<p><code>key</code> 是虚拟 DOM 对象的唯一标识。在 Diff 算法中，Vue 通过 <code>key</code> 来判断节点是否可复用。如果不绑定 key 或使用 index 作为 key，会导致列表更新时发生不必要的 DOM 重新渲染，甚至引发状态错乱。</p>",
-    "createTime": 1717834080000
-  },
-  {
-    "id": 9,
-    "title": "ref 和 reactive 的区别",
-    "content": "<ul><li><code>ref</code> 主要用于定义基本数据类型（String, Number），在 JS 中访问需要 <code>.value</code>，在模板中自动解包。</li><li><code>reactive</code> 用于定义引用数据类型（Object, Array），内部直接基于 Proxy 实现，访问时不需要 <code>.value</code>。</li></ul>",
-    "createTime": 1717837680000
-  },
-  {
-    "id": 10,
-    "title": "Vue 的生命周期钩子有哪些？",
-    "content": "<p>Vue 3 常用的生命周期钩子包括：<code>onBeforeMount</code>（挂载前）、<code>onMounted</code>（挂载后，常用于发请求）、<code>onBeforeUpdate</code>（更新前）、<code>onUpdated</code>（更新后）、<code>onBeforeUnmount</code>（卸载前，常用于清理定时器）。</p>",
-    "createTime": 1717841280000
-  },
-  {
-    "id": 11,
-    "title": "什么是插槽 (Slot)？",
-    "content": "<p>插槽是 Vue 的内容分发机制。分为：</p><ol><li><strong>默认插槽</strong>：未具名的内容填充。</li><li><strong>具名插槽</strong>：通过 <code>v-slot:name</code> 指定填充位置。</li><li><strong>作用域插槽</strong>：子组件可以向插槽传递数据，父组件通过 <code>v-slot=\"slotProps\"</code> 接收并自定义渲染。</li></ol>",
-    "createTime": 1717844880000
-  },
-  {
-    "id": 12,
-    "title": "Vue Router 的 hash 模式和 history 模式",
-    "content": "<p><strong>Hash 模式</strong>：URL 带有 <code>#</code>，利用 <code>window.onhashchange</code> 监听，兼容性好，无需后端配置。</p><p><strong>History 模式</strong>：URL 更美观，利用 HTML5 History API，但需要后端配合配置重定向，否则刷新会出现 404。</p>",
-    "createTime": 1717848480000
-  },
-  {
-    "id": 13,
-    "title": "Pinia 和 Vuex 的区别",
-    "content": "<p>Pinia 是 Vue 官方推荐的新一代状态管理库。它去除了 Vuex 中的 <code>mutations</code>，只有 <code>state</code>、<code>getters</code> 和 <code>actions</code>。Pinia 对 TypeScript 的支持更加友好，且体积更小，完美支持 Vue 3 的组合式 API。</p>",
-    "createTime": 1717852080000
-  },
-  {
-    "id": 14,
-    "title": "什么是 Keep-alive？",
-    "content": "<p><code>&lt;keep-alive&gt;</code> 是 Vue 的内置组件，用于缓存不活动的组件实例，避免重复渲染。常用于多标签页（Tabs）页面切换。它提供了 <code>include</code> 和 <code>exclude</code> 属性来精确控制哪些组件需要被缓存。</p>",
-    "createTime": 1717855680000
-  },
-  {
-    "id": 15,
-    "title": "Vue 3 的 Teleport 组件是什么？",
-    "content": "<p><code>&lt;teleport&gt;</code>（传送门）允许我们将组件的 HTML 结构渲染到 DOM 树中的其他位置（如 <code>body</code> 下），即使它在逻辑上仍属于当前组件。常用于实现全局的 Modal 弹窗、Tooltip 提示等，避免被父级 <code>overflow: hidden</code> 或 <code>z-index</code> 影响。</p>",
-    "createTime": 1717859280000
-  },
-  {
-    "id": 16,
-    "title": "Vue 中的性能优化手段有哪些？",
-    "content": "<ol><li>路由懒加载 (<code>() => import()</code>)</li><li>长列表使用虚拟滚动 (Virtual Scroll)</li><li>合理使用 <code>v-show</code> 和 <code>v-if</code></li><li>使用 <code>Object.freeze()</code> 冻结不需要修改的庞大静态数据</li><li>图片懒加载</li></ol>",
-    "createTime": 1717862880000
-  },
-  {
-    "id": 17,
-    "title": "什么是 SSR (服务端渲染)？",
-    "content": "<p>SSR 是指在服务器端将 Vue 组件渲染为 HTML 字符串并发送给浏览器。它的优势在于 <strong>SEO 友好</strong>（搜索引擎能抓取完整内容）和 <strong>首屏加载速度快</strong>。常见的 Vue SSR 框架有 Nuxt.js。</p>",
-    "createTime": 1717866480000
-  },
-  {
-    "id": 18,
-    "title": "v-model 的实现原理",
-    "content": "<p><code>v-model</code> 本质上是一个语法糖。在 Vue 3 中，<code>&lt;input v-model=\"val\"&gt;</code> 会被编译为：</p><p><code>&lt;input :modelValue=\"val\" @update:modelValue=\"val = $event\"&gt;</code></p><p>在自定义组件中，可以通过定义 <code>props</code> 和 <code>emits</code> 来实现双向绑定。</p>",
-    "createTime": 1717870080000
-  },
-  {
-    "id": 19,
-    "title": "Vue 3 的 Fragment 特性",
-    "content": "<p>在 Vue 2 中，组件的模板必须有一个根节点。Vue 3 引入了 Fragment（片段）特性，允许组件拥有多个根节点。这不仅让模板编写更灵活，也减少了不必要的 DOM 嵌套层级。</p>",
-    "createTime": 1717873680000
-  },
-  {
-    "id": 20,
-    "title": "什么是 Tree-shaking？",
-    "content": "<p>Tree-shaking 是一种打包优化技术（如 Webpack/Vite 中使用）。Vue 3 的 API 全面支持 ES Module，打包工具可以根据代码的实际引用情况，自动剔除那些未被使用的导出代码，从而大幅减小最终打包文件的体积。</p>",
-    "createTime": 1717877280000
-  }
+export const vueList = [
+    {
+        "id": 1,
+        "title": "Vue3 中 ref 与 reactive 的核心区别及选型策略是什么？",
+        "content": "<p><strong>核心区别：</strong></p><ul><li><strong>适用数据类型：</strong><code>ref</code> 适用于基本类型（Number/String/Boolean）以及需要整体替换的复杂对象；<code>reactive</code> 仅适用于复杂类型（Object/Array/Map/Set 等），无法代理基本类型。</li><li><strong>响应式实现方式：</strong><code>ref</code> 会将数据包装成 <code>RefImpl</code> 实例，通过 <code>.value</code> 访问；<code>reactive</code> 基于 <code>Proxy</code> 直接代理对象，无需 <code>.value</code>。</li><li><strong>解构行为：</strong><code>reactive</code> 对象直接解构会丢失响应式（需配合 <code>toRefs</code>）；<code>ref</code> 解构后仍保持响应式。</li><li><strong>替换整个数据：</strong><code>ref</code> 支持通过 <code>.value = 新值</code> 整体替换；<code>reactive</code> 不支持整体替换，否则会导致响应式断裂。</li></ul><p><strong>选型策略：</strong></p><ul><li>基本类型 ️ 必须用 <code>ref</code>。</li><li>对象类型、层级不深或需要整体替换 ️ 推荐 <code>ref</code>。</li><li>对象类型、层级较深、频繁修改属性 ️ 推荐 <code>reactive</code>。</li></ul><pre><code class=\"language-vue\">&lt;script setup&gt;\nimport { ref, reactive } from 'vue';\n\n// 基本类型必须用 ref\nconst count = ref(0);\ncount.value++;\n\n// 复杂对象推荐 reactive\nconst user = reactive({\n  name: '张三',\n  age: 20\n});\nuser.age++;\n&lt;/script&gt;</code></pre><p> <strong>口语化回答：</strong></p><p>简单来说，<code>ref</code> 和 <code>reactive</code> 最大的区别就是处理的数据类型不一样。<code>ref</code> 是个万能胶，基本类型和对象都能包，但在 JS 里操作对象得加个 <code>.value</code>；而 <code>reactive</code> 专门用来处理对象，用起来更简洁，直接点属性就行，但它有个坑，就是不能直接解构，解构了响应式就没了。在实际开发中，我的习惯是：如果是简单的数字、字符串，或者接口返回需要整体替换的对象，我就无脑用 <code>ref</code>；如果是一个结构很复杂、嵌套很深、平时只改里面某个属性的表单对象，我就会用 <code>reactive</code>，这样代码写起来更清爽。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 2,
+        "title": "Promise 包含哪些状态？其状态流转机制是怎样的？",
+        "content": "<p><strong>Promise 的三种状态：</strong></p><ul><li><code>pending</code>（待定）：初始状态，既没有被兑现，也没有被拒绝。</li><li><code>fulfilled</code>（已兑现/成功）：操作成功完成。</li><li><code>rejected</code>（已拒绝/失败）：操作失败。</li></ul><p><strong>状态流转机制：</strong></p><ul><li><strong>单向流转：</strong>状态只能从 <code>pending</code> ️ <code>fulfilled</code>，或者从 <code>pending</code> ️ <code>rejected</code>。</li><li><strong>不可逆性（状态锁死）：</strong>状态一旦发生改变，就会被锁死，永远不会再改变，也不受外界影响。</li><li><strong>无取消机制：</strong>Promise 没有 cancel 方法，创建后会立即执行，无法中途取消。</li></ul><pre><code class=\"language-javascript\">const myPromise = new Promise((resolve, reject) => {\n  setTimeout(() => {\n    const success = true;\n    if (success) {\n      resolve('操作成功'); // pending -> fulfilled\n    } else {\n      reject(new Error('操作失败')); // pending -> rejected\n    }\n  }, 1000);\n});</code></pre><p> <strong>口语化回答：</strong></p><p>Promise 一共有三个状态：待定、成功和失败。它的流转机制最核心的特点就是“单向且不可逆”。你可以把它想象成一台自动贩卖机，投币之后就是“待定”状态，最后要么出货（成功），要么退币（失败）。一旦出货或者退币了，状态就彻底锁死了，不可能再变回待定状态。而且它一旦开始执行就没法中途取消，我们只能通过 <code>.then</code> 或 <code>.catch</code> 去消费它的最终结果。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 3,
+        "title": "Webpack 与 Vite 在编译原理、开发启动及生产构建策略上的本质区别是什么？",
+        "content": "<p><strong>1. 编译原理差异：</strong></p><ul><li><strong>Webpack：</strong> 基于 Bundle（打包）的模型。无论开发还是生产，都会递归解析所有依赖，构建依赖图，将所有模块打包成 bundle 文件。</li><li><strong>Vite：</strong> 基于原生 ESM（ES Modules）按需编译。开发时不打包，利用浏览器原生支持 ESM 的特性，请求哪个模块才即时编译哪个模块。</li></ul><p><strong>2. 开发启动与热更新：</strong></p><ul><li><strong>Webpack：</strong> 启动慢（需全量打包），热更新（HMR）随项目变大而变慢（需重新构建模块链）。</li><li><strong>Vite：</strong> 启动极快（仅启动服务器），热更新极快（仅重新编译变化的单个模块，利用 esbuild 提速）。</li></ul><p><strong>3. 生产构建策略：</strong></p><ul><li><strong>Webpack：</strong> 使用自身的打包引擎进行代码分割、Tree-shaking 等优化。</li><li><strong>Vite：</strong> 生产环境下复用 Rollup 进行轻量打包，产物更小，兼顾生产性能。</li></ul><pre><code class=\"language-javascript\">// Vite 开发时利用原生 ESM\n// 浏览器直接请求并执行模块，无需等待 Webpack 的 bundle.js\n&lt;script type=\"module\" src=\"/src/main.js\"&gt;&lt;/script&gt;</code></pre><p> <strong>口语化回答：</strong></p><p>它俩的本质区别在于“构建范式”不同。Webpack 像是“自助餐提前备菜”，不管客人吃不吃，先把所有菜炒好打包，所以项目一大，启动和热更新就卡得不行；而 Vite 像是“餐厅点单现做”，开发时根本不打包，浏览器请求什么它就利用 esbuild 瞬间编译什么，所以启动几乎是秒开。不过到了生产环境，为了避免浏览器发太多请求，Vite 也会老老实实调用 Rollup 把代码打包压缩，保证上线后的性能。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 4,
+        "title": "前端工程化中的“部署”具体包含哪些内容？",
+        "content": "<p>前端部署不仅仅是把代码传到服务器，它是一套完整的工程化交付流程，主要包含以下内容：</p><ul><li><strong>环境分离：</strong> 严格区分开发、测试、预发和生产环境，确保配置一致性。</li><li><strong>自动化构建与部署（CI/CD）：</strong> 使用 Git 进行版本控制，通过 Jenkins/GitHub Actions 等工具实现代码提交后的自动构建、测试与发布。</li><li><strong>缓存与性能优化：</strong> 使用内容哈希命名静态文件（如 <code>[contenthash].js</code>），配合 CDN 分发静态资源，减轻服务器压力。</li><li><strong>路由与服务器配置：</strong> 解决 SPA 单页应用刷新 404 的问题（如 Nginx 配置 <code>try_files</code>）。</li><li><strong>安全与监控：</strong> 配置 HTTPS、CSP 策略，并接入 Sentry 等监控工具进行错误追踪和性能告警。</li></ul><pre><code class=\"language-nginx\"># Nginx 解决 SPA 路由刷新 404 问题\nlocation / {\n  try_files $uri $uri/ /index.html;\n}</code></pre><p> <strong>口语化回答：</strong></p><p>现在的前端部署早就不是以前那种手动把 dist 文件夹丢到服务器上的时代了。它其实是一整套自动化流水线：首先代码得通过 CI/CD 自动跑测试、自动打包；其次打包出来的静态资源要扔到 CDN 上加速，并且文件名得带上 hash 值来做缓存控制；最后还得配好 Nginx 解决单页应用刷新 404 的问题。上线之后，还得接上监控报警系统，这样用户遇到白屏或者接口报错，我们比用户先知道。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 5,
+        "title": "行内元素与块级元素分别有哪些？核心区别是什么？",
+        "content": "<p><strong>常见分类：</strong></p><ul><li><strong>块级元素（Block）：</strong> <code>&lt;div&gt;</code>、<code>&lt;p&gt;</code>、<code>&lt;h1&gt;~&lt;h6&gt;</code>、<code>&lt;ul&gt;</code>/<code>&lt;ol&gt;</code>/<code>&lt;li&gt;</code>、<code>&lt;form&gt;</code>、<code>&lt;header&gt;</code>/<code>&lt;footer&gt;</code> 等。</li><li><strong>行内元素（Inline）：</strong> <code>&lt;span&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;strong&gt;</code>/<code>&lt;b&gt;</code>、<code>&lt;em&gt;</code>/<code>&lt;i&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;input&gt;</code> 等。</li></ul><p><strong>核心区别：</strong></p><ul><li><strong>排版布局：</strong> 块级元素独占一行，前后自动换行，宽度默认撑满父容器；行内元素不换行，仅占据自身内容的宽度，与其他行内元素排在一行。</li><li><strong>盒模型：</strong> 块级元素可以自由设置 width、height、margin 和 padding；普通行内元素设置宽高无效，垂直方向的 margin/padding 表现异常。</li><li><strong>嵌套规则：</strong> 块级元素可以嵌套行内元素和其他块级元素；但行内元素（如 <code>&lt;p&gt;</code>）内部不能嵌套块级元素，否则会导致 DOM 结构意外断裂。</li></ul><pre><code class=\"language-html\">&lt;!-- 块级元素独占一行 --&gt;\n&lt;div style=\"background: lightblue;\"&gt;我是块级元素&lt;/div&gt;\n&lt;div style=\"background: lightgreen;\"&gt;我也独占一行&lt;/div&gt;\n\n&lt;!-- 行内元素排在一行 --&gt;\n&lt;p&gt;普通文字 &lt;span style=\"color:red;\"&gt;红色行内文字&lt;/span&gt; &lt;a href=\"#\"&gt;链接&lt;/a&gt;&lt;/p&gt;</code></pre><p> <strong>口语化回答：</strong></p><p>块级元素就像是一块块大砖头，摆上去之后自己独占一整行，后面的东西只能乖乖到下一行，而且你可以随便设置它的宽高；行内元素就像是一粒粒文字，它们可以紧挨着排在同一行，你给它们设置宽高通常是无效的。另外有个面试常考的坑：像 <code>&lt;p&gt;</code> 标签里是绝对不能嵌套 <code>&lt;div&gt;</code> 的，浏览器解析时会自动把 <code>&lt;p&gt;</code> 闭合掉，导致页面结构错乱。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 6,
+        "title": "HTML 中 href 与 src 属性的区别是什么？",
+        "content": "<p><strong>核心区别：</strong></p><ul><li><strong>href (Hypertext Reference)：</strong> 用于建立当前文档与目标资源之间的<strong>链接关系</strong>。浏览器在解析到 href 时，<strong>不会</strong>立即下载目标资源，而是等用户点击或真正需要时才去获取。常见于 <code>&lt;a&gt;</code>、<code>&lt;link&gt;</code> 标签。</li><li><strong>src (Source)：</strong> 用于将外部资源<strong>嵌入</strong>到当前文档中。浏览器在解析到 src 时，会<strong>立即暂停</strong>后续解析，去下载该资源（如 JS、图片），加载并执行/渲染完毕后，才继续往下走。常见于 <code>&lt;script&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;iframe&gt;</code> 标签。</li></ul><pre><code class=\"language-html\">&lt;!-- href: 建立链接，不立即下载 --&gt;\n&lt;link href=\"style.css\" rel=\"stylesheet\"&gt;\n&lt;a href=\"https://example.com\"&gt;跳转链接&lt;/a&gt;\n\n&lt;!-- src: 嵌入资源，立即暂停并下载 --&gt;\n&lt;script src=\"app.js\"&gt;&lt;/script&gt;\n&lt;img src=\"logo.png\" alt=\"Logo\"&gt;</code></pre><p> <strong>口语化回答：</strong></p><p>简单来说，<code>href</code> 是“指路”的，它告诉浏览器资源在哪里，但浏览器不会马上跑去拿，比如 CSS 样式表或者超链接；而 <code>src</code> 是“搬砖”的，浏览器遇到它就必须立刻停下来，把资源下载下来塞进当前页面里，比如 JS 脚本和图片。所以如果 JS 文件很大，用 <code>src</code> 直接引入会阻塞页面渲染，这也是为什么我们常把 <code>&lt;script&gt;</code> 放在 body 底部或者加 <code>defer/async</code> 的原因。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 7,
+        "title": "v-for 渲染列表时绑定 key 的作用是什么？",
+        "content": "<p><strong>核心作用：</strong></p><p><code>key</code> 是 Vue 虚拟 DOM 算法（Diff 算法）中用于追踪节点身份的<strong>唯一标识</strong>。它的主要作用包括：</p><ul><li><strong>高效更新：</strong> 当数据发生变化时，Vue 通过 <code>key</code> 来判断新旧节点是否是同一个元素。如果 key 相同，则复用并更新该节点；如果 key 不同，则销毁旧节点并创建新节点。</li><li><strong>保持状态：</strong> 确保组件的内部状态（如输入框的内容、选中状态）在列表重新排序时不会错乱。</li></ul><p><strong>️ 为什么不建议用 index 作为 key？</strong></p><p>当列表发生插入、删除或排序时，index 会随之改变。这会导致 Vue 误以为对应位置的节点发生了变化，从而进行不必要的 DOM 更新，甚至引发状态错乱。</p><pre><code class=\"language-vue\">&lt;template&gt;\n  &lt;!--  正确：使用唯一 ID 作为 key --&gt;\n  &lt;li v-for=\"item in list\" :key=\"item.id\"&gt;\n    {{ item.name }}\n  &lt;/li&gt;\n\n  &lt;!--  错误：使用 index 作为 key --&gt;\n  &lt;li v-for=\"(item, index) in list\" :key=\"index\"&gt;\n    {{ item.name }}\n  &lt;/li&gt;\n&lt;/template&gt;</code></pre><p> <strong>口语化回答：</strong></p><p><code>key</code> 就像是每个列表项的“身份证号”。Vue 在更新列表时，是靠这个身份证号来认人的。如果身份证一样，Vue 就原地更新内容；如果不一样，就直接换人。如果我们偷懒用数组的下标 index 当 key，一旦我们在列表中间插入了一个新数据，后面的 index 全变了，Vue 就会以为后面的人全换了，不仅白白浪费性能去重新渲染，还可能导致输入框里的文字、勾选状态等出现莫名其妙的 Bug。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 8,
+        "title": "箭头函数与常规函数的核心区别有哪些？",
+        "content": "<p><strong>核心区别：</strong></p><ul><li><strong>this 指向：</strong> 箭头函数没有自己的 <code>this</code>，它的 <code>this</code> 永远指向定义时所在作用域的 <code>this</code>（词法作用域）；常规函数的 <code>this</code> 指向调用时的对象。</li><li><strong>构造函数：</strong> 箭头函数不能用作构造函数，不能使用 <code>new</code> 关键字，否则会抛出 TypeError。</li><li><strong>arguments 对象：</strong> 箭头函数内部没有 <code>arguments</code> 对象，但可以使用剩余参数 <code>...args</code> 代替。</li><li><strong>原型对象：</strong> 箭头函数没有 <code>prototype</code> 属性。</li></ul><pre><code class=\"language-javascript\">const obj = {\n  name: 'Vue',\n  // 常规函数：this 指向调用者 obj\n  normalFunc: function() {\n    console.log(this.name); \n  },\n  // 箭头函数：this 指向定义时的外层作用域（通常是 window）\n  arrowFunc: () => {\n    console.log(this.name); \n  }\n};</code></pre><p> <strong>口语化回答：</strong></p><p>箭头函数和常规函数最核心的区别就是 <code>this</code> 的指向问题。常规函数的 <code>this</code> 是“谁调用就指向谁”，而箭头函数根本没有自己的 <code>this</code>，它是“出生在哪，this 就指向哪”。所以在 Vue 或 React 的组件方法里，如果我们需要用到组件实例的 this，千万别用箭头函数，否则 this 会变成 undefined 或者 window。另外，箭头函数也不能用来 new 对象，也没有 arguments 参数集合。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 9,
+        "title": "CSS 属性 flex: 1 是哪三个 Flexbox 属性的简写？",
+        "content": "<p><strong>flex: 1</strong> 是以下三个 Flexbox 属性的简写：</p><ul><li><code>flex-grow: 1</code>：定义元素的放大比例。当容器有剩余空间时，该元素会按比例分配剩余空间。</li><li><code>flex-shrink: 1</code>：定义元素的缩小比例。当容器空间不足时，该元素会按比例收缩。</li><li><code>flex-basis: 0%</code>：定义元素在分配多余空间之前的初始主轴大小。设为 0% 表示忽略内容本身的宽度，完全按 grow 比例分配。</li></ul><p><strong>️ 易混淆点：</strong></p><p><code>flex: 1</code> 等同于 <code>flex: 1 1 0%</code>，而不是 <code>flex: 1 1 auto</code>。这意味着元素会完全忽略自身内容宽度，像分蛋糕一样均分容器的剩余空间。</p><pre><code class=\"language-css\">.container {\n  display: flex;\n}\n\n.item {\n  /* 完全等价于 flex: 1 1 0%; */\n  flex: 1; \n  \n  /* 如果写成 flex: auto，则等价于 flex: 1 1 auto; */\n  /* 此时元素会先根据自身内容撑开宽度，再分配剩余空间 */\n}</code></pre><p> <strong>口语化回答：</strong></p><p><code>flex: 1</code> 其实是 <code>flex-grow: 1</code>、<code>flex-shrink: 1</code> 和 <code>flex-basis: 0%</code> 这三个属性的缩写。在实际开发中，我们写 <code>flex: 1</code> 最常见的场景就是让某个元素自动撑满剩余空间。因为它把基准大小（basis）设为了 0，所以它会完全无视自己里面有没有内容，直接把父容器剩下的空间按比例瓜分掉。这也是为什么我们在做侧边栏固定宽度、右侧内容区自适应布局时，右侧只需要写一个 <code>flex: 1</code> 就搞定了。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 10,
+        "title": "Vue2 与 Vue3 响应式数据的底层实现有何区别？",
+        "content": "<p><strong>核心区别：</strong></p><ul><li><strong>数据劫持方式：</strong>Vue2 使用 ES5 的 <code>Object.defineProperty</code> 劫持对象已有属性的 getter/setter；Vue3 使用 ES6 的 <code>Proxy</code> 直接代理整个对象，拦截 get/set/deleteProperty 等操作<websource>source_group_web_1</websource>。</li><li><strong>新增/删除属性：</strong>Vue2 无法自动监听对象属性的新增和删除，必须使用 <code>Vue.set</code> / <code>Vue.delete</code>；Vue3 原生支持动态属性的增删，无需额外 API<websource>source_group_web_2</websource>。</li><li><strong>数组监听：</strong>Vue2 无法监听数组下标和 length 的变化，只能通过重写数组的 7 个变异方法（push, pop, splice 等）来实现响应式；Vue3 完美支持数组下标、length 及所有原生数组方法<websource>source_group_web_3</websource>。</li><li><strong>初始化性能：</strong>Vue2 在初始化时需要深度递归遍历所有属性，一次性开销大；Vue3 采用惰性代理（懒代理），只有在访问到嵌套对象时才进行代理，初始化极快<websource>source_group_web_4</websource>。</li><li><strong>依赖收集结构：</strong>Vue2 每个属性绑定一个 <code>Dep</code> 类，组件对应 <code>Watcher</code>；Vue3 使用 <code>WeakMap</code> 存储依赖关系（target -> key -> effect），完全解耦了 Dep 类，且 WeakMap 弱引用机制可防止内存泄漏<websource>source_group_web_5</websource>。</li><li><strong>数据类型支持：</strong>Vue2 仅支持 Object 和 Array；Vue3 原生支持 Map、Set、WeakMap 等复杂数据结构的响应式<websource>source_group_web_6</websource>。</li></ul><pre><code class=\"language-javascript\">// Vue2 响应式核心思路（简化）\nfunction defineReactive(obj, key) {\n  let val = obj[key];\n  Object.defineProperty(obj, key, {\n    get() {\n      dep.depend(); // 依赖收集\n      return val;\n    },\n    set(newValue) {\n      if (newValue === val) return;\n      val = newValue;\n      dep.notify(); // 派发更新\n    }\n  });\n}\n\n// Vue3 响应式核心思路（简化）\nconst reactive = (target) => {\n  return new Proxy(target, {\n    get(target, key, receiver) {\n      track(target, key); // 收集依赖\n      return Reflect.get(target, key, receiver);\n    },\n    set(target, key, value, receiver) {\n      const result = Reflect.set(target, key, value, receiver);\n      trigger(target, key); // 触发更新\n      return result;\n    }\n  });\n};</code></pre><p>💬 <strong>口语化回答：</strong></p><p>Vue2 和 Vue3 响应式最大的区别在于底层 API 的升级。Vue2 用的是 <code>Object.defineProperty</code>，它只能劫持对象已经存在的属性，所以我们在 Vue2 里给对象新增属性或者修改数组某一项时，视图不会更新，必须得用 <code>$set</code> 这种补丁方法，而且它初始化时要递归遍历所有属性，性能开销比较大。Vue3 换成了 <code>Proxy</code>，它是直接代理整个对象，不管是新增删除属性，还是操作数组下标、length，甚至是 Map 和 Set，都能自动拦截并触发更新。另外，Vue3 采用了“懒代理”机制，只有真正访问到深层对象时才会去代理，初始化速度大幅提升。在依赖收集上，Vue3 用 <code>WeakMap</code> 替代了 Vue2 的 Dep 和 Watcher，不仅结构更清晰，还能在对象被销毁时自动回收内存，避免内存泄漏。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 11,
+        "title": "var、let 和 const 的核心区别是什么？",
+        "content": "<p>在 JavaScript 中，<code>var</code>、<code>let</code> 和 <code>const</code> 都是用来声明变量的关键字，但它们在作用域、变量提升、重复声明和赋值行为上存在本质区别。</p><h3>核心区别</h3><ul><li><strong>作用域</strong>：<code>var</code> 是函数作用域，在 <code>if</code> 或 <code>for</code> 等代码块中声明的变量在外部依然可访问；而 <code>let</code> 和 <code>const</code> 是块级作用域，仅在 <code>{}</code> 内部有效。</li><li><strong>变量提升与暂时性死区（TDZ）</strong>：<code>var</code> 存在变量提升，声明和初始化都会被提升到作用域顶部，初始值为 <code>undefined</code>；<code>let</code> 和 <code>const</code> 虽然声明也会提升，但在执行到声明语句前不可访问，处于暂时性死区（TDZ），访问会抛出 <code>ReferenceError</code>。</li><li><strong>重复声明与赋值</strong>：<code>var</code> 允许在同一作用域内重复声明，且允许重新赋值；<code>let</code> 和 <code>const</code> 不允许重复声明。<code>let</code> 允许重新赋值，而 <code>const</code> 声明时必须初始化，且不允许重新赋值（但如果是引用类型，其内部属性仍可修改）。</li><li><strong>全局对象挂载</strong>：在全局作用域下，<code>var</code> 声明的变量会挂载到 <code>window</code> 对象上，而 <code>let</code> 和 <code>const</code> 不会。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">if (true) {\n  var a = 10;\n  let b = 20;\n  const c = 30;\n}\nconsole.log(a); // 10\nconsole.log(b); // ReferenceError\nconsole.log(c); // ReferenceError\n\nconst obj = { name: 'Vue' };\nobj.name = 'Vue3'; // 允许修改对象内部属性\n// obj = {};       // TypeError: 不允许重新赋值</code></pre><h3> 口语化回答示例</h3><p>“这三个关键字的核心区别我一般从四个维度来记。第一是作用域，var 只有函数作用域，而 let 和 const 是块级作用域。第二是变量提升，var 会提升到顶部变成 undefined，而 let 和 const 存在暂时性死区，提前访问会报错。第三是重复声明，var 可以重复声明，但 let 和 const 不行。第四是赋值，const 声明时必须赋值且不能重新赋值，但如果它指向的是一个对象，对象内部的属性还是可以修改的。在实际开发中，我现在的原则是：优先用 const，需要重新赋值时用 let，尽量不用 var。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 12,
+        "title": "== 和 === 的区别是什么？",
+        "content": "<p>这两个运算符的核心区别在于<strong>是否触发隐式类型转换</strong>。</p><h3>区别与底层机制</h3><ul><li><strong><code>==</code>（抽象相等）</strong>：在比较前会执行隐式类型转换。例如，比较字符串和数字时会将字符串转为数字，比较布尔值时会将其转为数字（<code>true</code> 为 1，<code>false</code> 为 0），且 <code>null == undefined</code> 会返回 <code>true</code>。这种复杂的转换规则容易导致反直觉的结果和隐蔽的 Bug。</li><li><strong><code>===</code>（严格相等）</strong>：禁止任何类型转换。它会先判断操作数的数据类型，如果类型不同直接返回 <code>false</code>；只有当类型和值都完全相同时才返回 <code>true</code>。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">console.log(1 == '1');       // true (字符串 '1' 转为数字 1)\nconsole.log(1 === '1');      // false (类型不同)\nconsole.log(null == undefined);  // true (特殊规则)\nconsole.log(null === undefined); // false\nconsole.log(false == 0);     // true (布尔值转为数字)\nconsole.log(false === 0);    // false</code></pre><h3> 口语化回答示例</h3><p>“简单来说，双等号 == 比较的时候比较‘宽松’，如果两边类型不一样，它会偷偷做隐式类型转换，比如把字符串转成数字再比，甚至 null 和 undefined 也会被认为相等。而三等号 === 是严格相等，类型和值必须完全一样才行。因为 == 的转换规则太复杂了，很容易踩坑，所以在实际项目中，我都是无脑使用 ===，只有在明确需要判断 null 或 undefined 的时候才会用 == null 这种写法。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 13,
+        "title": "Vue Router 的核心作用是什么？",
+        "content": "<p>Vue Router 是 Vue.js 的官方路由管理器，专为构建单页应用（SPA）设计。</p><h3>核心作用</h3><ul><li><strong>路径与组件映射</strong>：通过管理 URL 路径与组件的映射关系，实现页面的无刷新切换。</li><li><strong>嵌套与动态路由</strong>：支持嵌套路由（如后台管理系统的多级菜单）和动态路由匹配（如 <code>/user/:id</code>）。</li><li><strong>导航控制</strong>：提供编程式导航（<code>router.push</code>）以及用于权限校验的导航守卫（全局、路由独享、组件内守卫）。</li><li><strong>性能优化</strong>：支持路由懒加载，按需加载组件，提升首屏渲染速度。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">import { createRouter, createWebHistory } from 'vue-router';\n\nconst routes = [\n  {\n    path: '/user/:id',\n    name: 'User',\n    component: () => import('@/views/User.vue'), // 懒加载\n    props: true // 将路由参数作为 props 传递给组件\n  }\n];\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes\n});\n\nexport default router;</code></pre><h3> 口语化回答示例</h3><p>“Vue Router 的核心作用就是让 Vue 这种单页应用能够像多页网站一样，通过改变 URL 来切换不同的页面组件，而且整个过程是不刷新浏览器的。除了基本的路径映射，它在实际项目中最常用的还有几个功能：一是路由懒加载，用来优化首屏加载速度；二是动态路由和嵌套路由，用来处理复杂的后台菜单；三是导航守卫，用来做登录鉴权和页面访问权限控制。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 14,
+        "title": "Vue 组件之间如何传参？",
+        "content": "<p>Vue 提供了多种组件通信方式，适用于不同的层级关系。</p><h3>常见传参方式</h3><ul><li><strong>父子组件</strong>：父组件通过 <code>props</code> 向子组件传递数据；子组件通过 <code>$emit</code> 触发自定义事件向父组件发送消息。</li><li><strong>跨层级/兄弟组件</strong>：使用状态管理库（如 Vuex 或 Pinia）进行全局状态共享；或使用 <code>provide / inject</code> 实现祖先组件向后代组件注入数据。</li><li><strong>其他通信方式</strong>：通过事件总线（Event Bus）发布/订阅消息；利用 <code>$refs</code> 直接访问子组件实例。</li></ul><h3>代码示例（父子通信）</h3><pre><code class=\"language-vue\">&lt;!-- 子组件 Son.vue --&gt;\n&lt;script setup&gt;\nconst props = defineProps(['money']);\nconst emit = defineEmits(['give-money']);\nconst giveMoney = () =&gt; emit('give-money', 20);\n&lt;/script&gt;\n\n&lt;!-- 父组件 Parent.vue --&gt;\n&lt;template&gt;\n  &lt;Son :money=\"totalMoney\" @give-money=\"handleGetMoney\" /&gt;\n&lt;/template&gt;</code></pre><h3> 口语化回答示例</h3><p>“组件通信我一般根据组件的关系来选。如果是父子组件，最标准的就是父传子用 props，子传父用 emit。如果是跨层级的爷孙组件，用 provide 和 inject 最方便。如果是兄弟组件或者全局共享的状态，比如用户信息、购物车数据，那肯定是用 Pinia 或者 Vuex。以前老项目还会用 Event Bus，但现在 Vue3 官方不推荐了，因为不好维护还容易内存泄漏。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 15,
+        "title": "如何解决 JavaScript 的异步问题？",
+        "content": "<p>JavaScript 是单线程语言，通过事件循环（Event Loop）机制处理异步操作。为了解决异步编程中的代码可读性和维护性问题，经历了以下演进：</p><h3>常见解决方案</h3><ul><li><strong>回调函数（Callback）</strong>：最基础的异步处理方式，但多层嵌套易导致“回调地狱”。</li><li><strong>Promise</strong>：通过链式调用（<code>.then()</code> / <code>.catch()</code>）解决回调地狱，提供状态流转机制（pending、fulfilled、rejected）。</li><li><strong>async/await</strong>：基于 Promise 的语法糖，使异步代码能够以同步的语义编写，大幅提升代码可读性。支持 <code>try/catch</code> 进行错误处理。</li><li><strong>并发控制</strong>：使用 <code>Promise.all()</code> 并行执行多个独立任务，或使用 <code>Promise.race()</code> 获取最快完成的任务结果。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">async function fetchData() {\n  try {\n    const res = await fetch('/api/data');\n    const data = await res.json();\n    console.log(data);\n  } catch (error) {\n    console.error('请求失败:', error);\n  }\n}</code></pre><h3> 口语化回答示例</h3><p>“JS 异步编程的演进其实就是一条从难用到好用的路。最早是用回调函数，嵌套多了就是回调地狱，代码根本没法看。后来有了 Promise，用 then 链式调用解决了嵌套问题。现在主流都是用 async/await，它本质上还是 Promise，但写法上就像同步代码一样，从上往下读，配合 try/catch 处理异常，可读性极高。如果页面需要同时发好几个互不依赖的请求，我还会用 Promise.all 来做并发控制，提升加载速度。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 16,
+        "title": "Vue 监听属性（Watch）的作用是什么？",
+        "content": "<p><code>watch</code> 用于观察和响应 Vue 实例上的数据变动。当被监听的数据发生变化时，会触发相应的回调函数。</p><h3>作用与适用场景</h3><ul><li><strong>执行副作用</strong>：适用于执行带有副作用的操作，例如数据变化时发起异步网络请求（API 调用）。</li><li><strong>路由监听</strong>：监听路由参数（<code>$route</code>）变化以重新获取数据。</li><li><strong>复杂联动</strong>：执行复杂的业务逻辑联动，或需要对比新旧值的场景。</li><li><strong>配置选项</strong>：支持 <code>deep: true</code>（深度监听对象内部属性变化）和 <code>immediate: true</code>（立即执行回调）。</li></ul><h3>代码示例</h3><pre><code class=\"language-vue\">&lt;script setup&gt;\nimport { ref, watch } from 'vue';\n\nconst keyword = ref('');\n\nwatch(keyword, (newVal, oldVal) =&gt; {\n  // 搜索防抖逻辑\n  console.log(`搜索词从 ${oldVal} 变为 ${newVal}`);\n}, { immediate: true });\n&lt;/script&gt;</code></pre><h3> 口语化回答示例</h3><p>“watch 主要是用来‘监听数据变化然后干点别的事’的。比如我在搜索框里输入关键字，数据一变，我就要去发请求拿搜索结果；或者监听路由参数变了，重新拉取页面数据。它和 computed 最大的区别是，computed 是用来‘算’出一个新值的，而 watch 是用来执行‘副作用’的，比如发请求、操作 DOM 等。另外要注意，如果监听的是一个深层对象，记得加 deep: true。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 17,
+        "title": "Vue 计算属性（Computed）的作用是什么？",
+        "content": "<p><code>computed</code> 是基于其响应式依赖进行缓存的派生状态。</p><h3>核心特性与区别</h3><ul><li><strong>缓存机制</strong>：只有当依赖的响应式数据发生变化时，它才会重新求值；否则多次访问只会返回缓存的结果，性能更优。</li><li><strong>与 methods 的区别</strong>：<code>methods</code> 中的方法在每次触发重新渲染时都会被无条件执行；而 <code>computed</code> 具有缓存机制。</li><li><strong>语义化</strong>：<code>computed</code> 适用于声明式的派生状态计算（如过滤列表、格式化文本），而 <code>methods</code> 适用于处理事件或执行具体的业务动作。</li></ul><h3>代码示例</h3><pre><code class=\"language-vue\">&lt;script setup&gt;\nimport { ref, computed } from 'vue';\n\nconst list = ref();\nconst evenList = computed(() => list.value.filter(item => item % 2 === 0));\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;p&gt;偶数列表: {{ evenList }}&lt;/p&gt;\n&lt;/template&gt;</code></pre><h3> 口语化回答示例</h3><p>“computed 最大的特点就是‘带缓存’。只要它依赖的数据没变，不管你在模板里引用它多少次，它都只计算一次，直接返回缓存的结果。而 methods 是每次组件重新渲染都会重新执行。所以如果是像列表过滤、文本拼接这种依赖其他数据的派生状态，我一定会用 computed。另外 computed 默认只有 getter，如果需要对计算出来的值进行赋值，也可以写 setter。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 18,
+        "title": "v-if 和 v-show 哪个更好？",
+        "content": "<p><code>v-if</code> 和 <code>v-show</code> 没有绝对的“更好”，只有“更适合的场景”，它们的核心区别在于底层渲染机制。</p><h3>区别与性能差异</h3><ul><li><strong>v-if（条件渲染）</strong>：当条件为假时，元素及其子组件不会被渲染到 DOM 中，条件改变时会触发组件的销毁与重建生命周期。<strong>切换开销大，初始渲染开销小</strong>，适合条件在运行时很少改变的场景（如权限路由）。</li><li><strong>v-show（条件显示）</strong>：无论条件真假，元素始终会被渲染并保留在 DOM 中，仅通过切换 CSS 的 <code>display: none</code> 属性来控制显隐。<strong>初始渲染开销大，切换开销极小</strong>，适合需要非常频繁切换显隐的场景（如 Tab 切换、下拉菜单）。</li></ul><h3>选型建议</h3><p>如果组件月均切换频次较高，<code>v-show</code> 综合性能更优；若条件极少变化，<code>v-if</code> 是更好的选择。</p><h3> 口语化回答示例</h3><p>“这俩没有绝对的好坏，得看场景。v-if 是真正的条件渲染，条件为假时 DOM 直接没了，切换时要重新创建和销毁，所以切换开销大。v-show 是始终渲染 DOM，只是用 CSS 的 display:none 来控制显隐，切换特别快。所以如果是像权限控制这种切一次就不怎么变的，用 v-if；如果是 Tab 栏、下拉菜单这种频繁切来切去的，用 v-show 性能更好。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 19,
+        "title": "如何检测设备并适配不同尺寸的屏幕，列举方法",
+        "content": "<p>在前端开发中，实现“一次开发，多端适配”是提升用户体验的核心目标。针对设备检测与屏幕适配，业界通常采用以下主流方法：</p><h3>一、 设备检测方法</h3><ul><li><strong>1. User-Agent (UA) 字符串分析</strong>：通过读取 <code>navigator.userAgent</code> 字符串，利用正则表达式匹配特定关键词（如 <code>Android</code>、<code>iPhone</code>、<code>Mobile</code> 等）来判断设备类型。优点是信息丰富，缺点是 UA 容易被伪造，且部分浏览器在桌面模式下会伪装 UA，存在误判风险。</li><li><strong>2. CSS 媒体查询 (Media Queries)</strong>：通过 <code>window.matchMedia()</code> API 或 CSS 的 <code>@media</code> 规则，检测视口宽度、分辨率、横竖屏等能力。该方法不依赖 UA，能实时响应窗口缩放，是响应式设计的核心。</li><li><strong>3. 屏幕尺寸检测</strong>：通过 <code>window.screen.width</code> 或 <code>window.innerWidth</code> 获取屏幕宽度，结合预设的断点（如 768px 区分平板，1024px 区分 PC）来判断设备类型。</li><li><strong>4. 特性检测</strong>：通过检测设备是否支持特定 API 来判断，例如使用 <code>'ontouchstart' in window</code> 来判断是否为触摸屏设备。</li></ul><h3>二、 移动端屏幕适配方案</h3><ul><li><strong>1. Viewport 视口配置</strong>：在 HTML 头部必须添加 <code>&lt;meta name=\"viewport\"&gt;</code> 标签，设置 <code>width=device-width</code> 确保页面宽度等于设备屏幕宽度，防止移动端浏览器自动缩放。</li><li><strong>2. 相对单位替代固定 px</strong>：拒绝使用固定的像素值，优先使用 <code>rem</code>（相对于根元素字体大小）、<code>vw/vh</code>（视口宽高的百分比）等相对单位，实现元素尺寸的自适应。</li><li><strong>3. 弹性布局 (Flex/Grid)</strong>：使用 CSS Flexbox 或 Grid 布局，配合百分比宽度，使容器和子元素能够根据屏幕空间自动伸缩和换行。</li><li><strong>4. 弹性媒体</strong>：为图片和视频设置 <code>max-width: 100%</code> 和 <code>height: auto</code>，确保媒体资源在容器内自动缩放，防止溢出。</li></ul><h3>三、 综合代码示例</h3><pre><code class=\"language-html\">&lt;!-- 1. 核心 Viewport 配置 --&gt;\n&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"&gt;</code></pre><pre><code class=\"language-javascript\">// 2. JS 设备检测示例\nfunction detectDevice() {\n  const ua = navigator.userAgent;\n  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);\n  const isTouchDevice = 'ontouchstart' in window;\n  return { isMobile, isTouchDevice };\n}</code></pre><pre><code class=\"language-css\">/* 3. CSS 媒体查询与弹性布局示例 */\n.container {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 10px;\n}\n.box {\n  flex: 1 1 300px; /* 弹性自适应 */\n  max-width: 100%;\n}\n/* 针对小屏幕手机的特殊适配 */\n@media (max-width: 576px) {\n  .box { flex: 1 1 100%; }\n}</code></pre><h3> 口语化回答示例</h3><p>“检测设备我一般不只看 UA，因为容易被伪造。我会结合 window.innerWidth 的断点，或者用 matchMedia 来做媒体查询，这样更准。至于屏幕适配，现在主流方案是 viewport 配 rem 或者 vw/vh。我平时开发会用 postcss-px-to-viewport 这种插件，写代码的时候照样写 px，构建时自动转成 vw，特别省心。布局上尽量用 Flex 和 Grid，少用固定宽高，这样在不同屏幕上自然就能自适应了。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 20,
+        "title": "Vue 双向数据绑定的原理是什么？",
+        "content": "<p>Vue 的双向数据绑定（Two-way Data Binding）是指数据模型（Model）与视图（View）之间的自动同步机制：当数据发生变化时，视图会自动更新；当用户在视图（如表单输入）中进行交互时，数据模型也会随之自动更新。Vue 通过 v-model 指令实现了这一特性，其底层核心原理可以概括为“数据劫持”结合“观察者模式（发布-订阅模式）”。</p><h3>核心实现机制</h3><ul><li><strong>数据劫持</strong>：Vue 在实例化时，会遍历 data 选项中的所有属性，通过特定的 API 为每个属性分配 getter 和 setter。当属性被读取时触发 getter，被修改时触发 setter。</li><li><strong>依赖收集与派发更新（观察者模式）</strong>：Vue 内部维护了 Dep（依赖收集器/发布者）和 Watcher（订阅者）。当组件渲染用到某个数据时，Watcher 会被添加到该数据对应的 Dep 中；当数据修改触发 setter 时，Dep 会通知所有相关的 Watcher 执行更新操作，从而重新渲染视图。</li><li><strong>v-model 的本质</strong>：v-model 实际上是一个语法糖。它在底层被编译为绑定元素的 value 属性（数据流向视图），并监听 input 事件（视图流向数据）。</li></ul><h3>Vue 2.x 与 Vue 3.x 的区别</h3><ul><li><strong>Vue 2.x</strong>：使用 ES5 的 Object.defineProperty() 方法来实现数据劫持。它的局限性在于只能劫持对象的已知属性，且无法直接监听数组索引的变化和对象属性的新增/删除。</li><li><strong>Vue 3.x</strong>：全面采用 ES6 的 Proxy 构造函数替代了 Object.defineProperty。Proxy 可以直接代理整个对象，不仅能监听属性的读写，还能拦截数组操作、对象新增属性等，性能更好且功能更强大。</li></ul><h3>代码示例</h3><p><strong>1. v-model 的底层等价写法（Vue 3）：</strong></p><pre><code class=\"language-html\">&lt;!-- 开发者使用的语法糖 --&gt;\n&lt;input v-model=\"message\" /&gt;\n\n&lt;!-- 底层实际编译的等价代码 --&gt;\n&lt;input \n  :value=\"message\" \n  @input=\"message = $event.target.value\" \n/&gt;</code></pre><p><strong>2. Vue 3 响应式数据劫持核心原理（Proxy 简化版）：</strong></p><pre><code class=\"language-javascript\">function createReactive(obj) {\n  return new Proxy(obj, {\n    get(target, key) {\n      track(target, key); // 依赖收集：记录当前的 Watcher\n      return target[key];\n    },\n    set(target, key, value) {\n      if (target[key] !== value) {\n        target[key] = value;\n        trigger(target, key); // 派发更新：通知所有相关的 Watcher 更新视图\n      }\n      return true;\n    }\n  });\n}</code></pre><h3> 口语化回答示例</h3><p>“Vue 双向绑定的原理我一般从三个层面来回答。首先是核心思想，它其实就是‘数据劫持’加上‘发布-订阅模式’。Vue 会在底层偷偷给 data 里的数据加上 getter 和 setter，当你读取数据时，Vue 会把当前的渲染 Watcher 收集起来；当你修改数据时，setter 就会通知这些 Watcher 去更新视图。其次是 v-model 的本质，它其实是个语法糖，底层就是绑定了 value 属性并监听了 input 事件。最后是版本差异，Vue 2 用的是 Object.defineProperty，只能劫持单个属性；而 Vue 3 升级成了 Proxy，可以直接代理整个对象，不仅解决了 Vue 2 无法监听数组和新增属性的痛点，性能也更好了。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 21,
+        "title": "说一下JS的基础数据类型",
+        "content": "<p>JavaScript 的数据类型主要分为两大类：基本数据类型和引用数据类型。</p><h3>基本数据类型（7种）</h3><ul><li><strong>Number</strong>：数字类型，包括整数和浮点数（如 NaN、Infinity）。</li><li><strong>String</strong>：字符串类型。</li><li><strong>Boolean</strong>：布尔类型，只有 true 和 false。</li><li><strong>Undefined</strong>：未定义，变量声明但未赋值时的默认值。</li><li><strong>Null</strong>：空值，表示一个空对象指针。</li><li><strong>Symbol</strong>（ES6新增）：表示独一无二的值。</li><li><strong>BigInt</strong>（ES2020新增）：用于表示任意精度的大整数。</li></ul><h3>引用数据类型</h3><p>主要是 <strong>Object</strong>，包括普通对象、数组（Array）、函数（Function）、日期（Date）等。</p><h3>核心区别</h3><p>基本类型存储在栈内存中，赋值时是值的拷贝；引用类型存储在堆内存中，栈中只存储指向堆的引用地址，赋值时是地址的拷贝。</p><h3> 口语化回答示例</h3><p>“JS的数据类型我一般分为基本类型和引用类型。基本类型有7种，除了我们常见的 Number、String、Boolean、Null、Undefined 之外，ES6 新增了 Symbol，ES2020 新增了 BigInt。引用类型主要是 Object。它们最大的区别在于内存分配：基本类型存在栈里，直接存值；而引用类型存在堆里，栈里只存一个地址。所以基本类型赋值是深拷贝，引用类型赋值其实是浅拷贝，改变一个会影响另一个。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 22,
+        "title": "说一下Vue2和Vue3的生命周期",
+        "content": "<p>Vue3 在生命周期上对 Vue2 进行了优化，主要是为了配合组合式 API（Composition API）。</p><h3>核心变化</h3><ul><li><strong>初始化阶段</strong>：Vue2 的 <code>beforeCreate</code> 和 <code>created</code> 在 Vue3 中被 <code>setup()</code> 函数取代。</li><li><strong>挂载阶段</strong>：<code>beforeMount</code> 变为 <code>onBeforeMount</code>；<code>mounted</code> 变为 <code>onMounted</code>。</li><li><strong>更新阶段</strong>：<code>beforeUpdate</code> 变为 <code>onBeforeUpdate</code>；<code>updated</code> 变为 <code>onUpdated</code>。</li><li><strong>销毁阶段</strong>：<code>beforeDestroy</code> 改名为 <code>onBeforeUnmount</code>；<code>destroyed</code> 改名为 <code>onUnmounted</code>。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">import { onMounted, onUnmounted } from 'vue';\n\nsetup() {\n  onMounted(() => {\n    console.log('组件已挂载');\n  });\n  onUnmounted(() => {\n    console.log('组件已卸载');\n  });\n}</code></pre><h3> 口语化回答示例</h3><p>“Vue3 的生命周期和 Vue2 相比，主要是名字变了，而且从选项式变成了函数式调用。最明显的就是 setup 替代了 beforeCreate 和 created。然后像 mounted 变成了 onMounted，销毁相关的 destroyed 变成了 onUnmounted。这样改的好处是，我们可以把生命周期逻辑抽离到独立的 hook 函数里，代码复用性更强了。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 23,
+        "title": "CSS的水平垂直居中总共有多少种",
+        "content": "<p>CSS 实现水平垂直居中是高频考点，主流方案有以下几种：</p><h3>主流方案</h3><ul><li><strong>Flex 布局（最推荐）</strong>：父元素设置 <code>display: flex; justify-content: center; align-items: center;</code>，无需知道子元素宽高。</li><li><strong>Grid 布局（最简洁）</strong>：父元素设置 <code>display: grid; place-items: center;</code>，一行代码搞定。</li><li><strong>定位 + Transform（通用方案）</strong>：子元素绝对定位，<code>top: 50%; left: 50%; transform: translate(-50%, -50%);</code>，适合未知宽高的弹窗。</li><li><strong>定位 + Margin: auto</strong>：子元素绝对定位且上下左右都为0，配合固定宽高和 <code>margin: auto;</code>。</li><li><strong>Table-cell 布局（老式兼容）</strong>：父元素 <code>display: table-cell; text-align: center; vertical-align: middle;</code>。</li></ul><h3> 口语化回答示例</h3><p>“实现水平垂直居中，现在项目里我最常用的是 Flex 布局，直接 justify-content 和 align-items 设为 center 就行了，不用管子元素宽高。如果追求代码极简，用 Grid 的 place-items: center 最爽。如果是做那种固定宽高的弹窗，用绝对定位加 transform 也很经典。老项目里可能还会见到 table-cell 的写法。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 24,
+        "title": "说一下Vue如何实现页面的动画，如渐进渐出",
+        "content": "<p>Vue 提供了内置的 <code>&lt;Transition&gt;</code> 组件来实现元素的进入和离开动画。</p><h3>核心机制</h3><p>Vue 会在过渡过程中自动添加/移除 6 个 CSS 类名：</p><ul><li><code>v-enter-from</code> / <code>v-enter-to</code>：进入的起始/结束状态。</li><li><code>v-enter-active</code>：进入过程中的过渡状态（定义 duration 和 easing）。</li><li><code>v-leave-from</code> / <code>v-leave-to</code>：离开的起始/结束状态。</li><li><code>v-leave-active</code>：离开过程中的过渡状态。</li></ul><h3>代码示例</h3><pre><code class=\"language-html\">&lt;Transition name=\"fade\"&gt;\n  &lt;p v-if=\"show\"&gt;Hello Vue&lt;/p&gt;\n&lt;/Transition&gt;</code></pre><pre><code class=\"language-css\">.fade-enter-active, .fade-leave-active {\n  transition: opacity 0.5s ease;\n}\n.fade-enter-from, .fade-leave-to {\n  opacity: 0;\n}</code></pre><h3> 口语化回答示例</h3><p>“做渐入渐出动画，我一般直接用 Vue 的 Transition 组件把元素包起来。它会自动帮我们加一些类名，比如 enter-active 和 leave-active。我们只需要在 CSS 里写好 transition 属性，然后设置起始和结束状态的 opacity 就可以了。如果是列表动画，就用 TransitionGroup，配合 key 值来实现 FLIP 动画。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 25,
+        "title": "Vue项目中如何解决跨域问题",
+        "content": "<p>跨域是浏览器的同源策略导致的，前端最常用的解决方案是配置开发服务器的代理（Proxy）。</p><h3>解决方案</h3><ul><li><strong>开发环境（Vite/Webpack Proxy）</strong>：在配置文件中设置 proxy，将特定前缀的请求代理到真实后端服务器，并开启 <code>changeOrigin: true</code>。</li><li><strong>生产环境</strong>：通常由 Nginx 配置反向代理来解决，或者由后端开启 CORS（跨域资源共享）响应头。</li></ul><h3>Vite 配置示例</h3><pre><code class=\"language-javascript\">// vite.config.js\nexport default {\n  server: {\n    proxy: {\n      '/api': {\n        target: 'http://localhost:3000',\n        changeOrigin: true,\n        rewrite: (path) => path.replace(/^\\/api/, '')\n      }\n    }\n  }\n}</code></pre><h3> 口语化回答示例</h3><p>“跨域问题在开发环境我一般直接配 Vite 或 Webpack 的 proxy 代理。把请求前缀比如 /api 代理到后端真实地址，记得把 changeOrigin 设为 true。如果是生产环境，通常就是让运维在 Nginx 上做反向代理，或者让后端同学配一下 CORS 响应头。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 26,
+        "title": "Vue中组件间通信方式都有哪些",
+        "content": "<p>Vue 提供了丰富的组件通信方案，需根据组件层级关系选择：</p><h3>常见方式</h3><ul><li><strong>父子组件</strong>：父传子用 <code>props</code>，子传父用 <code>$emit</code>。双向绑定可用 <code>v-model</code>。</li><li><strong>跨层级组件</strong>：使用 <code>provide / inject</code> 实现祖先组件向后代注入数据。</li><li><strong>全局状态管理</strong>：使用 <strong>Pinia</strong>（Vue3推荐）或 Vuex 进行集中式状态管理。</li><li><strong>其他</strong>：使用 <code>$refs</code> 直接访问子组件实例；使用事件总线（mitt）进行任意组件通信。</li></ul><h3> 口语化回答示例</h3><p>“组件通信看场景。父子之间肯定首选 props 和 emit。如果是跨层级，比如爷孙组件，用 provide 和 inject 比较方便。如果是全局共享的状态，比如用户信息、主题配置，那肯定上 Pinia。现在不推荐用 Event Bus 了，容易内存泄漏且不好维护。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 27,
+        "title": "说一下你对Vue中keep-alive的理解",
+        "content": "<p><code>&lt;keep-alive&gt;</code> 是 Vue 的内置组件，用于缓存不活动的组件实例，避免重复销毁和创建。</p><h3>核心特性</h3><ul><li><strong>状态保留</strong>：切换组件时，保留组件的状态（如表单输入、滚动位置）。</li><li><strong>专属生命周期</strong>：被缓存的组件不会触发 mounted，而是触发 <code>activated</code>（激活）和 <code>deactivated</code>（停用）。</li><li><strong>属性控制</strong>：通过 <code>include</code> 和 <code>exclude</code> 精确控制哪些组件需要缓存；通过 <code>max</code> 限制最大缓存数量（LRU算法）。</li></ul><h3> 口语化回答示例</h3><p>“keep-alive 就是个缓存组件。比如我们在列表页滚到了底部，点进详情页再返回，如果用了 keep-alive，列表页还会停在原来的位置，数据也不用重新请求。它有两个专属生命周期：activated 和 deactivated。用的时候要注意，必须给组件加上 name 属性，这样 include 才能匹配到。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 28,
+        "title": "说一下Vue中的拷贝问题",
+        "content": "<p>在 Vue 中处理对象或数组时，经常需要拷贝数据以避免修改原响应式数据。</p><h3>拷贝方式</h3><ul><li><strong>浅拷贝</strong>：使用 <code>Object.assign()</code> 或展开运算符 <code>{...obj}</code>。只拷贝第一层，嵌套对象仍是引用。</li><li><strong>深拷贝</strong>：使用 <code>JSON.parse(JSON.stringify(obj))</code>（缺点：无法处理函数、undefined、Date等）；或使用 lodash 的 <code>_.cloneDeep()</code>；Vue3 也可使用 <code>structuredClone()</code>（原生API）。</li></ul><h3> 口语化回答示例</h3><p>“Vue 里拷贝数据，如果是简单对象，用展开运算符做个浅拷贝就行。但如果对象嵌套很深，浅拷贝改了内层还是会触发响应式更新。这时候就需要深拷贝。以前常用 JSON 序列化那套，但现在我一般直接用浏览器原生的 structuredClone，或者引入 lodash 的 cloneDeep，更安全。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 29,
+        "title": "请说一下v-if和v-for为什么不建议一起使用",
+        "content": "<p>在 Vue 中，永远不建议将 <code>v-if</code> 和 <code>v-for</code> 用在同一个元素上。</p><h3>核心原因</h3><ul><li><strong>优先级问题</strong>：在 Vue2 中，<code>v-for</code> 的优先级高于 <code>v-if</code>，这意味着每次渲染都会先遍历整个列表，然后再在循环内部判断条件，造成极大的性能浪费。</li><li><strong>Vue3 的变化</strong>：在 Vue3 中，<code>v-if</code> 的优先级高于 <code>v-for</code>。此时 <code>v-if</code> 无法访问 <code>v-for</code> 作用域内的变量，会直接报错。</li></ul><h3>解决方案</h3><p>使用 <code>&lt;template&gt;</code> 标签包裹循环，将 <code>v-if</code> 放在内层；或者使用计算属性（computed）提前过滤好数据再渲染。</p><h3> 口语化回答示例</h3><p>“这俩绝对不能一起用。Vue2 里 v-for 优先级高，会导致每次都把整个列表遍历一遍再去判断 v-if，性能极差。Vue3 虽然改了优先级，但 v-if 会先执行，这时候根本拿不到 v-for 的变量，直接报错。最好的做法是用 computed 先把数据过滤好，或者外面套一层 template 写 v-if。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 30,
+        "title": "后端传来一个嵌套数组时，该怎么去过滤掉不需要的字段",
+        "content": "<p>处理嵌套数组的字段过滤，核心思想是“逐层映射（Map）”。</p><h3>处理方案</h3><ul><li><strong>使用 map 逐层处理</strong>：外层数组用 <code>map</code> 遍历，内层数组再次用 <code>map</code> 遍历，通过解构赋值提取需要的字段。</li><li><strong>避免直接修改原数据</strong>：永远不要直接对后端返回的原始数据进行 delete 或修改，应返回一个新的干净数组。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">const rawData = [\n  { id: 1, name: 'A', extra: 'x', items: [{ id: 10, val: 'v1', temp: 't1' }] }\n];\n\nconst cleanData = rawData.map(({ id, name, items }) => ({\n  id,\n  name,\n  items: items.map(({ id, val }) => ({ id, val }))\n}));</code></pre><h3> 口语化回答示例</h3><p>“遇到嵌套数组过滤字段，我一般用 map 嵌套 map 来处理。最外层 map 解构出需要的字段，遇到内层数组再套一个 map 继续解构。这样既能剔除多余字段，又不会污染后端返回的原始数据。如果层级特别深，可能会考虑写个递归函数或者用 lodash 的 pick 方法来简化代码。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 31,
+        "title": "解释一下vue插槽与作用域插槽的区别",
+        "content": "<p><strong>核心区别：</strong></p><ul><li><strong>普通插槽（Default/Named Slot）：</strong> 主要用于内容分发。父组件向子组件传递<strong>静态结构或HTML</strong>，插槽内容只能访问父组件的数据，无法获取子组件内部的状态。</li><li><strong>作用域插槽（Scoped Slot）：</strong> 核心在于“数据反向传递”。子组件通过 <code>v-bind</code> 将内部数据作为“插槽 Prop”暴露出来，父组件在接收插槽时，可以基于子组件的数据来<strong>自定义渲染逻辑</strong>。</li><li><strong>数据流向：</strong> 普通插槽是单向的（父 ️ 子传递内容）；作用域插槽实现了闭环（子 ️ 父传递数据，父渲染后回填给子）。</li></ul><pre><code class=\"language-vue\">&lt;!-- 子组件 List.vue --&gt;\n&lt;template&gt;\n  &lt;ul&gt;\n    &lt;li v-for=\"item in list\" :key=\"item.id\"&gt;\n      &lt;!-- 暴露 item 数据给父组件 --&gt;\n      &lt;slot :item=\"item\"&gt;&lt;/slot&gt;\n    &lt;/li&gt;\n  &lt;/ul&gt;\n&lt;/template&gt;\n\n&lt;!-- 父组件 Parent.vue --&gt;\n&lt;template&gt;\n  &lt;List&gt;\n    &lt;!-- 接收子组件数据并自定义渲染 --&gt;\n    &lt;template #default=\"{ item }\"&gt;\n      &lt;span&gt;{{ item.name }}&lt;/span&gt;\n    &lt;/template&gt;\n  &lt;/List&gt;\n&lt;/template&gt;</code></pre><p> <strong>口语化回答：</strong></p><p>普通插槽就像是我们去餐厅点菜，餐厅（子组件）提供了一个盘子（插槽），我们（父组件）往里面放什么菜，它就上什么菜，但我们不知道后厨是怎么做的。而作用域插槽相当于餐厅不仅给了盘子，还把这道菜的“食材和做法”（数据）也递给了我们，我们可以根据这些食材，自己决定怎么摆盘、加什么调料（自定义渲染逻辑）。简单来说，普通插槽传的是“壳子”，作用域插槽传的是“数据+壳子的控制权”。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 32,
+        "title": "请说一下vuex和localStorage的区别",
+        "content": "<p><strong>核心区别：</strong></p><ul><li><strong>存储位置与生命周期：</strong>Vuex 存储在浏览器内存中，页面刷新后数据会丢失；localStorage 存储在本地硬盘中，数据是永久保存的，除非手动清除。</li><li><strong>响应式特性：</strong>Vuex 与 Vue 的响应式系统深度集成，状态改变会自动触发视图更新；localStorage 只是普通的键值对存储，不具备响应式能力。</li><li><strong>数据类型：</strong>Vuex 可以存储任意 JavaScript 数据类型（对象、数组等）；localStorage 只能存储字符串，存储对象时需要使用 <code>JSON.stringify</code> 和 <code>JSON.parse</code> 进行转换。</li><li><strong>应用场景：</strong>Vuex 用于组件间（尤其是跨层级）的共享状态管理；localStorage 用于持久化保存用户配置（如主题、Token）或离线数据。</li></ul><pre><code class=\"language-javascript\">// Vuex: 响应式，刷新丢失\nstore.commit('setUser', { name: 'Vue' });\n\n// localStorage: 永久存储，非响应式\nlocalStorage.setItem('user', JSON.stringify({ name: 'Vue' }));\nconst user = JSON.parse(localStorage.getItem('user'));</code></pre><p> <strong>口语化回答：</strong></p><p>Vuex 就像是应用里的“共享内存”，数据放在里面，所有组件都能实时响应它的变化，但一刷新页面就没了；而 localStorage 就像是浏览器的“本地硬盘”，存进去的数据哪怕关机重启都还在，但它不会自动触发页面更新。在实际开发中，我们通常会把两者结合使用：用 Vuex 管理运行时的状态，同时用 localStorage 把关键数据（比如用户的登录 Token）持久化下来，刷新页面后再从 localStorage 读出来塞回 Vuex 里。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 33,
+        "title": "请说一下vue开发框架的优点，以及vue2和vue3的区别",
+        "content": "<p><strong>Vue 框架的优点：</strong></p><ul><li><strong>渐进式架构：</strong> 核心库只关注视图层，极易上手，且能轻松与第三方库或既有项目整合。</li><li><strong>组件化开发：</strong> 将 UI 拆分为独立、可复用的组件，提高代码的可维护性。</li><li><strong>响应式数据绑定：</strong> 自动追踪状态变化并更新 DOM，开发者无需手动操作 DOM。</li></ul><p><strong>Vue2 与 Vue3 的核心区别：</strong></p><ul><li><strong>响应式原理：</strong> Vue2 使用 <code>Object.defineProperty</code>，存在无法监听数组下标和对象新增属性的缺陷；Vue3 使用 <code>Proxy</code>，实现全场景监听且支持惰性代理，性能大幅提升。</li><li><strong>API 设计：</strong> Vue2 采用 Options API（选项式），逻辑按类型分散，复用依赖 Mixins，易产生冲突；Vue3 引入 Composition API（组合式），按业务逻辑聚合代码，复用性极强。</li><li><strong>工程化与性能：</strong> Vue3 打包体积减少 41%，初次渲染快 55%，原生支持 TypeScript，并新增了 Fragment（多根节点）、Teleport 等特性。</li></ul><pre><code class=\"language-vue\">&lt;!-- Vue3 Composition API 示例 --&gt;\n&lt;script setup&gt;\nimport { ref, computed } from 'vue';\nconst count = ref(0);\nconst double = computed(() => count.value * 2);\n&lt;/script&gt;</code></pre><p> <strong>口语化回答：</strong></p><p>Vue 最大的优点就是“渐进式”和“简单易用”，学习曲线平缓，而且组件化和响应式让我们能专注业务逻辑。至于 Vue2 和 Vue3 的区别，最直观的就是 API 变了。Vue2 的选项式写法，一个功能的代码散落在 data、methods 里，项目一大就很难维护；Vue3 的组合式 API 把相关逻辑都写在一起，复用起来特别爽。底层的话，Vue3 用 Proxy 替换了 defineProperty，不仅解决了以前数组和对象新增属性不更新的坑，性能也强了很多，而且对 TS 的支持更友好了。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 34,
+        "title": "请描述一下vue常用的修饰符",
+        "content": "<p><strong>常用修饰符分类：</strong></p><ul><li><strong>事件修饰符：</strong> <code>.stop</code>（阻止冒泡）、<code>.prevent</code>（阻止默认事件）、<code>.capture</code>（捕获模式）、<code>.self</code>（仅当事件从元素本身触发才执行）、<code>.once</code>（只触发一次）。</li><li><strong>按键修饰符：</strong> <code>.enter</code>、<code>.tab</code>、<code>.esc</code> 等（Vue3 中移除了自定义 keyCode，推荐使用 key 别名）。</li><li><strong>v-model 修饰符：</strong> <code>.lazy</code>（在 change 事件而非 input 事件后同步）、<code>.number</code>（自动将输入转为数字）、<code>.trim</code>（自动过滤首尾空格）。</li><li><strong>v-bind 修饰符：</strong> <code>.sync</code>（Vue2 中用于双向绑定，Vue3 中被 <code>v-model:arg</code> 取代）、<code>.prop</code>（强制作为 DOM property 绑定）。</li></ul><pre><code class=\"language-vue\">&lt;!-- 事件修饰符 --&gt;\n&lt;a href=\"#\" @click.prevent.stop=\"handleClick\"&gt;阻止冒泡和默认行为&lt;/a&gt;\n\n&lt;!-- v-model 修饰符 --&gt;\n&lt;input v-model.lazy.trim=\"msg\" /&gt;\n&lt;input v-model.number=\"age\" type=\"number\" /&gt;</code></pre><p> <strong>口语化回答：</strong></p><p>修饰符其实就是 Vue 给我们提供的语法糖，用来处理常见的 DOM 事件细节。比如点链接时既想执行方法又不想页面跳转，就用 <code>@click.prevent</code>；不想事件冒泡就用 <code>.stop</code>。在表单里特别好用，比如想让输入框失去焦点时才更新数据，加个 <code>.lazy</code>；想自动去掉用户输入的空格，加个 <code>.trim</code>。它们大大减少了我们在 methods 里写 <code>event.preventDefault()</code> 这种样板代码。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 35,
+        "title": "解释一下vue route和router的区别",
+        "content": "<p><strong>概念辨析：</strong></p><ul><li><strong>Vue Router（通常简称为 Router）：</strong> 是 Vue.js 官方的<strong>路由管理器插件</strong>。它是一个完整的库，负责将 URL 路径与 Vue 组件进行映射，实现 SPA（单页应用）的页面切换、路由守卫、嵌套路由等功能。</li><li><strong>Route（路由对象）：</strong> 是 Vue Router 在运行时解析当前 URL 后生成的一个<strong>状态对象</strong>。它包含了当前路由的所有信息，如 <code>path</code>、<code>name</code>、<code>params</code>、<code>query</code>、<code>meta</code> 等。</li><li><strong>总结：</strong> Router 是“管理者/引擎”，Route 是“当前被管理的具体状态/数据”。</li></ul><pre><code class=\"language-javascript\">// Router: 路由管理器实例\nconst router = createRouter({\n  history: createWebHistory(),\n  routes: [{ path: '/user/:id', component: User }]\n});\n\n// Route: 当前路由对象（在组件中通过 this.$route 或 useRoute() 获取）\nconsole.log(this.$route.params.id); // 获取动态参数</code></pre><p> <strong>口语化回答：</strong></p><p>简单来说，Router 是“导航仪”或者“交警”，它是一个工具，负责制定规则和指挥交通，决定哪个 URL 对应哪个页面；而 Route 是“你当前所在的位置信息”，比如你现在在哪条路、带了什么参数。我们在代码里 <code>import</code> 进来配置的是 Router，但在组件里通过 <code>this.$route</code> 拿到的是 Route 对象。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 36,
+        "title": "说一下vue的hooks，以及常用的hooks",
+        "content": "<p><strong>什么是 Hooks：</strong></p><p>在 Vue3 中，Hooks 通常指的是基于 Composition API 封装的<strong>组合式函数（Composables）</strong>。它们利用 Vue 的响应式系统，将特定的业务逻辑或通用功能抽离成独立的函数，从而实现逻辑的优雅复用，完美替代了 Vue2 中容易冲突的 Mixins。</p><p><strong>常用 Hooks 示例：</strong></p><ul><li><strong>useMouse：</strong> 监听并返回鼠标当前的 X/Y 坐标。</li><li><strong>useFetch：</strong> 封装异步请求，返回 data、loading、error 状态。</li><li><strong>useLocalStorage：</strong> 响应式地读写本地存储。</li></ul><pre><code class=\"language-javascript\">// 自定义 Hook: useMouse.js\nimport { ref, onMounted, onUnmounted } from 'vue';\n\nexport function useMouse() {\n  const x = ref(0);\n  const y = ref(0);\n  const update = (e) => { x.value = e.pageX; y.value = e.pageY; };\n  \n  onMounted(() => window.addEventListener('mousemove', update));\n  onUnmounted(() => window.removeEventListener('mousemove', update));\n  \n  return { x, y };\n}</code></pre><p> <strong>口语化回答：</strong></p><p>Vue 里的 Hooks 其实就是 Vue3 组合式 API 衍生出来的“组合式函数”。以前在 Vue2 里，我们想复用一段逻辑（比如获取鼠标位置），只能用 Mixins，但用多了很容易出现变量名冲突、不知道数据从哪来的问题。现在有了 Hooks，我们把这段逻辑抽成一个独立的函数，里面用 ref 和生命周期钩子处理好，最后把响应式数据 return 出去。用的时候直接解构赋值，逻辑清晰，而且完全不用担心命名冲突。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 37,
+        "title": "说一下vue的防抖和节流",
+        "content": "<p><strong>核心概念：</strong></p><ul><li><strong>防抖（Debounce）：</strong> 在事件被触发 n 秒后再执行回调，如果在这 n 秒内又被触发，则重新计时。适用于：搜索框输入、窗口大小调整。</li><li><strong>节流（Throttle）：</strong> 规定在一个单位时间内，只能触发一次函数。如果这个时间内触发多次，只有一次生效。适用于：滚动加载、鼠标移动、游戏技能冷却。</li></ul><p><strong>在 Vue 中的使用：</strong></p><p>在 Vue2 中通常在 methods 中配合 lodash 使用；在 Vue3 中，推荐在 <code>&lt;script setup&gt;</code> 中将事件处理函数用防抖/节流包裹，或使用自定义 Hooks。</p><pre><code class=\"language-vue\">&lt;script setup&gt;\nimport { ref } from 'vue';\nimport { debounce, throttle } from 'lodash-es';\n\nconst keyword = ref('');\n// 防抖：停止输入 500ms 后才执行搜索\nconst handleSearch = debounce((val) => {\n  console.log('搜索:', val);\n}, 500);\n\n// 节流：滚动时 1000ms 内只触发一次\nconst handleScroll = throttle(() => {\n  console.log('滚动中');\n}, 1000);\n&lt;/script&gt;</code></pre><p> <strong>口语化回答：</strong></p><p>防抖和节流都是用来优化高频触发事件的。防抖就像是“坐电梯”，不管外面多少人按按钮，只要有人进，就重新等 10 秒再关门，适合搜索框这种“等用户输完再查”的场景；节流就像是“公交车”，不管站台挤了多少人，每 10 分钟只发一班车，适合滚动条这种“持续触发但没必要太频繁”的场景。在 Vue 里，我们一般用 lodash 库来实现，注意在 Vue3 中要把防抖函数包在事件处理的外层，而不是直接绑定在模板上。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 38,
+        "title": "说一下js的作用域",
+        "content": "<p><strong>作用域分类：</strong></p><ul><li><strong>全局作用域：</strong> 在代码任何地方都能访问到的变量（如顶层的 var、let、const，以及未声明直接赋值的变量）。</li><li><strong>函数作用域：</strong> 在函数内部声明的变量，仅在函数内部可见，外部无法访问。</li><li><strong>块级作用域（ES6新增）：</strong> 由 <code>{}</code> 包裹的区域。<code>let</code> 和 <code>const</code> 声明的变量仅在块级作用域内有效，解决了 ES5 中 var 导致的变量泄露问题。</li></ul><p><strong>作用域链：</strong></p><p>当访问一个变量时，JS 引擎会从当前作用域开始向上查找，直到全局作用域。如果找不到则报错。这种层层嵌套的查找机制就是作用域链。</p><pre><code class=\"language-javascript\">let globalVar = '全局';\n\nfunction outer() {\n  let outerVar = '外部';\n  \n  if (true) {\n    let blockVar = '块级'; // 仅在 if 块内有效\n    console.log(globalVar); // 向上查找：找到全局\n  }\n  // console.log(blockVar); // ReferenceError\n}</code></pre><p> <strong>口语化回答：</strong></p><p>作用域其实就是变量的“可见范围”和“生命周期”。你可以把它想象成俄罗斯套娃，最里面的是块级作用域（let/const），外面是函数作用域，最外面是全局作用域。当代码要用一个变量时，它会先在当前的盒子里找，找不到就去外面的盒子找，一层层往外找，直到全局。如果最外面都没有，那就报错了。ES6 引入 let 和 const 后，有了真正的块级作用域，再也不用担心 for 循环里的变量污染外部了。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 39,
+        "title": "说一下js事件循环",
+        "content": "<p><strong>核心机制：</strong></p><p>JavaScript 是单线程语言，事件循环（Event Loop）是其实现异步非阻塞的核心机制。</p><ul><li><strong>执行栈（Call Stack）：</strong> 同步代码在此执行。</li><li><strong>宏任务（Macrotask）：</strong> 包括 setTimeout、setInterval、I/O、UI 渲染等。</li><li><strong>微任务（Microtask）：</strong> 包括 Promise.then、MutationObserver、queueMicrotask 等。</li></ul><p><strong>执行流程：</strong></p><ol><li>执行栈中的同步代码执行完毕。</li><li>清空当前所有的微任务队列。</li><li>从宏任务队列中取出一个任务执行。</li><li>再次清空微任务队列。</li><li>循环往复。</li></ol><pre><code class=\"language-javascript\">console.log('1'); // 同步\n\nsetTimeout(() => console.log('2')); // 宏任务\n\nPromise.resolve().then(() => {\n  console.log('3'); // 微任务\n});\n\nconsole.log('4'); // 同步\n\n// 输出顺序：1 -> 4 -> 3 -> 2</code></pre><p> <strong>口语化回答：</strong></p><p>JS 是单线程的，同一时间只能干一件事。事件循环就像是“大堂经理”，负责安排任务的执行顺序。首先，经理会把所有能立刻干的活（同步代码）干完；然后，他会优先检查有没有“VIP客户”（微任务，比如 Promise），有的话全部处理完；接着，再去普通等候区（宏任务，比如 setTimeout）叫一个号来处理；处理完一个宏任务后，又会立刻回去检查有没有新的 VIP 客户。这就是为什么 Promise 的回调总是比 setTimeout 先执行的原因。</p>",
+        "createTime": 1749375600000
+    },
+    {
+        "id": 40,
+        "title": "Promise 和 async/await 有什么区别？",
+        "content": "<p>Promise 和 async/await 都是 JavaScript 中用于处理异步操作的核心机制，但它们在语法表现、代码可读性以及错误处理上存在显著差异。async/await 本质上是基于 Promise 的语法糖，旨在让异步代码的编写更加优雅。</p><h3>核心区别</h3><ul><li><strong>语法与可读性</strong>：Promise 使用链式调用（<code>.then()</code> 和 <code>.catch()</code>），当存在多个依赖的异步任务时，代码依然可能变得复杂且难以阅读。而 async/await 允许开发者以类似同步代码的线性结构来编写异步逻辑，大幅提升了可读性。</li><li><strong>错误处理机制</strong>：Promise 依赖 <code>.catch()</code> 方法捕获异常，或者在 <code>.then()</code> 的第二个参数中处理。async/await 则允许直接使用传统的 <code>try...catch</code> 块，使得同步和异步错误的捕获方式完全一致，更加直观。</li><li><strong>并发处理能力</strong>：Promise 提供了 <code>Promise.all()</code>、<code>Promise.race()</code> 等强大的并行控制方法。虽然 async/await 也能实现并发，但通常需要结合 <code>Promise.all()</code> 来使用。</li><li><strong>执行与返回值</strong>：Promise 在创建时其执行器函数会立即运行；async 函数始终返回一个 Promise 对象，而 <code>await</code> 会暂停当前函数的执行，直到后面的 Promise 状态变为 fulfilled。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">// 1. 使用 Promise 的链式调用\nfunction fetchDataWithPromise() {\n  fetch('/api/user')\n    .then(res => res.json())\n    .then(data => console.log(data))\n    .catch(err => console.error(err));\n}\n\n// 2. 使用 async/await 的同步写法\nasync function fetchDataWithAsync() {\n  try {\n    const res = await fetch('/api/user');\n    const data = await res.json();\n    console.log(data);\n  } catch (err) {\n    console.error(err);\n  }\n}</code></pre><h3>口语化回答示例</h3><p>“其实 async/await 就是建立在 Promise 基础上的语法糖。Promise 最大的痛点是当异步任务变多时，<code>.then()</code> 链式调用会让代码变得很难看，而且错误处理只能靠 <code>.catch()</code>。而 async/await 最大的优势就是让异步代码看起来像同步代码一样，从上往下读，非常直观，配合 <code>try...catch</code> 处理异常也特别方便。不过在实际开发中，如果我们需要同时并发请求好几个接口，我还是会用到 <code>Promise.all()</code>，所以这两者通常是结合使用的。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 41,
+        "title": "请介绍一下 JavaScript",
+        "content": "<p>JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）的编程语言。它是现代 Web 开发的三大核心技术之一（与 HTML、CSS 并列），主要用于为网页添加动态交互功能。</p><h3>核心特性</h3><ul><li><strong>单线程与事件循环</strong>：JavaScript 是单线程语言，但通过事件循环（Event Loop）机制，它能够非阻塞地处理异步任务（如网络请求、定时器），这是其高并发处理能力的基石。</li><li><strong>多范式与动态类型</strong>：它支持面向对象、命令式和函数式编程风格。同时，它是动态类型语言，变量的类型在运行时才确定，这赋予了它极高的灵活性。</li><li><strong>一等公民函数</strong>：在 JS 中，函数可以像普通变量一样被传递、赋值和作为参数，这使得高阶函数和闭包等高级特性成为可能。</li><li><strong>跨平台生态</strong>：除了浏览器端，借助 Node.js，JavaScript 已经成功扩展到服务器端、桌面应用（Electron）以及移动端（React Native）开发。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">// 1. 动态类型与一等公民函数\nlet dynamicVar = 'Hello';\ndynamicVar = 100; // 允许改变类型\n\nconst greet = (name) => `Hi, ${name}!`;\nconsole.log(greet('Vue')); // Hi, Vue!\n\n// 2. 异步编程 (Event Loop 的体现)\nconsole.log('Start');\nsetTimeout(() => console.log('Async Task'), 0);\nconsole.log('End');\n// 输出顺序: Start -> End -> Async Task</code></pre><h3>口语化回答示例</h3><p>“JavaScript 是前端开发的核心语言，它最大的特点是单线程但支持异步，通过事件循环机制来处理非阻塞任务。它是一门动态类型的多范式语言，函数是一等公民，可以随意传递。现在 JS 早就不仅仅局限于浏览器了，有了 Node.js 之后，它已经是一门真正的全栈语言。另外，ES6 之后 JS 每年都在更新，像 Promise、async/await、Proxy 这些新特性让它在工程化开发中变得越来越强大。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 42,
+        "title": "Vue 监听属性（Watch）和计算属性（Computed）的区别是什么？",
+        "content": "<p>在 Vue 中，<code>computed</code> 和 <code>watch</code> 都是用来处理响应式数据的，但它们的设计初衷和适用场景截然不同。记住一个核心原则：能用 <code>computed</code> 实现的，绝不要用 <code>watch</code>。</p><h3>核心区别</h3><ul><li><strong>设计初衷与产出</strong>：<code>computed</code> 是“数据层面”的处理，用于派生新数据，必须有返回值；<code>watch</code> 是“行为层面”的处理，用于监听数据变化并执行自定义的业务逻辑（副作用），没有返回值。</li><li><strong>缓存机制</strong>：<code>computed</code> 具有缓存机制，只有当它依赖的源数据发生变化时才会重新计算，否则直接返回缓存结果，性能极高；<code>watch</code> 没有缓存，只要监听的数据变化，回调函数就会重新执行。</li><li><strong>触发方式</strong>：<code>computed</code> 是自动触发的，依赖变化时自动更新；<code>watch</code> 是被动触发的，且支持配置 <code>deep: true</code> 进行深度监听，或 <code>immediate: true</code> 立即执行。</li></ul><h3>代码示例</h3><pre><code class=\"language-vue\">&lt;script setup&gt;\nimport { ref, computed, watch } from 'vue';\n\nconst firstName = ref('John');\nconst lastName = ref('Doe');\nconst keyword = ref('');\n\n// Computed: 用于派生新数据，有缓存\nconst fullName = computed(() => `${firstName.value} ${lastName.value}`);\n\n// Watch: 用于执行副作用（如发请求）\nwatch(keyword, (newVal) => {\n  console.log('搜索词变化，发起请求:', newVal);\n  // fetchSearchData(newVal);\n}, { immediate: true });\n&lt;/script&gt;</code></pre><h3>口语化回答示例</h3><p>“这两个的区别我总结为两点：第一是目的不同，computed 是用来‘算’出一个新值的，比如把名和姓拼成全名，它自带缓存，依赖不变就不重新算；而 watch 是用来‘干活’的，比如监听搜索框的值变了，就去发个网络请求。第二是返回值，computed 必须有 return，watch 不需要。所以在实际开发中，如果是简单的数据转换和过滤，我无脑用 computed；只有涉及到发请求、操作 DOM 这种副作用时，才会用 watch。”",
+        "createTime": 1749369600000
+    },
+    {
+        "id": 43,
+        "title": "什么是 JavaScript 中的闭包（Closure）？它的利弊分别是什么？",
+        "content": "<p>闭包（Closure）是 JavaScript 中最核心、最基础，同时也是面试中最常考的概念之一。简单来说，闭包是指一个函数能够访问其外部（词法）作用域中定义的变量，即使该外部函数已经执行完毕并返回。它的本质是“函数 + 它所记住的外部变量环境”。</p><h3>核心原理与形成条件</h3><ul><li><strong>形成条件</strong>：必须存在函数嵌套，内部函数引用了外部函数的变量，并且外部函数将内部函数返回到了外部作用域。</li><li><strong>词法作用域</strong>：JavaScript 采用词法作用域，函数的作用域在定义时就已确定。当内部函数被返回并在外部执行时，它会沿着作用域链向上查找，从而访问到外部函数的变量。</li><li><strong>内存驻留</strong>：正常情况下，函数执行完毕后其局部变量会被垃圾回收机制销毁。但由于闭包保持着对外部变量的引用，导致这些变量不会被回收，从而实现了状态的“记忆”与持久化。</li></ul><h3>闭包的“利”（优点与应用场景）</h3><ul><li><strong>数据私有化与封装</strong>：闭包可以创建独立的私有变量，外部无法直接访问，只能通过返回的函数进行操作，有效避免了全局变量污染。</li><li><strong>状态持久化</strong>：允许函数在多次调用之间保持状态，非常适合用于实现计数器、缓存（Memoization）等场景。</li><li><strong>函数工厂与高阶函数</strong>：可以批量生成具有相同逻辑但不同配置的函数（如柯里化），或者实现防抖（Debounce）与节流（Throttle）等性能优化手段。</li></ul><h3>闭包的“弊”（缺点与风险）</h3><ul><li><strong>内存泄漏风险</strong>：由于闭包引用的外部变量不会被垃圾回收，如果大量创建闭包且不及时释放引用，会导致内存占用过高，甚至引发内存泄漏。</li><li><strong>性能损耗</strong>：闭包会延长作用域链，访问外部变量时需要逐级查找，在高频调用的场景下（如动画帧、滚动事件）可能会带来一定的性能开销。</li><li><strong>调试困难</strong>：多层嵌套的闭包会使变量的生命周期变得复杂，增加代码的调试和维护难度。</li></ul><h3>代码示例</h3><pre><code class=\"language-javascript\">// 1. 闭包实现数据私有化与状态持久化\nfunction createCounter(initialValue) {\n  let count = initialValue; // 被闭包“记住”的私有变量\n  return function() {\n    count++; \n    return count;\n  };\n}\nconst counterA = createCounter(0);\nconsole.log(counterA()); // 1\nconsole.log(counterA()); // 2\n\n// 2. 避坑指南：及时释放闭包引用，防止内存泄漏\nlet myCounter = createCounter(10);\nconsole.log(myCounter()); // 11\nmyCounter = null; // 手动解除引用，允许垃圾回收机制释放 count 变量</code></pre><h3>口语化回答示例</h3><p>“关于闭包，一般从定义、优点和缺点三个方面来回答。通俗点讲，闭包就是‘函数套函数，并且内部函数记住了外部函数的变量’。正常情况下外部函数执行完，里面的变量就该被销毁了，但因为内部函数还在用，所以 JS 引擎会把它们留在内存里。它的优点很明显，主要是能实现数据的私有化，防止全局变量污染，还能在函数调用间保持状态，比如我们常用的防抖节流、计数器都是基于闭包。但它的缺点也很致命，就是容易导致内存泄漏。因为闭包引用的变量不会被垃圾回收，如果用得太多或者用完不释放，内存就会一直涨。所以在实际开发中，用闭包一定要谨慎，不用的时候记得手动把变量置为 null 来释放内存。”",
+        "createTime": 1749369600000
+    }
 ]

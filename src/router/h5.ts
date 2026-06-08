@@ -34,27 +34,26 @@ export default [
             },
         ]
     },
-    //面经内容表格
+    //面经内容详情
     {
-        path: '/mianjingTableh5',
+        path: '/mianjingContenth5/:id',
         meta: {
-            title: '面经内容表格',
+            title: '面经内容',
             keepAlive: true
         },
         component: () => import('@/h5/layout/main.vue'),
-        // meta:{show:true},
-        redirect: '/',
         children: [
             {
                 path: '',
-                component: () => import('@/h5/mainjing/content/tableIndex.vue')
+                component: () => import('@/h5/mainjing/content/contentIndex.vue'),
+                props: true
             },
         ]
     },          //面经内容列表
     {
         path: '/mianjingListh5',
         meta: {
-            title: '面经内容列表',
+            title: '面经列表',
             keepAlive: true
         },
         component: () => import('@/h5/layout/main.vue'),

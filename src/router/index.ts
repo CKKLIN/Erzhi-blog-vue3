@@ -146,7 +146,8 @@ const h5Paths = h5.map(route => route.path)
 
 // 移动端自动跳转到面经页面
 router.beforeEach((to, _from, next) => {
-  if (isMobileDevice() && !h5Paths.includes(to.path)) {
+  const isH5 = to.matched.some(record => h5Paths.includes(record.path))
+  if (isMobileDevice() && !isH5) {
     next('/mianJingh5')
   } else {
     next()
