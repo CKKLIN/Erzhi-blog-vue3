@@ -6,9 +6,6 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
-
-import type { TabsPaneContext } from 'element-plus'
 import memoCard from '@/components/card/memoCard/index.vue'
 
 </script>

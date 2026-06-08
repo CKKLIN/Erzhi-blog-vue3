@@ -85,16 +85,16 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { User, Lock, Iphone } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
-import { loginAPI, registAPI, getCaptchaAPI } from '@/api/login'
+import { registAPI, getCaptchaAPI } from '@/api/login'
 import { useTokenStore } from '@/stores/token'
 import useCounter from '@/stores/pinia'
 import bj1 from '@/assets/bj/bj1.jpg'
 import bj4 from '@/assets/bj/bj4.jpeg'
 import bj5 from '@/assets/bj/bj5.jpg'
 
-const counterStore = useCounter()
+useCounter()
 const router = useRouter()
-const tokenStore = useTokenStore()
+useTokenStore()
 const isLogin = ref(true)
 const captcha = ref()
 const loginPassword = ref()
@@ -142,7 +142,7 @@ const changeType = () => {
   resetForms()
 }
 
-const handleLogin = async (formEl: FormInstance | undefined) => {
+const handleLogin = async (_formEl: FormInstance | undefined) => {
   // if (!formEl) return
   // await formEl.validate(async (valid) => {
   //   if (valid) {

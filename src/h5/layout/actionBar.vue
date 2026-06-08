@@ -56,6 +56,10 @@ const handleClick = (item) => {
   align-items: center;
   box-sizing: border-box;
   position: relative;
+  background: rgba(134, 134, 134, 0.226);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .actionBar-slider {
@@ -65,12 +69,13 @@ const handleClick = (item) => {
   left: calc(v-bind('sliderOffset') + 4px);
   width: calc(v-bind('sliderWidth') - 8px);
   border-radius: 30px;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
   box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.12),
-    0 2px 6px rgba(0, 0, 0, 0.08),
-    inset 0 2px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.06);
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 0;
 }

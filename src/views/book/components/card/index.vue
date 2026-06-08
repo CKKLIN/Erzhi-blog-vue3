@@ -26,13 +26,7 @@ interface Book {
 
 const books: Book[] = bookList12
 
-const coverModules = import.meta.glob('@/assets/linshi/img/book/*.jpg', { eager: true, import: 'default' }) as Record<string, string>
 
-function getCover(cover: string): string {
-    const filename = cover.split('/').pop()!
-    const key = Object.keys(coverModules).find(k => k.endsWith(`/${filename}`))
-    return key ? coverModules[key] : ''
-}
 </script>
 
 <style scoped>

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import h5 from './h5'
 
 const isMobileDevice = () => {
@@ -6,7 +6,7 @@ const isMobileDevice = () => {
 }
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
@@ -145,7 +145,7 @@ const router = createRouter({
 const h5Paths = h5.map(route => route.path)
 
 // 移动端自动跳转到面经页面
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   if (isMobileDevice() && !h5Paths.includes(to.path)) {
     next('/mianJingh5')
   } else {

@@ -16,8 +16,8 @@ export default [
                 component: () => import('@/h5/mainjing/index.vue')
             },
         ]
-    }, 
-      //主页
+    },
+    //主页
     {
         path: '/myh5',
         meta: {
@@ -33,11 +33,12 @@ export default [
                 component: () => import('@/h5/my/index.vue')
             },
         ]
-    },  //主页
+    },
+    //面经内容表格
     {
-        path: '/myh52',
+        path: '/mianjingTableh5',
         meta: {
-            title: '我的',
+            title: '面经内容表格',
             keepAlive: true
         },
         component: () => import('@/h5/layout/main.vue'),
@@ -46,14 +47,14 @@ export default [
         children: [
             {
                 path: '',
-                component: () => import('@/h5/my/index.vue')
+                component: () => import('@/h5/mainjing/content/tableIndex.vue')
             },
         ]
-    },  //主页
+    },          //面经内容列表
     {
-        path: '/myh51',
+        path: '/mianjingListh5',
         meta: {
-            title: '我的',
+            title: '面经内容列表',
             keepAlive: true
         },
         component: () => import('@/h5/layout/main.vue'),
@@ -62,7 +63,7 @@ export default [
         children: [
             {
                 path: '',
-                component: () => import('@/h5/my/index.vue')
+                component: () => import('@/h5/mainjing/content/listIndex.vue')
             },
         ]
     },

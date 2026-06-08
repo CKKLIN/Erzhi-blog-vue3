@@ -33,7 +33,7 @@ import mainjing from '../mainjing/index.vue'
     height: 72px;
     border-radius: 40px;
     margin-bottom: 12px;
-    background: rgba(255, 255, 255, 0.2);
+    /* background: rgba(255, 255, 255, 0.2); */
     backdrop-filter: blur(24px) saturate(200%);
     -webkit-backdrop-filter: blur(24px) saturate(200%);
     border: 1px solid rgba(255, 255, 255, 0.3);

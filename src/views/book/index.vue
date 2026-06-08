@@ -32,7 +32,7 @@
             </div>
 
           </template>
-          <template #cover="{ item }">
+          <template #cover>
             <div class="cover">
 
               <!-- <titleCard class="body-two-title"></titleCard> -->
