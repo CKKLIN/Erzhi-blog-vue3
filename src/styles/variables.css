@@ -3,17 +3,22 @@
   --color-card-time:rgba(209, 209, 209, 0.957);
   --color-card-border:1px solid rgb(243, 243, 243);
   --color-card-shadow: 2px 2px 5px rgba(155, 155, 155, 0.233);
+  --color-card-shadow-one:        
+        0 1px 2px rgba(255, 255, 255, 0.6) inset,
+        0 4px 12px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08);
   --color-card-shadow-top: 0 -4px 8px rgb(90, 90, 90);
   --color-white: rgb(255, 255, 255);
   --color-shadow: rgba(0, 0, 0, 0.356);
   --color-ar-text: rgb(101, 101, 101);
   --color-line: 0.8px solid  rgba(0, 0, 0, 0.123);
+  --color-h5-top: linear-gradient(160deg, rgba(153, 205, 50, 0.815), rgba(153, 205, 50, 0.445), rgba(153, 205, 50, 0.356));
   --padding-card:15px;
   --gap: 15px;
   --border-radius-card: 8px;
   --padding-ssm: 5px;
   --padding-sm: 10px;
   --transform-sm:perspective(600px) rotateX(30deg);
-  --color-h5Top:rgba(186, 236, 84, 0.705);
+  --color-h5Top:rgba(185, 236, 84, 0.925);
   --border-radius-sm:16px
 }

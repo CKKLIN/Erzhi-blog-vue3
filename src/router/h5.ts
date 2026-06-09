@@ -1,5 +1,11 @@
 export default [
 
+    //h5登录
+    {
+        path: '/loginh5',
+        meta: { title: '登录' },
+        component: () => import('@/h5/login/index.vue')
+    },
     //面经
     {
         path: '/mianJingh5',

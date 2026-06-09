@@ -58,7 +58,7 @@ const setDefaultImage = (event) => {
 
 .top {
   width: 50%;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
   color: rgb(87, 87, 87);
 }
 
@@ -66,7 +66,7 @@ const setDefaultImage = (event) => {
   margin: 0 auto 30px auto;
   max-width: 800px;
   background-color: var(--color-white);
-  padding: 10px 10px 0 10px;
+  padding: 20px 10px 0 10px;
   border-radius: 15px;
 }
 

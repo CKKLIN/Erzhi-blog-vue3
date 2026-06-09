@@ -144,13 +144,15 @@ const router = createRouter({
 // h5 页面路径列表
 const h5Paths = h5.map(route => route.path)
 
-// 移动端自动跳转到面经页面
+// 移动端跳转到面经页面，非移动端跳转到首页
 router.beforeEach((to, _from, next) => {
   const isH5 = to.matched.some(record => h5Paths.includes(record.path))
-  if (isMobileDevice() && !isH5) {
-    next('/mianJingh5')
+  if (isMobileDevice()) {
+    if (!isH5) next('/mianJingh5')
+    else next()
   } else {
-    next()
+    if (isH5) next('/home')
+    else next()
   }
 })
 

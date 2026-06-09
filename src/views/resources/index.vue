@@ -1,13 +1,29 @@
 <template>
     <div class="container">
         <div class="center-card">
-            <memoCard></memoCard>
+            <memoCard :headers="headers">
+                <template #body-0>
+                    <div>标签1的内容</div>
+                </template>
+                <template #body-1>
+                    <div>标签2的内容</div>
+                </template>
+                <template #body-2>
+                    <div>标签3的内容</div>
+                </template>
+            </memoCard>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
 import memoCard from '@/components/card/memoCard/index.vue'
+import { ref } from 'vue'
 
+const headers = ref([
+    { name: '软件', color: '#e74c3c' },
+    { name: '网站', color: '#3498db' },
+    { name: '效率工具', color: '#2ecc71' },
+])
 </script>
 <style scoped>
 
@@ -28,7 +44,7 @@ import memoCard from '@/components/card/memoCard/index.vue'
     margin-top: 100px;
     width: 70%;
     height: fit-content;
-    background-color: rgb(250, 235, 215);
+    /* background-color: rgb(187, 119, 29); */
     /* border-radius: var(--border-radius-card); */
     /* overflow: hidden; */
 }

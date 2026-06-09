@@ -1,17 +1,9 @@
 <template>
   <div class="actionBar">
     <!-- 滑块背景 -->
-    <div
-      class="actionBar-slider"
-      :style="{ left: sliderOffset + '%' }"
-    ></div>
-    <div
-      v-for="(item, index) in menuList"
-      :key="index"
-      class="actionBar-item"
-      :class="{ active: currentPath === item.path }"
-      @click="handleClick(item)"
-    >
+    <div class="actionBar-slider" :style="{ left: sliderOffset + '%' }"></div>
+    <div v-for="(item, index) in menuList" :key="index" class="actionBar-item"
+      :class="{ active: currentPath === item.path }" @click="handleClick(item)">
       <component :is="item.icon" class="actionBar-icon" />
       <span class="actionBar-text">{{ item.name }}</span>
     </div>
@@ -29,8 +21,8 @@ const currentPath = computed(() => route.path)
 
 const menuList = [
   { name: '面经', path: '/mianJingh5' },
-//   { name: '我的', path: '/myh52' },
-//   { name: '我的', path: '/myh51' },
+  //   { name: '我的', path: '/myh52' },
+  //   { name: '我的', path: '/myh51' },
   { name: '我的', path: '/myh5' },
 ]
 
@@ -50,13 +42,14 @@ const handleClick = (item) => {
 
 <style scoped>
 .actionBar {
+  font-family: "ZiHun144Hao-LangYuanTi-2";
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   box-sizing: border-box;
   position: relative;
-  background: rgba(134, 134, 134, 0.226);
+  background: rgb(211, 211, 211);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -106,18 +99,20 @@ const handleClick = (item) => {
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.3px;
-  color: rgba(60, 60, 67, 0.5);
+  color: rgb(253, 253, 253);
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   white-space: nowrap;
 }
 
 .actionBar-item.active .actionBar-icon {
-  color: #007AFF;
+
+  color: rgba(60, 60, 67, 0.5);
   filter: drop-shadow(0 2px 4px rgba(0, 122, 255, 0.4));
 }
 
 .actionBar-item.active .actionBar-text {
-  color: #007AFF;
+
+  color: rgba(60, 60, 67, 0.5);
   font-weight: 600;
 }
 

@@ -20,6 +20,7 @@ const lookContent=(path)=>{
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .capsule-btn {
@@ -36,7 +37,7 @@ const lookContent=(path)=>{
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 2px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    box-shadow:var(--color-card-shadow-one);
     cursor: pointer;
     transition: all 0.3s ease;
 }

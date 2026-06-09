@@ -11,7 +11,7 @@
         <template v-slot:danmu="{ index, danmu }">
           <div @mouseenter="handleEnter" @mouseleave="handleLeave" @click='handleClick(danmu)' class="item">
             <img :src="danmu.imageUrl" class="danmkuAvatar" @error="setDefaultImage($event)">
-            <p class="msg">{{ danmu.comment }}</p>
+            <div class="msg">{{ danmu.comment }}</div>
           </div>
         </template>
       </vue-danmaku>
@@ -30,7 +30,9 @@
 <script setup>
 import vueDanmaku from 'vue-danmaku'
 import { onMounted, ref } from 'vue';
-// import { getCommentAPI, addCommentAPI, isGoodAPI, noGoodAPI } from '../../api/comment';
+import commentData from '../../assets/linshi/data/comments.json';
+import { getCommentListAPI, addCommentAPI, updateCommentAPI } from '../../api/comment';
+import { ElNotification } from 'element-plus'
 import useCounter from '../../stores/pinia';
 // import rain from '../../components/modules/rain.vue'
 import { useRouter } from 'vue-router';
@@ -47,57 +49,16 @@ const showScrollButton = ref(false)
 
 // 创建一个响应式引用，用于保存对`elementA`的引用。初始值为null。
 const elementA = ref(null);
-const commentList = ref([
-    { id: 1, imageUrl: 'https://picsum.photos/seed/1/100/100', name: "二隔热隔热给", comment: "博主写得太好了，已三连支持！", good: true, createTime: "2023-05-05 09:09:09" },
-    { id: 2, imageUrl: 'https://picsum.photos/seed/2/100/100', name: "深夜码农", comment: "凌晨两点看到这篇博客，简直是我的救命稻草。", good: true, createTime: "2023-05-05 10:15:30" },
-    { id: 3, imageUrl: 'https://picsum.photos/seed/3/100/100', name: "全栈探索者", comment: "终于搞懂了这个概念，博主解释得比官方文档还清楚！", good: true, createTime: "2023-05-05 11:20:12" },
-    { id: 4, imageUrl: 'https://picsum.photos/seed/4/100/100', name: "前端小学生", comment: "请问一下，这里为什么要用 watch 而不是 computed 呢？", good: false, createTime: "2023-05-05 11:25:45" },
-    { id: 5, imageUrl: 'https://picsum.photos/seed/5/100/100', name: "Bug终结者", comment: "按照你的方法试了一下，果然完美解决了我的问题。", good: true, createTime: "2023-05-05 14:00:00" },
-    { id: 6, imageUrl: 'https://picsum.photos/seed/6/100/100', name: "设计小美", comment: "这个博客的排版和配色看着真舒服，用的什么主题呀？", good: true, createTime: "2023-05-05 15:30:22" },
-    { id: 7, imageUrl: 'https://picsum.photos/seed/7/100/100', name: "代码搬运工", comment: "收藏了！下次面试前就靠这篇文章复习了。", good: true, createTime: "2023-05-05 16:00:00" },
-    { id: 8, imageUrl: 'https://picsum.photos/seed/8/100/100', name: "摸鱼冠军", comment: "上班摸鱼看技术博客，老板以为我在认真工作哈哈。", good: true, createTime: "2023-05-05 16:10:00" },
-    { id: 9, imageUrl: 'https://picsum.photos/seed/9/100/100', name: "Vue爱好者", comment: "Vue3 的组合式 API 确实让逻辑复用变得更优雅了。", good: true, createTime: "2023-05-05 16:20:00" },
-    { id: 10, imageUrl: 'https://picsum.photos/seed/10/100/100', name: "React信徒", comment: "虽然我是 React 用户，但这篇博客的思路值得借鉴。", good: true, createTime: "2023-05-05 16:30:00" },
-    { id: 11, imageUrl: 'https://picsum.photos/seed/11/100/100', name: "后端大叔", comment: "前端现在发展太快了，感觉有点跟不上了...", good: false, createTime: "2023-05-05 16:40:00" },
-    { id: 12, imageUrl: 'https://picsum.photos/seed/12/100/100', name: "运维小哥", comment: "博主有没有考虑过写一篇关于 Docker 部署的文章？", good: false, createTime: "2023-05-05 16:50:00" },
-    { id: 13, imageUrl: 'https://picsum.photos/seed/13/100/100', name: "UI设计师", comment: "动效演示很丝滑，是用 GSAP 做的吗？", good: true, createTime: "2023-05-05 17:00:00" },
-    { id: 14, imageUrl: 'https://picsum.photos/seed/14/100/100', name: "实习生小李", comment: "刚入职的小白，看了这篇博客豁然开朗，感谢博主！", good: true, createTime: "2023-05-05 17:10:00" },
-    { id: 15, imageUrl: 'https://picsum.photos/seed/15/100/100', name: "架构师老王", comment: "整体思路没问题，不过在生产环境要注意性能优化。", good: true, createTime: "2023-05-05 17:20:00" },
-    { id: 16, imageUrl: 'https://picsum.photos/seed/16/100/100', name: "TypeScript粉", comment: "强烈建议博主加上 TypeScript 的类型定义示例。", good: true, createTime: "2023-05-05 17:30:00" },
-    { id: 17, imageUrl: 'https://picsum.photos/seed/17/100/100', name: "Node.js玩家", comment: "后端接口也是你写的吗？想请教一下 JWT 认证的问题。", good: false, createTime: "2023-05-05 17:40:00" },
-    { id: 18, imageUrl: 'https://picsum.photos/seed/18/100/100', name: "产品经理阿强", comment: "这个功能我们产品也想做，转发给开发看看。", good: true, createTime: "2023-05-05 17:50:00" },
-    { id: 19, imageUrl: 'https://picsum.photos/seed/19/100/100', name: "CSS魔法师", comment: "Tailwind CSS 配合 Vue 真的太香了，强烈推荐。", good: true, createTime: "2023-05-05 18:00:00" },
-    { id: 20, imageUrl: 'https://picsum.photos/seed/20/100/100', name: "测试工程师", comment: "边界情况处理得很到位，点赞。", good: true, createTime: "2023-05-05 18:10:00" },
-    { id: 21, imageUrl: 'https://picsum.photos/seed/21/100/100', name: "Git高手", comment: "代码规范写得很好，建议开源到 GitHub。", good: true, createTime: "2023-05-05 18:20:00" },
-    { id: 22, imageUrl: 'https://picsum.photos/seed/22/100/100', name: "Vite拥护者", comment: "Vite 的开发体验真的吊打 Webpack，谁用谁知道。", good: true, createTime: "2023-05-05 18:30:00" },
-    { id: 23, imageUrl: 'https://picsum.photos/seed/23/100/100', name: "Webpack老兵", comment: "Webpack 配置虽然复杂，但灵活性还是很高的。", good: true, createTime: "2023-05-05 18:40:00" },
-    { id: 24, imageUrl: 'https://picsum.photos/seed/24/100/100', name: "数据库专家", comment: "数据持久化这块可以考虑用 IndexedDB。", good: true, createTime: "2023-05-05 18:50:00" },
-    { id: 25, imageUrl: 'https://picsum.photos/seed/25/100/100', name: "安全卫士", comment: "XSS 防护做了吗？记得对输入内容做转义处理哦。", good: true, createTime: "2023-05-05 19:00:00" },
-    { id: 26, imageUrl: 'https://picsum.photos/seed/26/100/100', name: "性能优化师", comment: "首屏加载时间可以再用 Lighthouse 测一下。", good: true, createTime: "2023-05-05 19:10:00" },
-    { id: 27, imageUrl: 'https://picsum.photos/seed/27/100/100', name: "PWA粉丝", comment: "如果能做成 PWA 就更棒了，离线也能访问。", good: true, createTime: "2023-05-05 19:20:00" },
-    { id: 28, imageUrl: 'https://picsum.photos/seed/28/100/100', name: "SEO专员", comment: "SSR 渲染对 SEO 更友好，可以考虑 Nuxt。", good: true, createTime: "2023-05-05 19:30:00" },
-    { id: 29, imageUrl: 'https://picsum.photos/seed/29/100/100', name: "微前端探索者", comment: "qiankun 微前端方案有了解过吗？", good: false, createTime: "2023-05-05 19:40:00" },
-    { id: 30, imageUrl: 'https://picsum.photos/seed/30/100/100', name: "组件库作者", comment: "封装得不错，可以考虑发布到 npm。", good: true, createTime: "2023-05-05 19:50:00" },
-])
+const commentList = ref(commentData)
 
 let channels = 0
 
 const danmakuRef = ref(null)
 
-
-
-const getComment = async (createTime, good) => {
-
-  let params1 = {
-    createTime: createTime,
-    good: good,
-    userId: user.value.id
-  }
-  const result = await getCommentAPI(params1);
-  commentList.value = result.data
-  // console.log(result.data)
-  // console.log(commentList.value)
-
+const fetchComments = async () => {
+  try {
+    commentList.value = await getCommentListAPI()
+  } catch {}
 }
 
 
@@ -107,43 +68,42 @@ const setDefaultImage = (event) => {
   event.target.src = 'https://p3fx.kgimg.com/v2/fxuserlogo/eac9145ecd909b9606c4f8e5f3e936e7.jpg_200x200.jpg'
 }
 
+const saveComments = () => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(commentList.value))
+}
+
 const send = async () => {
   const trimmedInput = input.value.trim()
   if (trimmedInput === '') {
-    // ElNotification.warning('消息不能为空')
+    ElNotification.warning('消息不能为空')
     return
   }
-  let params = {
-    userId: user.value.id,
-    name: user.value.name,
-    imageUrl: user.value.imageUrl,
-    comment: trimmedInput
+  const newComment = {
+    imageUrl: 'https://p3fx.kgimg.com/v2/fxuserlogo/eac9145ecd909b9606c4f8e5f3e936e7.jpg_200x200.jpg',
+    name: user.value?.name || '匿名用户',
+    comment: trimmedInput,
+    good: false,
+    createTime: new Date().toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-')
   }
-  const result = await addCommentAPI(params)
-  if (result.data.code == 200) {
-    let params1 = {
-      createTime: 'l',
-      good: null
-    }
-    getComment('l', null, user.value.id)
+  const result = await addCommentAPI(newComment)
+  if (result.success) {
+    await fetchComments()
     input.value = ""
   }
-
 }
 
-const isGood = async (id, userId) => {
-  console.log(id + "/" + userId + "///")
-  const result = await isGoodAPI(userId, id)
-  if (result.data.code == 200) {
-    good.value = true
-    getComment()
+const isGood = async (id) => {
+  const item = commentList.value.find(c => c.id === id)
+  if (item) {
+    await updateCommentAPI({ ...item, good: true })
+    await fetchComments()
   }
 }
-const noGood = async (id, userId) => {
-  const result = await noGoodAPI(userId, id)
-  if (result.data.code == 200) {
-    good.value = true
-    getComment()
+const noGood = async (id) => {
+  const item = commentList.value.find(c => c.id === id)
+  if (item) {
+    await updateCommentAPI({ ...item, good: false })
+    await fetchComments()
   }
 }
 
@@ -162,8 +122,8 @@ const scrollToTop = () => {
 }
 
 
-onMounted(() => {
-
+onMounted(async () => {
+  await fetchComments()
   const danmakuHeight = danmakuRef.value.$el.offsetHeight
   channels = Math.ceil(danmakuHeight / 55);
 //   if (counterStore.jwt) {
@@ -197,6 +157,7 @@ onMounted(() => {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  /* background-color: yellow; */
   background-color: rgba(58, 53, 53, 0.735);
   height: 44px;
   border-radius: 22px;
@@ -215,7 +176,12 @@ onMounted(() => {
   font-size: 18px;
   padding-right: 15px;
   padding-left: 5px;
-  color: #ffffffea;
+  color: #fad0a1ea;
+  /* background-color: yellowgreen; */
+  line-height: 1;
+  /* display: flex;
+  align-items:center;
+  justify-content:center; */
 font-family: 'YuWoErYanNiZuiKeAi-2';
 }
 

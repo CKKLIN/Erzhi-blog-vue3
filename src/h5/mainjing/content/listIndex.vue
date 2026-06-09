@@ -4,7 +4,7 @@
             <img :src=backIcon class="back" @click="goBack()">
             <div class="title">Vue面试常问</div>
         </div>
-        <div class="body">
+        <div class="body" ref="bodyRef">
             <div class="search-box">
                 <a-input-search
                     v-model:value="keyword"
@@ -29,11 +29,29 @@
 import backIcon from '@/assets/icon/back.svg'
 import { useRouter, useRoute } from 'vue-router'
 import { vueList } from '@/assets/linshi/data/h5/mainjing'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onActivated, onBeforeUnmount, nextTick } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
 const keyword = ref('')
+const bodyRef = ref(null)
+const scrollKey = 'mianjingList_scrollTop'
+
+const saveScroll = () => {
+    if (bodyRef.value) {
+        sessionStorage.setItem(scrollKey, String(bodyRef.value.scrollTop))
+    }
+}
+const restoreScroll = () => {
+    const saved = sessionStorage.getItem(scrollKey)
+    if (saved && bodyRef.value) {
+        nextTick(() => { bodyRef.value.scrollTop = Number(saved) })
+    }
+}
+
+onMounted(restoreScroll)
+onActivated(restoreScroll)
+onBeforeUnmount(saveScroll)
 
 const filterList = computed(() => {
     if (!keyword.value) return vueList
@@ -46,6 +64,7 @@ const goBack=()=>{
       router.push('/mianJingh5')
 }
 const lookContent=(id)=>{
+    saveScroll()
     router.push(`/mianjingContenth5/${id}`)
 }
 </script>
@@ -53,11 +72,12 @@ const lookContent=(id)=>{
 .container{
     width: 100%;
     height: 100%;
+    font-family: "ZiHun144Hao-LangYuanTi-2";
 }
 .top{
     width: 100%;
     height: 7%;
-    background-color: var(--color-h5Top);
+    background: var(--color-h5-top);
     display: flex;
     flex-direction: row;
     align-items:center;
@@ -88,10 +108,7 @@ const lookContent=(id)=>{
     backdrop-filter: blur(14px) saturate(160%);
     -webkit-backdrop-filter: blur(14px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow:
-        0 1px 2px rgba(255, 255, 255, 0.6) inset,
-        0 4px 12px rgba(0, 0, 0, 0.1),
-        0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow:var(--color-card-shadow-one);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .list-item:active {
@@ -121,7 +138,7 @@ const lookContent=(id)=>{
 .search-box {
     margin-bottom: 16px;
     border-radius: 28px;
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.733);
     backdrop-filter: blur(14px) saturate(160%);
     -webkit-backdrop-filter: blur(14px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.6);
@@ -132,7 +149,7 @@ const lookContent=(id)=>{
     transition: all 0.3s ease;
 }
 .search-box:focus-within {
-    border-color: rgba(154, 205, 50, 0.6);
+    border-color: rgba(206, 206, 205, 0.986);
     box-shadow:
         0 1px 2px rgba(255, 255, 255, 0.5) inset,
         0 4px 24px rgba(154, 205, 50, 0.18);
