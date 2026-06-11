@@ -7,6 +7,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
 
+const props = withDefaults(defineProps<{
+  images?: string[]
+}>(), {
+  images: () => []
+})
+
 const containerRef = ref<HTMLDivElement>()
 
 let scene: THREE.Scene
@@ -34,8 +40,7 @@ let ctx: gsap.Context | null = null
 let hoverTweenIn: gsap.core.Tween | null = null
 let hoverTweenOut: gsap.core.Tween | null = null
 
-// ==================== 螺旋控制参数 ====================
-const IMAGE_COUNT = 120     // 图片总数
+const IMAGE_COUNT = props.images.length
 const R_MAX = 5.5           // 螺旋顶部半径（最外圈）
 const R_MIN = 3.5           // 螺旋底部半径（最内圈）
 const TURN_SPACING = 2.7    // 每圈螺旋的垂直间距
@@ -53,17 +58,13 @@ const PARENT_SCROLL_SPEED = 0.005 // 父组件滚动驱动螺旋的倍率
 const SCROLL_LIMIT = -5    // 螺旋向下移动的最低位置（负值，值越小允许下移越低）
 const SCROLL_CEILING = 17   // 螺旋向上移动的最高位置（正值，0 为初始位置）
 const TILT_ANGLE = 0        // 螺旋整体往后倾斜的角度（弧度）
-const PLACEHOLDER_COLOR = '#7e7e7e32' // 图片加载前的占位颜色
-
-const IMAGE_LIST = Array.from(
-  { length: IMAGE_COUNT },
-  (_, i) => `https://picsum.photos/400/560?random=${i + 10}`
-)
+const PLACEHOLDER_COLOR = '#080808a1' // 图片加载前的占位颜色
 
 function initScene() {
   const container = containerRef.value!
   const width = container.clientWidth
   const height = container.clientHeight
+  if (width === 0 || height === 0) throw new Error('Container has zero dimensions')
 
   scene = new THREE.Scene()
   scene.background = null
@@ -73,9 +74,14 @@ function initScene() {
   camera.position.set(0, 0, 14)
   camera.lookAt(0, -4, 0)
 
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+    failIfMajorPerformanceCaveat: false,
+    powerPreference: 'default',
+  })
   renderer.setSize(width, height)
-  renderer.setPixelRatio(window.devicePixelRatio)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   container.appendChild(renderer.domElement)
 }
 
@@ -163,7 +169,7 @@ function createSpiral() {
       metalness: 0.1,
     })
 
-    const texture = loader.load(IMAGE_LIST[img], () => {
+    const texture = loader.load(props.images[img], () => {
       material.map = texture
       material.needsUpdate = true
     })
@@ -308,11 +314,19 @@ function cleanup() {
     }
   })
   renderer.dispose()
+  renderer.forceContextLoss()
+  renderer.domElement = null as unknown as HTMLCanvasElement
   containerRef.value?.removeChild(renderer.domElement)
 }
 
 onMounted(() => {
-  initScene()
+  if (!props.images.length) return
+  try {
+    initScene()
+  } catch (e) {
+    console.warn('[3DSpiralGallery] WebGL init failed:', e)
+    return
+  }
   addLights()
   createSpiral()
 
@@ -336,7 +350,7 @@ onUnmounted(() => {
   hoverTweenIn?.kill()
   hoverTweenOut?.kill()
   ctx?.revert()
-  cleanup()
+  if (renderer) cleanup()
   containerRef.value?.removeEventListener('mousemove', handleMouseMove)
   containerRef.value?.removeEventListener('wheel', handleWheel)
 })
@@ -346,6 +360,6 @@ onUnmounted(() => {
 .book-container {
   width: 100%;
   height: 100%;
-  background: #7e7e7e00;
+  background: #08080800;
 }
 </style>

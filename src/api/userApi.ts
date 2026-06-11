@@ -1,24 +1,15 @@
-const BASE = '/local-api/users'
+import usersData from '@/assets/linshi/data/users.json'
 
-export async function fetchUsers() {
-    const res = await fetch(BASE)
-    return res.json()
+export function fetchUsers() {
+    return Promise.resolve(usersData)
 }
 
-export async function registerUser(data: { name: string; password: string; level: number; role: number; collectList: any[] }) {
-    const res = await fetch(BASE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
-    return res.json()
+export function registerUser(data: { name: string; password: string; level: number; role: number; collectList: any[] }) {
+    console.warn('registerUser 仅在本地开发环境可用')
+    return Promise.resolve({ success: false, msg: '静态部署不支持注册' })
 }
 
-export async function updateUser(data: any) {
-    const res = await fetch(BASE, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
-    return res.json()
+export function updateUser(data: any) {
+    console.warn('updateUser 仅在本地开发环境可用')
+    return Promise.resolve({ success: false, msg: '静态部署不支持更新' })
 }

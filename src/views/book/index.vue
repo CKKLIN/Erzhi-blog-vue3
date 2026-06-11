@@ -2,7 +2,7 @@
   <div class="container" ref="containerRef" @scroll="onScroll">
     <div class="top">
       <titleCard class="title"></titleCard>
-      <Spiraly ref="spiralRef" class="Spiraly"></Spiraly>
+      <Spiraly ref="spiralRef" class="Spiraly" :images="bookCovers"></Spiraly>
     </div>
     <div class="body">
       <div class="center">
@@ -49,7 +49,9 @@ import Spiraly from '@/components/3DSpiralGallery/index.vue'
 import titleCard from '@/views/book/components/title/index.vue'
 import card from '@/views/book/components/card/index.vue'
 import cardAnimation from '@/components/cardAnimation/index.vue'
-import { bookList3 } from '@/assets/linshi/data/data'
+import { bookList3, getBookCovers } from '@/assets/linshi/data/data'
+
+const bookCovers = getBookCovers(120)
 
 const animationItems = bookList3.map(b => ({
   title: b.name,

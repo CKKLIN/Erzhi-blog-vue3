@@ -14,23 +14,25 @@
                     zIndex: headers.length - index,
                     paddingLeft: `${paddingLefts[index] ?? 12}px`
                 }"
+                @click="onClick(index)"
                 @mouseenter="onHover(index)"
                 @mouseleave="onLeave"
-                @click="onClick(index)"
             >
                 {{ item.name }}
             </div>
-            <div
-                v-if="slots[`body-${index}`]"
-                class="card-body"
-                :class="{ active: hoverIndex === index || activeIndex === index }"
-                :style="{
-                    backgroundColor: item.color,
-                    zIndex: activeIndex === index ? headers.length + 1 : headers.length - index
-                }"
-            >
-                <slot :name="`body-${index}`" />
-            </div>
+            <Transition name="body-fade">
+                <div
+                    v-if="slots[`body-${index}`] && (showBodyIndex >= 0 ? showBodyIndex === index : activeIndex === index)"
+                    class="card-body"
+                    :class="{ active: hoverIndex === index || activeIndex === index }"
+                    :style="{
+                        backgroundColor: item.color,
+                        zIndex: (hoverIndex === index || activeIndex === index) ? headers.length + 1 : headers.length - index
+                    }"
+                >
+                    <slot :name="`body-${index}`" />
+                </div>
+            </Transition>
         </div>
     </div>
 </template>
@@ -84,6 +86,8 @@ watch(() => props.headers, () => nextTick(calcOffsets), { deep: true })
 
 const activeIndex = ref(props.defaultActive)
 const hoverIndex = ref(-1)
+const showBodyIndex = ref(-1) // 控制实际显示的索引
+let hoverTimer: ReturnType<typeof setTimeout> | null = null
 
 watch(() => props.defaultActive, (val) => {
     activeIndex.value = val
@@ -91,10 +95,24 @@ watch(() => props.defaultActive, (val) => {
 
 function onHover(index: number) {
     hoverIndex.value = index
+    // 清除之前的定时器
+    if (hoverTimer) {
+        clearTimeout(hoverTimer)
+    }
+    // 设置1秒延迟后显示body
+    hoverTimer = setTimeout(() => {
+        showBodyIndex.value = index
+    }, 500)
 }
 
 function onLeave() {
-    hoverIndex.value = activeIndex.value
+    hoverIndex.value = -1
+    // 清除定时器并隐藏body
+    if (hoverTimer) {
+        clearTimeout(hoverTimer)
+        hoverTimer = null
+    }
+    showBodyIndex.value = -1
 }
 
 function onClick(index: number) {
@@ -135,7 +153,7 @@ function onClick(index: number) {
 
 .card-body {
     width: 100%;
-    height: 400px;
+    /* height: 400px; */
     position: absolute;
     top: 34.4px;
     transition: transform 0.25s ease;
@@ -149,5 +167,23 @@ function onClick(index: number) {
 .header-item.active,
 .card-body.active {
     transform: translateY(-8px);
+}
+
+.body-fade-enter-active {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.body-fade-leave-active {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.body-fade-enter-from {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+
+.body-fade-leave-to {
+    opacity: 0;
+    transform: translateY(6px);
 }
 </style>

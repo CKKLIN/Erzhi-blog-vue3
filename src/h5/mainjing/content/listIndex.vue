@@ -204,7 +204,7 @@ const lookContent=(id)=>{
 .search :deep(.ant-input-search-button) {
     border: none !important;
     border-radius: 0 28px 28px 0 !important;
-    background: linear-gradient(135deg, #9acd32, #6ebf1a) !important;
+    background: linear-gradient(135deg, #99cd328a, #6fbf1ad5) !important;
     color: #fff;
     height: auto !important;
     min-height: 46px;

@@ -1,21 +1,15 @@
-const BASE = '/local-api/comments'
+import commentsData from '@/assets/linshi/data/comments.json'
 
 export function getCommentListAPI() {
-  return fetch(BASE).then(res => res.json())
+  return Promise.resolve(commentsData)
 }
 
 export function addCommentAPI(comment: { imageUrl: string; name: string; comment: string; good: boolean; createTime: string }) {
-  return fetch(BASE, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(comment)
-  }).then(res => res.json())
+  console.warn('addCommentAPI 仅在本地开发环境可用')
+  return Promise.resolve({ success: false, msg: '静态部署不支持添加评论' })
 }
 
 export function updateCommentAPI(comment: { id: number; [key: string]: any }) {
-  return fetch(BASE, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(comment)
-  }).then(res => res.json())
+  console.warn('updateCommentAPI 仅在本地开发环境可用')
+  return Promise.resolve({ success: false, msg: '静态部署不支持更新评论' })
 }

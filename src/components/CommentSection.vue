@@ -6,7 +6,7 @@
         <!-- <el-button class="top-button" @click="$emit('getComment', 'll', null)">最新</el-button>
         <el-button class="top-button" @click="$emit('getComment', null, 1)">最火</el-button> -->
       </div>
-      <div class="comment" v-for="item in comments" :key="item.id">
+      <div class="comment" v-for="item in sortedComments" :key="item.id">
         <div class="comment-header">
           <img class="avatar" :src="item.imageUrl" alt="头像" @error="setDefaultImage($event)">
           <div class="comment-meta">
@@ -31,15 +31,20 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import goodIcon from '../assets/icon/good.svg'
 import goodedIcon from '../assets/icon/gooded.svg'
 
-defineProps({
+const props = defineProps({
   comments: {
     type: Array,
     default: () => []
   }
 })
+
+const sortedComments = computed(() =>
+  [...props.comments].sort((a, b) => new Date(b.createTime) - new Date(a.createTime))
+)
 
 defineEmits(['getComment', 'isGood', 'noGood'])
 

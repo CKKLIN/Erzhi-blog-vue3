@@ -38,6 +38,7 @@ import useCounter from '../../stores/pinia';
 import { useRouter } from 'vue-router';
 import { parseJwt } from '../../stores/pinia';
 import CommentSection from '../../components/CommentSection.vue'
+import avatarImg from '@/assets/picture/ikun.jpg'
 
 // const list = ref();
 const good = ref(false)
@@ -65,7 +66,7 @@ const fetchComments = async () => {
 
 // 设置默认头像
 const setDefaultImage = (event) => {
-  event.target.src = 'https://p3fx.kgimg.com/v2/fxuserlogo/eac9145ecd909b9606c4f8e5f3e936e7.jpg_200x200.jpg'
+  event.target.src = avatarImg
 }
 
 const saveComments = () => {
@@ -79,7 +80,7 @@ const send = async () => {
     return
   }
   const newComment = {
-    imageUrl: 'https://p3fx.kgimg.com/v2/fxuserlogo/eac9145ecd909b9606c4f8e5f3e936e7.jpg_200x200.jpg',
+    imageUrl: avatarImg,
     name: user.value?.name || '匿名用户',
     comment: trimmedInput,
     good: false,

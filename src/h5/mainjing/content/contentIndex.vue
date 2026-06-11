@@ -15,6 +15,7 @@
             </div>
             <div class="content" v-html="item?.content"></div>
         </div>
+        <div class="toast" v-if="toastMsg">{{ toastMsg }}</div>
     </div>
 </template>
 
@@ -68,8 +69,19 @@ const getCollectIds = () => {
 
 const isFav = ref(false)
 
+const toastMsg = ref('')
+let toastTimer = null
+const showToast = (msg) => {
+    toastMsg.value = msg
+    clearTimeout(toastTimer)
+    toastTimer = setTimeout(() => { toastMsg.value = '' }, 2000)
+}
+
 const toggleFav = async () => {
-    if (!currentUser.value) return
+    if (!currentUser.value) {
+        showToast('请先登录')
+        return
+    }
     const ids = getCollectIds()
     const id = Number(props.id)
     const idx = ids.indexOf(id)
@@ -298,5 +310,24 @@ const onTouchEnd = (e) => {
 
 .content :deep(li) {
     margin-bottom: 6px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 9999;
+    animation: toastIn 0.3s ease;
+}
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 </style>

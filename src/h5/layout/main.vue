@@ -20,7 +20,7 @@ import mainjing from '../mainjing/index.vue'
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: var(--color-h5-top);
+    /* background: var(--color-h5-top); */
 }
 
 .body {

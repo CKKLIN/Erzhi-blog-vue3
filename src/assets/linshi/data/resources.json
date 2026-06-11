@@ -1,0 +1,368 @@
+{
+    "headers": [
+        {
+            "id": 1,
+            "name": "软件",
+            "color": "#ffdf4f",
+            "label": 1
+        },
+        {
+            "id": 2,
+            "name": "网站",
+            "color": "#4b7424",
+            "label": 2
+        },
+        {
+            "id": 3,
+            "name": "效率工具",
+            "color": "#2ecc71",
+            "label": 3
+        },
+        {
+            "id": 3,
+            "name": "AI提示词",
+            "color": "#2acc21",
+            "label": 4
+        }
+    ],
+    "cards": [
+        {
+            "id": 1,
+            "label": 1,
+            "name": "VS Code",
+            "desc": "微软出品代码编辑器，轻量且强大",
+            "content": "<p><strong>Visual Studio Code</strong> 是微软开发的免费开源代码编辑器。</p><ul><li>支持 <em>IntelliSense</em> 智能补全</li><li>内置 Git 版本控制</li><li>丰富的扩展生态，支持几乎所有语言</li><li>轻量启动快，占用资源少</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/6c8c35a23011677f800ed3c4cba484e2.png",
+            "versions": [
+                {
+                    "label": "WIN-v1.124",
+                    "url": "https://vscode.download.prss.microsoft.com/dbazure/download/stable/1b50d58d73426c9171299ec4037d01365d995b78/VSCodeUserSetup-x64-1.124.0.exe"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "label": 1,
+            "name": "IntelliJ IDEA",
+            "desc": "领先的Java与Kotlin IDE，助力开发者高效构建全栈应用",
+            "content": "<p>IntelliJ IDEA 是由 JetBrains 开发的业界领先的集成开发环境（IDE），专为 Java、Kotlin 及多语言全栈开发设计。基于最新的 2026.1 版本更新，它在 AI 编程、智能编码辅助及框架支持上实现了重大突破。</p><p><strong>核心亮点与功能：</strong></p><ul><li><strong>智能 AI 编程助手</strong>：深度集成 <strong>Junie</strong>、<strong>Claude Agent</strong> 和 <strong>Codex</strong> 等先进 AI 代理，支持在编辑器内直接进行代码生成、问答和审查；提供不占用配额的「下一步编辑建议」，实现无缝的 <em>Tab-Tab</em> 开发体验。</li><li><strong>强大的全栈与框架支持</strong>：针对现代前端技术栈进行了深度优化，全面支持 <strong>TypeScript 6</strong> 新特性，提供更可靠的类型推断；同时增强了对 <strong>React</strong>、<strong>Vue</strong>、<strong>Angular 21</strong>、<strong>Svelte</strong> 及 <strong>Astro</strong> 的框架特定功能支持。</li><li><strong>卓越的开发效率</strong>：内置智能代码补全、实时错误检查与重构工具；深度集成版本控制（Git）、数据库工具及构建工具（Maven/Gradle），并通过丰富的插件生态满足个性化需求。</li></ul><p>凭借其对开发者工作流的深刻理解与不断进化的技术，IntelliJ IDEA 始终是全球数百万开发者提升生产力的首选工具。</p>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/R-C.jpg",
+            "versions": [
+                {
+                    "label": "v2026.1.3",
+                    "url": "https://download-cdn.clf.jetbrains.com.cn/idea/idea-2026.1.3.exe?Signature=aN37hO2VG~8vZKN3V8bcT-VJNdPOBjA64nBjcmzHsu3Lczb9nkVvUvpDBkYPi41Awwx1jU9d9l3JjfecGQ6y24ZrTsGSrCq56wlp13114rmdxYDypQWi~GAS5lcOM0Y3-arR~ougZgoi2zzybxZBOHYy~JojXzcCRODFEYYJu550Y7pTjdGKTl4Gkii~hcRqFMzLWOVGo2Gylof7If3KsN3fAtpRzWAnD8SBq9FZaz3GzU2jo19Lxq7yzsiIgkh0SfwtBYazWZEE0PCJe2ttPTtQYVlHok1U1szDH~3aO~n6e68vmckXRfFnoSh6yUNXh1o-av9ZWXdWzPrV-VpRSw__&Key-Pair-Id=&Expires=1781234187"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "label": 1,
+            "name": "Siemens NX",
+            "desc": "业界领先的企业级CAD/CAM/CAE一体化产品工程解决方案",
+            "content": "<p>Siemens NX（原名 UG，Unigraphics）是由西门子工业软件开发的一款业界领先的 CAD/CAM/CAE 一体化软件。它广泛应用于航空航天、汽车制造、通用机械及模具设计等高端制造领域，为复杂产品的全生命周期提供强大的数字化支持。</p><p><strong>核心功能亮点：</strong></p><ul><li><strong>强大的混合建模</strong>：无缝融合了参数化建模、直接建模与同步建模技术，支持对导入的第三方无参数模型进行极其灵活的快速修改。</li><li><strong>高级曲面与装配设计</strong>：提供顶级的 Class-A 曲面设计能力，满足严苛的空气动力学与工业设计美学要求；支持包含数万个零部件的超大型装配体管理与干涉检查。</li><li><strong>智能 CAM 制造</strong>：内置业界顶尖的数控加工编程模块，支持从 2.5 轴铣削到复杂的 5 轴联动加工及车铣复合，提供高效的刀轨生成与防碰撞仿真验证。</li><li><strong>一体化 CAE 仿真</strong>：集成了强大的有限元分析、运动学仿真及热力学分析工具，允许工程师在设计早期进行性能验证，大幅缩短研发周期。</li></ul><p>凭借极高的自由度、卓越的曲面处理能力以及深度的 PLM 集成，NX 始终是全球顶尖制造企业实现数字化转型的核心生产力工具。</p>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/OIP-C (2).webp",
+            "versions": [
+                {
+                    "label": "NX 8.5",
+                    "url": "https://cloudcube.wuxi.cn/cloudcube-jswx-person/PERSONCLOUD/ebf60ce4-622d-4629-b428-2cad55c1b484.zip?x-obs-traffic-limit=409600&X-Amz-Date=20260611T064015Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&x-amz-CLIENTTYPEIN=UNKNOWN&x-amz-userLevel=0&X-Amz-Credential=SZshenghuo/20260611/us-east-1/s3/aws4_request&x-amz-UID=300000743995188&x-amz-APPID=828221&response-content-disposition=attachment%3Bfilename%3DUG_NX8.5_Win64%25E4%25BD%258D%25E6%25AD%25A3%25E5%25BC%258F%25E7%2589%2588.zip&x-amz-CLIENTNETWORK=UNKNOWN&x-amz-CLOUDTYPEIN=PERSON&X-Amz-SignedHeaders=host&x-amz-SHID=12398118516684&X-Amz-Expires=9900&x-amz-FSIZE=2594959376&x-amz-UFID=725481218910790872&X-Amz-Signature=8388e1da4c1d150c441891501f0c1613149196f83237d53a95fae81fe07a879b"
+                },
+                {
+                    "label": "NX 10",
+                    "url": "https://media-bjcy-fy-person01.bjoss.ctyunxs.cn/PERSONCLOUD/da1cfc8c-94bc-49cc-92ea-4dfb85d4f831.rar?x-amz-CLIENTTYPEIN=UNKNOWN&AWSAccessKeyId=0Lg7dAq3ZfHvePP8DKEU&x-amz-userLevel=0&x-amz-limitrate=51200&x-amz-UID=300000743995188&x-amz-APPID=828221&response-content-disposition=attachment%3Bfilename%3D%22UG10.rar%22%3Bfilename*%3DUTF-8%27%27UG10.rar&x-amz-CLIENTNETWORK=UNKNOWN&x-amz-CLOUDTYPEIN=PERSON&Signature=E/wDTVxi48XoKJ6dlvaZGAJMuPQ%3D&x-amz-SHID=12458118630234&Expires=1781171037&x-amz-FSIZE=2924682836&x-amz-UFID=224811220776914532"
+                },
+                                {
+                    "label": "NX 12.0.29",
+                    "url": "https://qd-sxtyfy-tj-person01.tjtele.com/PERSONCLOUD/4ebe932e-6d21-439c-92be-04cf5dfd47ab.rar?x-obs-traffic-limit=409600&X-Amz-Date=20260611T063548Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&x-amz-CLIENTTYPEIN=UNKNOWN&x-amz-userLevel=0&X-Amz-Credential=mhmf5j3wi8misfz5n7n1/20260611/us-east-1/s3/aws4_request&x-amz-UID=300000743995188&x-amz-APPID=828221&response-content-disposition=attachment%3Bfilename%3DUG12.0.2.9.rar&x-amz-CLIENTNETWORK=UNKNOWN&x-amz-CLOUDTYPEIN=PERSON&X-Amz-SignedHeaders=host&x-amz-SHID=12404118619212&X-Amz-Expires=23160&x-amz-FSIZE=6061019245&x-amz-UFID=424651220779080067&X-Amz-Signature=b1da70e6396df10d3de5533004299acf50d67d41ba47c369f7ca7fdce3622865"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "label": 1,
+            "name": "Postman",
+            "desc": "主流 API 调试与测试协作工具",
+            "content": "<p><strong>Postman</strong> 是 API 开发协作平台。</p><ul><li>可视化发送 HTTP 请求</li><li>支持环境变量与集合管理</li><li>自动化测试脚本</li><li>团队协作与文档生成</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/be9c083cde5a6bfbf55d3bc7d4029628.png",
+            "versions": [
+                {
+                    "label": "最新",
+                    "url": "https://dl.pstmn.io/download/latest/win64"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "label": 1,
+            "name": "Git",
+            "desc": "分布式版本控制系统，开发者必备",
+            "content": "<p><strong>Git</strong> 是最流行的分布式版本控制系统。</p><ul><li>分支管理轻量高效</li><li>支持离线工作</li><li>强大的合并与冲突解决</li><li>与 GitHub / GitLab 深度集成</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/OIP-C (3).webp",
+            "versions": [
+
+                {
+                    "label": "v2.54.0",
+                    "url": "https://release-assets.githubusercontent.com/github-production-release-asset/23216272/97d75124-837c-4f83-834d-525694b2ed02?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-06-11T07%3A19%3A33Z&rscd=attachment%3B+filename%3DGit-2.54.0-64-bit.exe&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-06-11T06%3A18%3A45Z&ske=2026-06-11T07%3A19%3A33Z&sks=b&skv=2018-11-09&sig=LxOdb366FuBwl0VBp9Tzeu%2FH4hGaHGvrFzL5zXmuQWM%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4MTE2MjA3NCwibmJmIjoxNzgxMTYwMjc0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.WQacpWl9FURpwHPu5D0cvR6uVwZL4HGU3cUUzq9vXl8&response-content-disposition=attachment%3B%20filename%3DGit-2.54.0-64-bit.exe&response-content-type=application%2Foctet-stream"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "label": 1,
+            "name": "NVM",
+            "desc": "跨平台 Node.js 版本管理工具，轻松解决多项目环境冲突",
+            "content": "<p>NVM（Node Version Manager）是一款专为 Node.js 开发者设计的跨平台版本管理工具。它允许开发者在同一台机器上安装、管理和无缝切换多个 Node.js 版本，彻底解决因不同项目依赖不同运行环境而引发的兼容性冲突问题。</p><p><strong>核心功能亮点：</strong></p><ul><li><strong>多版本共存与秒级切换</strong>：支持一键安装、卸载及切换 Node.js 版本。通过动态修改系统环境变量或符号链接机制，实现毫秒级环境切换，互不干扰。</li><li><strong>项目级版本锁定</strong>：支持通过 <code>.nvmrc</code> 文件声明项目所需的特定 Node 版本，配合 <code>nvm use</code> 自动识别，确保团队开发与部署环境的绝对一致性。</li><li><strong>默认版本与别名管理</strong>：支持设置全局默认启动版本，避免每次重启终端后环境重置；同时支持安装最新的 LTS 或 Current 版本。</li><li><strong>跨平台与镜像加速</strong>：提供 Windows 安装包及 macOS/Linux 脚本安装方式；内置镜像源配置功能，国内用户可一键切换至淘宝镜像，大幅提升下载速度。</li></ul><p>作为现代前端与全栈开发的基础设施，NVM 极大地提升了开发效率，是保障软件供应链稳定性的必备工具。</p>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/OIP-C (4).webp",
+            "versions": [
+                {
+                    "label": "v1.2.2",
+                    "url": "https://gh-proxy.org/https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.zip"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "label": 2,
+            "name": "Canvas Confetti",
+            "desc": "轻量级 JavaScript 库，用于在网页上创建逼真的庆典彩带动效",
+            "content": "<p>Canvas Confetti 是一款轻量级、零依赖的 JavaScript 库，专为在网页 HTML5 Canvas 上绘制逼真的彩带、烟花及粒子动画效果而设计。它广泛适用于庆祝用户成就、节日特效或增强网页互动性，提供高度可定制的 API 以满足各种创意需求。</p><p><strong>核心功能亮点：</strong></p><ul><li><strong>逼真的物理引擎</strong>：内置模拟重力、摩擦力、速度与扩散角度的物理系统，可创造出从柔和飘落的雪花到剧烈爆发的烟花等多种真实感动画。</li><li><strong>丰富的预设效果</strong>：集成了多种开箱即用的动效模式，包括基础彩带、随机方向喷射、逼真外观、烟花、星星、下雪以及学校荣誉旗帜等。</li><li><strong>高度自定义形状</strong>：支持通过 SVG 路径或 Unicode 字符创建自定义粒子形状，允许开发者制作节日主题或品牌专属的彩带。</li><li><strong>灵活的渲染控制</strong>：支持指定自定义 Canvas 元素进行渲染，可限制彩带出现的区域，并提供全局配置重置与多实例管理功能。</li></ul><p>该库完全免费且无外部依赖，兼容现代浏览器，是前端开发者为网站增添趣味性与仪式感的首选工具。</p>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/v2-5c4f4a95fcb77910aa8d5b0ecde95a27_1440w.webp",
+            "url": "https://www.kirilv.com/canvas-confetti/"
+        },
+        {
+            "id": 8,
+            "label": 2,
+            "name": "路过图床",
+            "desc": "老牌免费图片上传与外链托管平台，支持全球CDN加速",
+            "content": "<p>路过图床是一家成立于2011年的老牌免费公共图床。它专注于提供高速、稳定的图片上传与外链分享服务，承诺不压缩图片质量，确保每一张上传的照片都能以最佳状态呈现，是众多博主、站长及开发者的理想选择。</p><p><strong>核心功能亮点：</strong></p><ul><li><strong>免费与无限存储</strong>：完全免费且不限空间、不限流量，支持免注册直接上传，并承诺除违规内容外永久保留图片。</li><li><strong>全球CDN加速</strong>：依托美国、德国、新加坡、日本等多地数据中心及 Cloudflare 等网络服务商，提供全球CDN加速，保障图片在全球范围内的高速访问。</li><li><strong>灵活的上传限制</strong>：游客无需登录即可上传最大 5MB 的图片；注册用户单张图片最大支持 10MB，并支持批量上传。</li><li><strong>丰富的开发者支持</strong>：提供 Markdown、HTML 等多种格式的代码一键复制功能，并为开发者提供 API 接口，方便将服务集成到个人应用或网站中。</li></ul><p>凭借多年的稳定运行与全面的功能支持，路过图床在个人博客配图、社交媒体分享及项目协作等场景中发挥着重要作用。</p>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/logo_homepage_1759901929061_feb341.png",
+            "url": "https://imgse.com/"
+        },
+        {
+            "id": 9,
+            "label": 2,
+            "name": "GitHub",
+            "desc": "全球最大的代码托管与协作平台",
+            "content": "<p><strong>GitHub</strong> 是全球最大的代码托管平台。</p><ul><li>Git 仓库托管</li><li>Pull Request 代码审查</li><li>GitHub Actions CI/CD</li><li>开源社区与项目发现</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X2pwZy9VaWMwUzFyNW82T3QzMTF5bmtobWJhSWhxYVdWNGM3b2ljbVh0aWNpY0c0T3E5aWNTQWZta3JBZGo2UEg4TzI3d0dMb2lhUnJJSDBLOExFV1NiVXo3TUxDZmN4dy82NDA.png",
+            "url": "https://github.com"
+        },
+        {
+            "id": 10,
+            "label": 2,
+            "name": "Stack Overflow",
+            "desc": "全球最大的程序员问答社区",
+            "content": "<p><strong>Stack Overflow</strong> 是程序员必上的问答社区。</p><ul><li>海量技术问答</li><li>高质量回答与投票机制</li><li>覆盖几乎所有编程语言和框架</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/OIP-C (5).webp",
+            "url": "https://stackoverflow.com"
+        },
+        {
+            "id": 11,
+            "label": 2,
+            "name": "MDN",
+            "desc": "Mozilla 官方 Web 技术文档",
+            "content": "<p><strong>MDN Web Docs</strong> 是 Mozilla 维护的 Web 技术文档。</p><ul><li>权威的 HTML/CSS/JS 文档</li><li>详细的 API 参考</li><li>实用的教程与指南</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/OIP-C (6).webp",
+            "url": "https://developer.mozilla.org"
+        },
+        {
+            "id": 12,
+            "label": 2,
+            "name": "JSON工具",
+            "desc": "免费在线图片去背景工具，一键智能去除背景并生成透明底图",
+            "content": "<p>这是一款免费在线图片处理工具，专为快速去除图片背景而设计。用户无需安装专业的制图软件，即可在几秒钟内清除图像背景，使其变为透明，非常适合处理图标、Logo 或需要抠图的素材。</p><p><strong>核心功能与特点：</strong></p><ul><li><strong>智能去除背景</strong>：通过上传图片并点击需要透明化的颜色区域，工具能自动识别并删除背景，实现一键抠图。</li><li><strong>即时预览与下载</strong>：处理过程在浏览器端完成，支持即时预览效果，并可一键下载处理后的图片。</li><li><strong>简单易用</strong>：操作流程仅需两步（上传 → 点击删除背景 → 下载），界面简洁，无需复杂的图像处理知识。</li><li><strong>参数调节</strong>：提供色差设置选项，允许用户调整容差范围，以适应不同复杂程度的背景去除需求。</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/logo.png",
+            "url": "https://www.jsongj.com/img/transparent"
+        },
+        {
+            "id": 13,
+            "label": 2,
+            "name": "bootstrap模板库",
+            "desc": "基于HTML5 Canvas的在线粒子动画特效网页背景生成器",
+            "content": "<p>这是一款在线粒子动画特效网页背景生成器，利用 HTML5 + Canvas 技术实现，能够帮助用户轻松创建炫酷的动态网页背景，如粒子特效、下雪动画、下雨动画及星空效果等，适用于科幻风格或需要高互动性的网页设计。</p><p><strong>核心功能亮点：</strong></p><ul><li><strong>多样化的动效类型</strong>：内置丰富的预设效果，包括粒子、下雨、下雪、气泡、气流、直线条、曲线、旋转线条、三角形、彩色流体及星空等。</li><li><strong>可视化编辑与实时预览</strong>：提供直观的参数调节面板，支持实时调整粒子数量、大小、颜色、速度、加速度以及线条连接方式，所见即所得。</li><li><strong>代码一键生成</strong>：配置完成后可直接生成标准的 HTML/JS 引用代码，方便开发者快速集成到现有项目或网站中。</li><li><strong>全屏与透明背景支持</strong>：支持切换到全屏模式以获得沉浸式体验，并允许设置透明背景色，完美融合于各类网页布局。</li></ul><p>该工具非常适合用于个人作品集、创意着陆页或需要增强视觉吸引力的企业网站背景制作。</p>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/Snipaste_2026-06-10_17-49-05.jpg",
+            "url": "https://www.bootstrapmb.com/h5bg"
+        },
+        {
+            "id": 14,
+            "label": 3,
+            "name": "二支待办",
+            "desc": "轻量级待办清单与备忘录，助你高效管理日常事务",
+            "content": "<p>这是一款轻量级的待办任务管理软件，深度融合了待办清单与备忘录功能。核心支持任务的快速录入与精准的定时提醒，完美适配日常办公及学习场景，帮助用户实现高效的个人事务管理。</p><p><strong>功能亮点：</strong></p><ul><li><strong>轻量高效</strong>：软件体积小，运行流畅，专注于核心任务管理，无冗余功能干扰。</li><li><strong>清单与备忘录融合</strong>：既能创建结构化的待办列表，又能作为随笔备忘录记录灵感与细节。</li><li><strong>智能提醒</strong>：支持为任务设置具体时间点的定时提醒，确保重要事项不被遗漏。</li><li><strong>场景适配</strong>：无论是工作项目拆解、学习计划制定，还是生活琐事记录，都能轻松胜任。</li></ul><p>安装包下载地址：<a href=\"https://github.com/CKKLIN/Erzhi-todo/releases\" target=\"_blank\">GitHub Releases</a></p>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/Snipaste_2026-06-10_18-08-37.jpg",
+            "versions": [
+                {
+                    "label": "v1.0",
+                    "url": "https://release-assets.githubusercontent.com/github-production-release-asset/1235163337/06f57822-3e66-4683-9685-d7629764f2f7?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-06-11T07%3A47%3A03Z&rscd=attachment%3B+filename%3DSetup.1.0.0.exe&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-06-11T06%3A46%3A27Z&ske=2026-06-11T07%3A47%3A03Z&sks=b&skv=2018-11-09&sig=36jFWl0KmM5IF3eVnJ%2FBbFDWNCCjhBXIa9%2FXtktZnqw%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4MTE2MjM0OCwibmJmIjoxNzgxMTYwNTQ4LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.PzEjLtqg6TJD48n2XdRdH1sK8kE8d5UmFgv7rgQpDQs&response-content-disposition=attachment%3B%20filename%3DSetup.1.0.0.exe&response-content-type=application%2Foctet-stream"
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "label": 3,
+            "name": "二支录屏",
+            "desc": "轻量级录屏与贴图工具，支持高清录制与实时标注",
+            "content": "<p>这是一款功能强大且轻量级的桌面屏幕录制与贴图工具，专为高效视觉创作与演示需求设计。软件深度融合了高清录屏、实时绘图与画面标注功能，完美适配教学演示、游戏录制及日常办公场景。</p><p><strong>核心功能亮点：</strong></p><ul><li><strong>高清屏幕录制</strong>：支持全屏、自定义区域及多显示器录制，提供灵活的码率与帧率调节，结合 Windows 平台硬件加速 H.264 编码，确保视频流畅清晰。</li><li><strong>实时绘图与标注</strong>：内置强大的画笔、箭头、矩形高亮等实时绘图工具，配合可自由拖拽的画中画摄像头预览，轻松制作专业级教学视频。</li><li><strong>灵活音频采集</strong>：支持独立的麦克风与系统音频混合采集，满足多样化的配音与背景音需求。</li><li><strong>智能后期与导出</strong>：提供极简的悬浮控制栏与全局快捷键操作，录制视频可直接导出为 MP4 或 GIF 格式，支持现代化毛玻璃界面与系统托盘集成。</li></ul><p>技术栈：Vue2 + Electron + TS + Canvas + FFmpeg<br>安装包下载地址：<a href=\"https://github.com/CKKLIN/screen-capture---texture-tool/releases\" target=\"_blank\">GitHub Releases</a></p>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/logo.ico",
+            "versions": [
+                {
+                    "label": "v1.0.0",
+                    "url": "https://release-assets.githubusercontent.com/github-production-release-asset/1235143596/d6fd33bc-dca0-420d-a0a1-2e957aa06b63?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-06-11T07%3A35%3A12Z&rscd=attachment%3B+filename%3DSetup.1.0.0.exe&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-06-11T06%3A35%3A05Z&ske=2026-06-11T07%3A35%3A12Z&sks=b&skv=2018-11-09&sig=6Lbe9d1Vpqpw9yDQuVPKlm9L5gRByAdaQi8usGEbfoQ%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4MTE2NDA2NCwibmJmIjoxNzgxMTYwNDY0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.33vUlyOmwS7CzXR_iJF1quKYSO_V3qpPwZ9y2wwDWgo&response-content-disposition=attachment%3B%20filename%3DSetup.1.0.0.exe&response-content-type=application%2Foctet-stream"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "label": 3,
+            "name": "Figma",
+            "desc": "在线协作 UI/UX 设计工具",
+            "content": "<p><strong>Figma</strong> 是基于浏览器的协作设计工具。</p><ul><li>实时多人协作编辑</li><li>强大的组件与样式系统</li><li>原型交互与设计交付</li><li>插件生态丰富</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/figmazuoshenme1.png",
+            "versions": [
+                {
+                    "label": "最新",
+                    "url": "https://desktop.figma.com/win/FigmaSetup.exe"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "label": 3,
+            "name": "Snipaste",
+            "desc": "简单强大的截图与贴图工具",
+            "content": "<p><strong>Snipaste</strong> 是轻量级截图贴图工具。</p><ul><li>一键截图，自动识别窗口</li><li>截图直接贴在屏幕上</li><li>支持标注、马赛克、取色</li><li>免安装，绿色便携</li></ul>",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ruanjain/e205e2abdf13f66c7b17eaa9e32ac27f.jpg",
+            "versions": [
+                {
+                    "label": "最新",
+                    "url": "https://download.snipaste.com/archives/Snipaste-2.11.3-x64.zip"
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "label": 4,
+            "name": "手绘风照片注解提示词",
+            "desc": "为照片中的元素添加日系可爱手绘风注解，包含线条、文字、装饰等详细规则",
+            "content": " <div style=\"padding:16px; background:#f9f9f9; border-radius:8px; font-family:sans-serif;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai18.png\" alt=\"手绘风示例图\" style=\"width:100%;border-radius:8px;margin-bottom:12px;\" /><p style=\"font-size:14px; color:#333; line-height:1.6;\">请观察照片中的元素，并为每个物件加上有意义的手绘风注解。</p><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">请观察照片中的元素、 并为每个物件加上有意义的 手绘风注解。 请填写照片中的物品 （例： 披萨、汽水 [描写规则】 • 使用像白色笔画的细线手绘线条 • 一笔画风格、 随性、略带不均匀感 • 沿着物件外围加上描边轮廓 •用箭头或虛线做出视线引导 [文字规则】 • 手写风格字体 （日系可爱感） • 句子简短、 像自言自语的小碎念 • 语气偏日记感、带一点情绪 [注解生成规则】 • 饮料 一> 味道、温度、心情 （例： 清爽、微甜、 刚刚好） •食物 一> 口感、好吃程度 （例： 松软、超好吃） • 空间 一> 氛围 （例： 很放松、喜欢这种感觉） • 整体 一> 一句总结 （例： 今天有点幸福~） [装饰） • 适度加入热气、闪光、爱心、星星、 小表情等元 素。不要过度装饰，保留空白空间</div></div>",
+            "copyText": "请观察照片中的元素、并为每个物件加上有意义的手绘风注解。请填写照片中的物品（例：披萨、汽水）\n[描写规则]\n• 使用像白色笔画的细线手绘线条\n• 一笔画风格、随性、略带不均匀感\n• 沿着物件外围加上描边轮廓\n• 用箭头或虚线做出视线引导\n[文字规则]\n• 手写风格字体（日系可爱感）\n• 句子简短、像自言自语的小碎念\n• 语气偏日记感、带一点情绪\n[注解生成规则]\n• 饮料 → 味道、温度、心情（例：清爽、微甜、刚刚好）\n• 食物 → 口感、好吃程度（例：松软、超好吃）\n• 空间 → 氛围（例：很放松、喜欢这种感觉）\n• 整体 → 一句总结（例：今天有点幸福~）\n[装饰]\n• 适度加入热气、闪光、爱心、星星、小表情等元素。不要过度装饰，保留空白空间",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai18.png"
+        },
+        {
+            "id": 20,
+            "label": 4,
+            "name": "可爱混乱儿童蜡笔涂鸦风",
+            "desc": "彩铅蜡笔手账贴纸结合，Q版萌系二次元，Kawaii少女感",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai6.png\" alt=\"可爱混乱儿童蜡笔涂鸦风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai5.png\" alt=\"可爱混乱儿童蜡笔涂鸦风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai31.png\" alt=\"可爱混乱儿童蜡笔涂鸦风3\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">把上传照片转化成一种可爱混乱的儿童蜡笔涂鸦插画风格。整体像是彩铅+蜡笔+手账贴纸+MS Paint 涂鸦的结合。使用：粗糙线条、抖动边缘、不均匀上色、纸张纹理、彩铅叠色、蜡笔颗粒感、故意幼稚但很有灵气的画风。人物变成Q版萌系二次元风格，大眼睛，夸张表情，可爱活泼。背景加入大量doodle：爱心、星星、糖果、笑脸云朵、小花、贴纸、游戏UI元素、乱涂乱画符号。颜色以：粉色、蓝色、紫色、黄色、薄荷色为主。整体氛围：可爱、混乱、梦幻、少女感、游戏宅手账风、互联网 kawai, Kawaii aesthetic不要精致，不要高级商业插画感，不要真实渲染，不要干净线稿，保留“手绘失败感”和“乱涂鸦感”。</div></div>",
+            "copyText": "把上传照片转化成一种可爱混乱的儿童蜡笔涂鸦插画风格。整体像是彩铅+蜡笔+手账贴纸+MS Paint 涂鸦的结合。使用：粗糙线条、抖动边缘、不均匀上色、纸张纹理、彩铅叠色、蜡笔颗粒感、故意幼稚但很有灵气的画风。人物变成Q版萌系二次元风格，大眼睛，夸张表情，可爱活泼。背景加入大量doodle：爱心、星星、糖果、笑脸云朵、小花、贴纸、游戏UI元素、乱涂乱画符号。颜色以：粉色、蓝色、紫色、黄色、薄荷色为主。整体氛围：可爱、混乱、梦幻、少女感、游戏宅手账风、互联网 kawai, Kawaii aesthetic不要精致，不要高级商业插画感，不要真实渲染，不要干净线稿，保留“手绘失败感”和“乱涂鸦感”。",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai6.png"
+        },
+        {
+            "id": 21,
+            "label": 4,
+            "name": "新海诚风格城市风景提示词",
+            "desc": "生成日系动画质感、通透梦幻、丁达尔效应明显的城市风景图",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai3.png\" alt=\"新海诚风格城市风景提示词1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai22.png\" alt=\"新海诚风格城市风景提示词2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">新海诚风格城市风景，日系动画天空，蓝天白云动画质感，清晨柔和阳光，空气极度通透，远景蓝色空气透视，高饱和但自然的色彩，绿色植被鲜艳，城市建筑清晰干净，动画电影级光影，梦幻通透氛围，高质量动画背景，电影级构图，8K，超细腻细节，丁达尔效应，干净通透的空气感</div></div>",
+            "copyText": "新海诚风格城市风景,日系动画天空,蓝天白云动画质感,清晨柔和阳光,空气极度通透,远景蓝色空气透视,高饱和但自然的色彩,绿色植被鲜艳,城市建筑清晰干净,动画电影级光影,梦幻通透氛围,高质量动画背景,电影级构图,8K,超细腻细节,丁达尔效应,干净通透的空气感",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai22.png"
+        },
+        {
+            "id": 22,
+            "label": 4,
+            "name": "伦勃朗光影人像",
+            "desc": "暗调强对比，动态模糊速度感，纯黑背景电影级质感",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai8.gif\" alt=\"伦勃朗光影国旗护卫1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai14.png\" alt=\"伦勃朗光影国旗护卫2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">采用伦勃朗光影布光，仅一束强光打亮半张脸，面部其余区域处于深邃阴影中；整体暗调风格，光影对比强烈；人物身后添加横向动态模糊拖影，营造疾速行进的速度感；纯黑色背景，电影级质感，8K分辨率，细节丰富：左下角排版白色简约字体文字：NATIONAL FLAG GUARD FOR OUR GLORY; 比例3:2，写实原生摄影</div></div>",
+            "copyText": "采用伦勃朗光影布光，仅一束强光打亮半张脸，面部其余区域处于深邃阴影中；整体暗调风格，光影对比强烈；人物身后添加横向动态模糊拖影，营造疾速行进的速度感；纯黑色背景，电影级质感，8K分辨率，细节丰富：左下角排版白色简约字体文字：NATIONAL FLAG GUARD FOR OUR GLORY; 比例3:2，写实原生摄影",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai8.gif"
+        },
+        {
+            "id": 23,
+            "label": 4,
+            "name": "蓝调时刻静谧治愈氛围",
+            "desc": "冷暖对比柔和，双光源融合，高级游戏质感",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai25.png\" alt=\"蓝调时刻静谧治愈氛围1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai27.png\" alt=\"蓝调时刻静谧治愈氛围2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">在保持原始构图与主体不变的前提下，营造蓝调时刻的光影氛围。天空呈现从上到下的渐变层次，顶部为深邃的钴蓝色，向下自然过渡为粉紫色晚霞余晖，暗部保持低饱和冷蓝色调，灯光以暖黄色、白色为主。整体色彩冷暖对比柔和，饱和度适中，无刺眼的高光与死黑的暗部。保留蓝调时刻的双光源效果，自然光与城市灯光融合，建筑轮廓清晰，云层保留纹理，增强天空层次；暗部细节丰富，亮部不过曝，整体光比适中，通透干净。整体质感高级，无明显噪点，画面干净通透，还原蓝调时刻独有的静谧治愈氛围。</div></div>",
+            "copyText": "在保持原始构图与主体不变的前提下，营造蓝调时刻的光影氛围。天空呈现从上到下的渐变层次，顶部为深邃的钴蓝色，向下自然过渡为粉紫色晚霞余晖，暗部保持低饱和冷蓝色调，灯光以暖黄色、白色为主。整体色彩冷暖对比柔和，饱和度适中，无刺眼的高光与死黑的暗部。保留蓝调时刻的双光源效果，自然光与城市灯光融合，建筑轮廓清晰，云层保留纹理，增强天空层次；暗部细节丰富，亮部不过曝，整体光比适中，通透干净。整体质感高级，无明显噪点，画面干净通透，还原蓝调时刻独有的静谧治愈氛围。",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai27.png"
+        },
+        {
+            "id": 24,
+            "label": 4,
+            "name": "伦勃朗光影建筑美学",
+            "desc": "暗调强对比，动态模糊速度感，纯黑背景电影级质感",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai10.png\" alt=\"伦勃朗光影建筑美学1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai16.png\" alt=\"伦勃朗光影建筑美学2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">采用伦勃朗光影布光，仅一束强光打亮建筑主体一侧，其余区域处于深邃阴影中；整体暗调风格，光影对比强烈：建筑主体后添加横向动态模糊拖影，营造疾速行进的速度感：去除图中所有人群和前景杂乱物体仅保留重要建筑主体，纯黑色背景，电影级质感，8K分辨率。细节丰富：原画幅比例不变，写实原生摄影#豆包#建筑美学视觉冲击</div></div>",
+            "copyText": "采用伦勃朗光影布光，仅一束强光打亮建筑主体一侧，其余区域处于深邃阴影中；整体暗调风格，光影对比强烈：建筑主体后添加横向动态模糊拖影，营造疾速行进的速度感：去除图中所有人群和前景杂乱物体仅保留重要建筑主体，纯黑色背景，电影级质感，8K分辨率。细节丰富：原画幅比例不变，写实原生摄影#豆包#建筑美学视觉冲击",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai16.png"
+        },
+        {
+            "id": 25,
+            "label": 4,
+            "name": "人像画质增强提示词",
+            "desc": "在严格保留人物身份、表情和背景的前提下，增强人像细节并模拟专业相机拍摄效果",
+            "content": "  <div style=\"padding:16px; background:#f5f7fa; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai11.png\" alt=\"HDR景观示例 1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai41.png\" alt=\"HDR景观示例 2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai24.png\" alt=\"我的世界像素穿搭风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai37.png\" alt=\"我的世界像素穿搭风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai4.png\" alt=\"我的世界像素穿搭风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai40.png\" alt=\"我的世界像素穿搭风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">通过精确的面部几何结构，在严格保留受试者身份的同时，增强人像。请勿更改其表情或面部形状。仅允许细微特征清理，而不改变它们的身份。保持与参考图像完全相同的背景。 无替换、无更改、无新对象、无布局偏移。环境的外观必须相同。必须使用85mm f1.4镜头，在f1.6.iso100，11/200快门速度下，重新创建图像，就像在索尼a1上拍摄一样。</div></div>",
+            "copyText": "通过精确的面部几何结构，在严格保留受试者身份的同时，增强人像。请勿更改其表情或面部形状。仅允许细微特征清理，而不改变它们的身份。保持与参考图像完全相同的背景。无替换、无更改、无新对象、无布局偏移。环境的外观必须相同。必须使用85mm f1.4镜头，在f1.6、ISO100、1/200快门速度下，重新创建图像，就像在索尼A1上拍摄一样。",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai40.png"
+        },
+        {
+            "id": 26,
+            "label": 4,
+            "name": "超写实电影级光影重构",
+            "desc": "体积光穿透云层，雨雾空气透视，电影开场叙事张力",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai30.png\" alt=\"手绘风示例图\" style=\"width:100%;border-radius:8px;margin-bottom:12px;\" /><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">超写实电影级风格，在保持原始构图与主体位置不变的前提下进行画面重构。场景由普通现实状态被瞬间唤醒，整体光影与色彩显著增强。天空层次被大幅拉开，云层翻涌，形成明显的光影对比。主光源从画面侧后方切入，强烈体积光穿透云层，照亮主体与环境。环境中加入细微雨雾、粒子与空气透视，增强空间纵深感。色彩整体提亮并增加饱和度，但保持自然真实不过度夸张。前景轻微动态模糊，中远景清晰，形成强烈空间层次。画面具有电影开场镜头般的震撼感与叙事张力。维持原比例，保证画面结构与主体不发生畸变。</div></div>",
+            "copyText": "超写实电影级风格，在保持原始构图与主体位置不变的前提下进行画面重构。场景由普通现实状态被瞬间唤醒，整体光影与色彩显著增强。天空层次被大幅拉开，云层翻涌，形成明显的光影对比。主光源从画面侧后方切入，强烈体积光穿透云层，照亮主体与环境。环境中加入细微雨雾、粒子与空气透视，增强空间纵深感。色彩整体提亮并增加饱和度，但保持自然真实不过度夸张。前景轻微动态模糊，中远景清晰，形成强烈空间层次。画面具有电影开场镜头般的震撼感与叙事张力。维持原比例，保证画面结构与主体不发生畸变。",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai30.png"
+        },
+        {
+            "id": 27,
+            "label": 4,
+            "name": "3A游戏CG渲染风格景观",
+            "desc": "虚幻引擎5级画面质感，电影级光影表现，细节极度丰富真实",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai38.png\" alt=\"3A游戏CG渲染风格景观1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai36.png\" alt=\"3A游戏CG渲染风格景观2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">3A游戏CG渲染风格景观，虚幻引擎5级画面质感，电影级光影表现，细节极度丰富真实，整体画面明亮通透，曝光充足偏高，色彩干净通透。高饱和自然，天空清澈通透，蓝天纯净，云层柔软立体，具有明显层次感。清晰方向光，形成明显光影对比与长阴影、体积光清晰可见。增强空间纵深感，地面具有适度反光与高光点，增强画面质感但不过度湿润，远景空气透视明显，层次分明，整体画面干净清爽，高动态范围成像(HDR)、高光通透不死白，暗部干净不发灰、整体视觉具有轻微发光感，画面清晰锐利。</div></div>",
+            "copyText": "3A游戏CG渲染风格景观，虚幻引擎5级画面质感，电影级光影表现，细节极度丰富真实，整体画面明亮通透，曝光充足偏高，色彩干净通透。高饱和自然，天空清澈通透，蓝天纯净，云层柔软立体，具有明显层次感。清晰方向光，形成明显光影对比与长阴影、体积光清晰可见.增强空间纵深感，地面具有适度反光与高光点，增强画面质感但不过度湿润，远景空气透视明显，层次分明，整体画面干净清爽，高动态范围成像(HDR)、高光通透不死白，暗部干净不发灰、整体视觉具有轻微发光感，画面清晰锐利。",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai36.png"
+        },
+        {
+            "id": 28,
+            "label": 4,
+            "name": "HDR电影级景观提示词",
+            "desc": "生成明亮通透、细节丰富、光影层次分明的HDR风格景观图",
+            "content": "  <div style=\"padding:16px; background:#f5f7fa; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai2.png\" alt=\"HDR景观示例 1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai39.png\" alt=\"HDR景观示例 2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">HDR风格景观，电影级光影表现、细节极度丰富真实，整体画面明亮通透，曝光充足偏高，色彩干净通透，高饱和自然，天空清澈通透，蓝天纯净，云层柔软立体，具有明显层次感。清晰方向光，形成明显光影对比与长阴影。体积光清晰可见，增强空间纵深感，地面具有适度反光与高光点，增强画面质感但不过度湿润，远景空气透视明显，层次分明，整体画面干净清爽，高动态范围成像(HDR)，高光通透不死白，暗部干净不发灰，整体视觉具有轻微发光感，画面清晰锐利，真实且具有质感。原比例。</div></div>",
+            "copyText": "HDR风格景观，电影级光影表现、细节极度丰富真实，整体画面明亮通透，曝光充足偏高，色彩干净通透，高饱和自然，天空清澈通透，蓝天纯净，云层柔软立体，具有明显层次感。清晰方向光，形成明显光影对比与长阴影。体积光清晰可见，增强空间纵深感，地面具有适度反光与高光点，增强画面质感但不过度湿润，远景空气透视明显，层次分明，整体画面干净清爽，高动态范围成像(HDR)，高光通透不死白，暗部干净不发灰，整体视觉具有轻微发光感，画面清晰锐利，真实且具有质感。原比例。#豆包口图 #抖音ai创作 #AI创作美",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai39.png"
+        },
+        {
+            "id": 29,
+            "label": 4,
+            "name": "我的世界像素穿搭风",
+            "desc": "人物方块细化，背景方块粗略化，保留穿搭细节",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai28.png\" alt=\"我的世界像素穿搭风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai23.png\" alt=\"我的世界像素穿搭风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">把我这个穿搭照变成我的世界的风格不能丟掉人物细节 人物方块细化 背景方块粗略化</div></div>",
+            "copyText": "把我这个穿搭照变成我的世界的风格不能丟掉人物细节 人物方块细化 背景方块粗略化",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai28.png"
+        },
+        {
+            "id": 30,
+            "label": 4,
+            "name": "四种主流AI风格提示词全攻略",
+            "desc": "四种主流AI风格提示词全攻略",
+            "content": "<div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai13.png\" alt=\"我的世界像素穿搭风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai15.png\" alt=\"我的世界像素穿搭风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai19.png\" alt=\"我的世界像素穿搭风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai33.png\" alt=\"我的世界像素穿搭风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div>",
+            "copyText": "",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai33.png"
+        },
+        {
+            "id": 30,
+            "label": 4,
+            "name": "色彩风格和画面质感AI提示词",
+            "desc": "色彩风格和画面质感AI提示词",
+            "content": "<div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai12.png\" alt=\"我的世界像素穿搭风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai17.png\" alt=\"我的世界像素穿搭风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai20.png\" alt=\"我的世界像素穿搭风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai34.png\" alt=\"我的世界像素穿搭风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai35.png\" alt=\"我的世界像素穿搭风1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai9.png\" alt=\"我的世界像素穿搭风2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div>",
+            "copyText": "",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai9.png"
+        },
+        {
+            "id": 25,
+            "label": 4,
+            "name": "科幻史诗巨墙剧照",
+            "desc": "真人实拍感，低饱和高原，巨墙与行星尺度对比，9:16竖构图",
+            "content": "<div style=\"padding:16px; background:#f0f7ff; border-radius:10px; font-family:'PingFang SC', sans-serif;\"><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai1.png\" alt=\"科幻史诗巨墙剧照1\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai21.png\" alt=\"科幻史诗巨墙剧照2\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"display: flex; justify-content: space-between; gap: 16px; width: 100%; margin: 16px 0;\"><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai29.png\" alt=\"科幻史诗巨墙剧照3\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /><img src=\"https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai7.png\" alt=\"科幻史诗巨墙剧照4\" style=\"width: 48%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-shrink: 0;\" /></div><div style=\"background:#fff; border:1px dashed #ccc; border-radius:6px; padding:12px;margin-top:12px;font-size:13px; color:#555; word-break:break-all;\">一张真人实拍感的科幻史诗电影剧照，竖构图。辽阔低饱和的绿色高原上，一名极小的人影独自站在画面下方偏右，面向前方一面巨大到不可理解的弧形人造墙体。那面巨墙像远古轨道文明遗留下来的地表外壳，灰白金属表面布满纵向机械分层、旧装甲板、维修缝和深色结构裂隙，体量像垂直山脉一样从地表升起，顶部被画框裁切，不展示完整轮廓。画面上方的天空不是普通天空，而是一颗巨大行星的弧面缓缓压入画面，淡蓝灰色的行星边缘在高空中隐约可见，像真实天体而不是夸张特效。巨墙、草原和天空中的行星共同构成强烈的尺度关系，让人感觉这个地方处在某个遥远殖民世界。人物只是一个小黑色剪影，不需要表情，不要英雄摆拍，只作为尺度锚点。摄影机位于远处草坡，以略低机位和长焦压缩空间，让草坡、人物、巨墙和高空行星更贴近。光线是冷白色日间漫射光，巨墙受光边缘有柔和银白高光，阴影退入深蓝灰暗部。整体低饱和草绿、灰白金属、蓝灰天空，真实电影胶片质感，轻微颗粒，干净暗部，避免赛博朋克霓虹、廉价太空插画感、爆炸、飞船编队、文字、水印、Logo、UI。将宽高比设为 9:16</div></div>",
+            "copyText": "一张真人实拍感的科幻史诗电影剧照，竖构图。辽阔低饱和的绿色高原上，一名极小的人影独自站在画面下方偏右，面向前方一面巨大到不可理解的弧形人造墙体。那面巨墙像远古轨道文明遗留下来的地表外壳，灰白金属表面布满纵向机械分层、旧装甲板、维修缝和深色结构裂隙，体量像垂直山脉一样从地表升起，顶部被画框裁切，不展示完整轮廓。画面上方的天空不是普通天空，而是一颗巨大行星的弧面缓缓压入画面，淡蓝灰色的行星边缘在高空中隐约可见，像真实天体而不是夸张特效。巨墙、草原和天空中的行星共同构成强烈的尺度关系，让人感觉这个地方处在某个遥远殖民世界。人物只是一个小黑色剪影，不需要表情，不要英雄摆拍，只作为尺度锚点。摄影机位于远处草坡，以略低机位和长焦压缩空间，让草坡、人物、巨墙和高空行星更贴近。光线是冷白色日间漫射光，巨墙受光边缘有柔和银白高光，阴影退入深蓝灰暗部。整体低饱和草绿、灰白金属、蓝灰天空，真实电影胶片质感，轻微颗粒，干净暗部，避免赛博朋克霓虹、廉价太空插画感、爆炸、飞船编队、文字、水印、Logo、UI。将宽高比设为 9:16",
+            "icon": "https://sky-lkc.oss-cn-beijing.aliyuncs.com/picture/ai/ai7.png"
+        }
+    ]
+}
