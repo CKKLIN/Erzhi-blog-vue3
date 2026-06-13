@@ -8,7 +8,7 @@
                 <div class="my-right">
                     <div class="right-one">
                         <div class="model-text">形象展示</div>
-                        <model modelUrl="/model/ikun2.glb"></model>
+                        <model modelUrl="https://sky-lkc.oss-cn-beijing.aliyuncs.com/model/ikun2.glb"></model>
                     </div>
                 </div>
             </div>

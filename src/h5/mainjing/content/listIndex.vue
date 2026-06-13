@@ -2,7 +2,7 @@
     <div class="container">
         <div class="top">
             <img :src=backIcon class="back" @click="goBack()">
-            <div class="title">Vue面试常问</div>
+            <div class="title">{{ categoryTitle }}面试常问</div>
         </div>
         <div class="body" ref="bodyRef">
             <div class="search-box">
@@ -15,7 +15,7 @@
             </div>
             <div
                 class="list-item"
-                v-for="item,index in filterList"
+                v-for="item in filterList"
                 :key="item.id"
                 @click="lookContent(item.id)"
             >
@@ -25,28 +25,36 @@
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import backIcon from '@/assets/icon/back.svg'
 import { useRouter, useRoute } from 'vue-router'
-import { vueList } from '@/assets/linshi/data/h5/mainjing'
+import { vueList, uniappList } from '@/assets/linshi/data/h5/mainjing'
 import { ref, computed, onMounted, onActivated, onBeforeUnmount, nextTick } from 'vue'
 
 const router = useRouter()
 const route = useRoute()
 const keyword = ref('')
-const bodyRef = ref(null)
-const scrollKey = 'mianjingList_scrollTop'
+const bodyRef = ref<HTMLElement | null>(null)
+
+const category = computed(() => (route.query.category as string) || 'vue')
+const categoryTitle = computed(() => category.value === 'uniapp' ? 'UniApp' : 'Vue')
+const dataList = computed(() => category.value === 'uniapp' ? uniappList : vueList)
+
+const scrollKey = computed(() => `mianjingList_${category.value}_scrollTop`)
 
 const saveScroll = () => {
     if (bodyRef.value) {
-        sessionStorage.setItem(scrollKey, String(bodyRef.value.scrollTop))
+        sessionStorage.setItem(scrollKey.value, String(bodyRef.value.scrollTop))
     }
 }
 const restoreScroll = () => {
-    const saved = sessionStorage.getItem(scrollKey)
-    if (saved && bodyRef.value) {
-        nextTick(() => { bodyRef.value.scrollTop = Number(saved) })
+    const saved = sessionStorage.getItem(scrollKey.value)
+nextTick(() => {
+    // 先判断 bodyRef.value 是否有值
+    if (bodyRef.value) {
+        bodyRef.value.scrollTop = Number(saved);
     }
+});
 }
 
 onMounted(restoreScroll)
@@ -54,8 +62,8 @@ onActivated(restoreScroll)
 onBeforeUnmount(saveScroll)
 
 const filterList = computed(() => {
-    if (!keyword.value) return vueList
-    return vueList.filter(item =>
+    if (!keyword.value) return dataList.value
+    return dataList.value.filter(item =>
         item.title.toLowerCase().includes(keyword.value.toLowerCase())
     )
 })
@@ -63,9 +71,9 @@ const filterList = computed(() => {
 const goBack=()=>{
       router.push('/mianJingh5')
 }
-const lookContent=(id)=>{
+const lookContent=(id: number)=>{
     saveScroll()
-    router.push(`/mianjingContenth5/${id}`)
+    router.push({ path: `/mianjingContenth5/${id}`, query: { category: category.value } })
 }
 </script>
 <style scoped>
