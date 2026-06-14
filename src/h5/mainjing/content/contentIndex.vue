@@ -1,7 +1,7 @@
 <template>
     <div class="container" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
         <div class="top">
-            <img :src="backIcon" class="back" @click="goBack()">
+            <img src='https://sky-lkc.oss-cn-beijing.aliyuncs.com/icon/back.svg' class="back" @click="goBack()">
             <div class="title">{{ item?.id }}.&ensp;{{ item?.title }}</div>
         </div>
         <div class="body">
@@ -9,8 +9,8 @@
                 <span class="tag">{{ categoryTag }}</span>
                 <span class="time">{{ formattedTime }}</span>
                 <span class="fav-btn" @click="toggleFav">
-                    <img :src="collectedIcon" v-if="isFav">
-                    <img :src="collectIcon" v-else>
+                    <img src='https://sky-lkc.oss-cn-beijing.aliyuncs.com/icon/collected.svg' v-if="isFav">
+                    <img src='https://sky-lkc.oss-cn-beijing.aliyuncs.com/icon/collect.svg' v-else>
                 </span>
             </div>
             <div class="content" v-html="item?.content"></div>
@@ -20,9 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import collectIcon from '@/assets/icon/collect.svg'
-import collectedIcon from '@/assets/icon/collected.svg'
-import backIcon from '@/assets/icon/back.svg'
 import { useRouter, useRoute } from 'vue-router'
 import { vueList, uniappList } from '@/assets/linshi/data/h5/mainjing'
 import { fetchUsers, updateUser } from '@/api/userApi'

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="top">
-            <img :src=backIcon class="back" @click="goBack()">
+            <img src='https://sky-lkc.oss-cn-beijing.aliyuncs.com/icon/back.svg' class="back" @click="goBack()">
             <div class="title">{{ categoryTitle }}面试常问</div>
         </div>
         <div class="body" ref="bodyRef">
@@ -26,7 +26,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import backIcon from '@/assets/icon/back.svg'
 import { useRouter, useRoute } from 'vue-router'
 import { vueList, uniappList } from '@/assets/linshi/data/h5/mainjing'
 import { ref, computed, onMounted, onActivated, onBeforeUnmount, nextTick } from 'vue'

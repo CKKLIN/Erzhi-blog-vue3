@@ -79,7 +79,7 @@ function onScroll(e: Event) {
   width: 100%;
   height: 450px;
   background-color: #000000;
-  background: url('@/assets/bj/bj14.jpg');
+  background: url('https://sky-lkc.oss-cn-beijing.aliyuncs.com/bj/bj14.jpg');
   box-shadow: var(--color-card-shadow-top);
   /* box-shadow-top: 0; */
   /* background-size: cover;
@@ -100,7 +100,7 @@ function onScroll(e: Event) {
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  background: url('@/assets/bj/bj13.jpg');
+  background: url('https://sky-lkc.oss-cn-beijing.aliyuncs.com/bj/bj13.jpg');
   box-shadow: var(--color-card-shadow-top);
   /* box-shadow-top: 0; */
   /* background-size: cover;
@@ -187,7 +187,7 @@ function onScroll(e: Event) {
   display: flex;
   justify-content: center;
   z-index: 0;
-  background: linear-gradient(rgba(14, 62, 134, 0), rgba(54, 125, 184, 0.281), rgba(76, 153, 216, 0.507)), url('@/assets/bj/bj4.jpeg');
+  background: linear-gradient(rgba(14, 62, 134, 0), rgba(54, 125, 184, 0.281), rgba(76, 153, 216, 0.507)), url('https://sky-lkc.oss-cn-beijing.aliyuncs.com/bj/bj4.jpeg');
 
 }
 
